@@ -1,5 +1,4 @@
-﻿using Projekt_koncowy_AM_WS_JG.Presenter;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,32 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Projekt_koncowy_AM_WS_JG.View
 {
     /// <summary>
-    /// Logika interakcji dla klasy MainView.xaml
+    /// Logika interakcji dla klasy Menu.xaml
     /// </summary>
-    public partial class MainView : Window
+    public partial class Menu : UserControl
     {
         public event EventHandler Loguj;
-
-        private Menu _menu;
-        public MainView()
+        public Menu()
         {
             InitializeComponent();
-            _menu = new Menu();
-
-            _menu.Loguj += (s, e) => Loguj?.Invoke(this, EventArgs.Empty);
-
-            MainContent.Content = _menu;
         }
-        public void LoadView(UserControl view)
+
+        private void LogowanieKlikniete(object sender, EventArgs e)
         {
-            MainContent.Content = view;
+            Loguj?.Invoke(this, EventArgs.Empty);
         }
-
-       
     }
 }
