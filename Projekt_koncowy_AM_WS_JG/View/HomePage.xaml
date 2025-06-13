@@ -9,7 +9,7 @@
     <Grid>
         <TabControl TabStripPlacement="Bottom">
 
-            <TabItem Header="TabItem" Width="174">
+            <TabItem Header="TabItem" Width="174" HorizontalAlignment="Left">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Header="TabItem" Width="174">
@@ -18,8 +18,10 @@
             <TabItem Header="TabItem" Width="174">
                     <Grid Background="#FFE5E5E5"/>
                 </TabItem>
-            <TabItem Header="TabItem" Width="174" IsSelected="False">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="TabItem" Width="174" >
+                <Grid Background="#FFE5E5E5">
+                    <Button Content="Wyloguj" HorizontalAlignment="Left" Margin="281,297,0,0" VerticalAlignment="Top" Click="WylogujKlikniete"/>
+                </Grid>
             </TabItem>
         </TabControl>
 

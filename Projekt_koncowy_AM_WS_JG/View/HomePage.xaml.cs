@@ -20,9 +20,16 @@ namespace Projekt_koncowy_AM_WS_JG.View
     /// </summary>
     public partial class HomePage : UserControl
     {
+        public event EventHandler Wyloguj;
         public HomePage()
         {
             InitializeComponent();
+
+        }
+
+        private void WylogujKlikniete(object sender, EventArgs e)
+        {
+            Wyloguj?.Invoke(this, EventArgs.Empty);
         }
     }
 }

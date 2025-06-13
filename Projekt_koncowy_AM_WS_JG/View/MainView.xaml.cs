@@ -20,17 +20,17 @@ namespace Projekt_koncowy_AM_WS_JG.View
     /// </summary>
     public partial class MainView : Window
     {
-        public event EventHandler Loguj;
+        //public event EventHandler Loguj;
 
-        private Menu _menu;
+        //private Menu _menu;
         public MainView()
         {
             InitializeComponent();
-            _menu = new Menu();
+            //_menu = new Menu();
 
-            _menu.Loguj += (s, e) => Loguj?.Invoke(this, EventArgs.Empty);
+            //_menu.Loguj += (s, e) => Loguj?.Invoke(this, EventArgs.Empty);
 
-            MainContent.Content = _menu;
+            //MainContent.Content = _menu;
         }
         public void LoadView(UserControl view)
         {
