@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Projekt_koncowy_AM_WS_JG.View
@@ -17,12 +18,11 @@ namespace Projekt_koncowy_AM_WS_JG.View
     /// <summary>
     /// Logika interakcji dla klasy HomePage.xaml
     /// </summary>
-    public partial class HomePage : Window
+    public partial class HomePage : UserControl
     {
         public HomePage()
         {
             InitializeComponent();
         }
-
     }
 }

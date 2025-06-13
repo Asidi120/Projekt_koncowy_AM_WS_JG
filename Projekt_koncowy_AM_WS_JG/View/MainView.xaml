@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt_koncowy_AM_WS_JG.View"
         mc:Ignorable="d"
-        Title="Logowanie" Height="405" Width="345">
+        Title="Logowanie" Height="405" Width="585">
     <DockPanel>
         <Button Content="Loguj" Margin="0,214,0,0" VerticalAlignment="Top" Click="LogowanieKlikniete" Height="60" Width="155"/>
-        <Button Content="Rejestruj" Margin="0,214,0,0" VerticalAlignment="Top" Click="RejestracjaKliknieta" Height="60" Width="185"/>
-        <ContentControl x:Name="MainContent" />
+        <ContentControl x:Name="MainContent" Width="480" Content="" />
+        <!--<Button Content="Rejestruj" Margin="0,214,0,0" VerticalAlignment="Top" Click="RejestracjaKliknieta" Height="60" Width="185"/>-->
     </DockPanel>
 </Window>
