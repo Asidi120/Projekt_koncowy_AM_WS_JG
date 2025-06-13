@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         Title="Logowanie" Height="500" Width="700">
     <DockPanel>
-        
-        <ContentControl x:Name="MainContent" Width="480" Content="" />
-        <!--<Button Content="Rejestruj" Margin="0,214,0,0" VerticalAlignment="Top" Click="RejestracjaKliknieta" Height="60" Width="185"/>-->
+
+        <ContentControl x:Name="MainContent" Width="700" Content="" />
     </DockPanel>
 </Window>
