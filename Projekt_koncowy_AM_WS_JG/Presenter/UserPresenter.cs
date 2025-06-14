@@ -1,14 +1,15 @@
-﻿using Projekt_koncowy_AM_WS_JG.Model;
+﻿using MySql.Data.MySqlClient;
+using Projekt_koncowy_AM_WS_JG.Model;
 using Projekt_koncowy_AM_WS_JG.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using CustomMenu = Projekt_koncowy_AM_WS_JG.View.Menu;
-using MySql.Data.MySqlClient;
-using System.Windows;
 
 
 
@@ -23,6 +24,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         private CustomMenu menu;
         private Model.MainModel _model;
         private HomePage homePage;
+        private HomePageRoot homePageRoot;
         public UserPresenter(MainView view, MainModel model)
         {
             _view = view;
@@ -31,18 +33,24 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             menu.Loguj += GdyLoguj;
             menu.Rejestracja += GdyRejestracja;
             _view.LoadView(menu);
-            var autorzy = _model.Autorzy_lista();
-            string tekstDoWyswietlenia = string.Join("\n", autorzy);
-            //System.Windows.MessageBox.Show(tekstDoWyswietlenia, "Lista autorów");
-
         }
         public void GdyLoguj(object sender, EventArgs e)
         {
-            if (_model.CzyEmailIstnieje(menu.EmailLogowanie) && menu.HasloLogowanie == _model.HasloUzytkownika(menu.EmailLogowanie))
+            string hasloZBazy = _model.HasloUzytkownika(menu.EmailLogowanie);
+            if (_model.CzyEmailIstnieje(menu.EmailLogowanie) && BCrypt.Net.BCrypt.Verify(menu.HasloLogowanie, hasloZBazy))
             {
-                homePage = new HomePage();
-                homePage.Wyloguj += GdyWyloguj;
-                _view.LoadView(homePage);
+                if (_model.CzyJestRoot(menu.EmailLogowanie))
+                {
+                    homePageRoot = new HomePageRoot();
+                    homePageRoot.Wyloguj += GdyWyloguj;
+                    _view.LoadView(homePageRoot);
+                }
+                else
+                {
+                    homePage = new HomePage();
+                    homePage.Wyloguj += GdyWyloguj;
+                    _view.LoadView(homePage);
+                }
             }
             else
             {
