@@ -89,5 +89,29 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             }
         }
 
+        public string HasloUzytkownika(string email)
+        {
+            string haslouzytkownika = "";
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand($"select haslo from uzytkownicy where email = @email", conn))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            haslouzytkownika = $"{reader["haslo"]}";
+                        }
+
+                    }
+
+                }
+                
+            }
+            return haslouzytkownika;
+        }
+
     }
 }

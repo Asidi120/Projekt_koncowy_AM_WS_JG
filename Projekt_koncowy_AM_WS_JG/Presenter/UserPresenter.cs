@@ -20,12 +20,14 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         //private readonly Menu _menu;
         //private readonly HomePage _homePage;
         private RejestracjaPage rejestracja;
+        private CustomMenu menu;
         private Model.MainModel _model;
+        private HomePage homePage;
         public UserPresenter(MainView view, MainModel model)
         {
             _view = view;
             _model = model;
-            var menu = new CustomMenu();
+            menu = new CustomMenu();
             menu.Loguj += GdyLoguj;
             menu.Rejestracja += GdyRejestracja;
             _view.LoadView(menu);
@@ -36,14 +38,21 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         }
         public void GdyLoguj(object sender, EventArgs e)
         {
-            var homePage = new HomePage();
-            homePage.Wyloguj += GdyWyloguj;
-            _view.LoadView(homePage);
+            if (_model.CzyEmailIstnieje(menu.EmailLogowanie) && menu.HasloLogowanie == _model.HasloUzytkownika(menu.EmailLogowanie))
+            {
+                homePage = new HomePage();
+                homePage.Wyloguj += GdyWyloguj;
+                _view.LoadView(homePage);
+            }
+            else
+            {
+                MessageBox.Show("Nieprawidłowy email lub hasło", "Błąd");
+            }
         }
 
         public void GdyWyloguj(object sender, EventArgs e)
         {
-            var menu = new CustomMenu();
+            menu = new CustomMenu();
             menu.Loguj += GdyLoguj;
             menu.Rejestracja += GdyRejestracja;
             _view.LoadView(menu);
@@ -56,9 +65,9 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         }
         public void GdyRejestracjaGotowa(object sender, EventArgs e)
         {
-            if(!_model.CzyUzytkownikIstnieje(rejestracja.nazwaużytkownika.Text.ToString()))
+            if(!_model.CzyUzytkownikIstnieje(rejestracja.NazwaUżytkownika))
             {
-                if (!_model.CzyEmailIstnieje(rejestracja.email.Text.ToString()))
+                if (!_model.CzyEmailIstnieje(rejestracja.Email))
                 {
                     var homePage = new HomePage();
                     homePage.Wyloguj += GdyWyloguj;

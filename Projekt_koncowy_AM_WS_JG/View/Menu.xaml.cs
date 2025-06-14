@@ -36,5 +36,17 @@ namespace Projekt_koncowy_AM_WS_JG.View
         {
             Rejestracja?.Invoke(this, EventArgs.Empty);
         }
+
+        public string EmailLogowanie
+        {
+            get => email.Text;
+            set => email.Text = value;
+        }
+
+        public string HasloLogowanie
+        {
+            get => haslo.Password;
+            set => haslo.Password = value;
+        }
     }
 }
