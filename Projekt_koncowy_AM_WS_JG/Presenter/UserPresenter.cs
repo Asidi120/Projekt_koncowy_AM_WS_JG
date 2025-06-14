@@ -19,7 +19,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         private readonly MainView _view;
         //private readonly Menu _menu;
         //private readonly HomePage _homePage;
-
+        private RejestracjaPage rejestracja;
         private Model.MainModel _model;
         public UserPresenter(MainView view, MainModel model)
         {
@@ -32,7 +32,6 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             var autorzy = _model.Autorzy_lista();
             string tekstDoWyswietlenia = string.Join("\n", autorzy);
             //System.Windows.MessageBox.Show(tekstDoWyswietlenia, "Lista autorów");
-
 
         }
         public void GdyLoguj(object sender, EventArgs e)
@@ -51,22 +50,24 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         }
         public void GdyRejestracja(object sender, EventArgs e)
         {
-            var rejestracja = new RejestracjaPage();
+            rejestracja = new RejestracjaPage();
             _view.LoadView(rejestracja);
             Console.WriteLine("Rejestracja użytkownika została wywołana.");
             rejestracja.RejestracjaGotowa += GdyRejestracjaGotowa;
         }
         public void GdyRejestracjaGotowa(object sender, EventArgs e)
         {
-            var homePage = new HomePage();
-            homePage.Wyloguj += GdyWyloguj;
-            _view.LoadView(homePage);
-            Console.WriteLine("Rejestracja użytkownika zakończona pomyślnie.");
-        }
-
-        public bool GetCzyUzytkownikIstnieje(string nazwauzytkownika)
-        {
-            return _model.CzyUzytkownikIstnieje(nazwauzytkownika);
+            if(!_model.CzyUzytkownikIstnieje(rejestracja.nazwaużytkownika.Text.ToString()))
+            {
+                var homePage = new HomePage();
+                homePage.Wyloguj += GdyWyloguj;
+                _view.LoadView(homePage);
+                Console.WriteLine("Rejestracja użytkownika zakończona pomyślnie.");
+            }
+            else
+            {
+                MessageBox.Show("Nazwa użytkownika już istnieje", "Nieprawidłowa nazwa użytkownika");
+            }
         }
     }
 }

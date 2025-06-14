@@ -39,7 +39,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
         }
         private void RejestrujGotowaKliknieta(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(nazwaużytkownika.Text) && !_presenter.GetCzyUzytkownikIstnieje(nazwaużytkownika.Text.ToString()))
+            if (!string.IsNullOrEmpty(nazwaużytkownika.Text))
             {
                 if (!string.IsNullOrEmpty(email.Text) && CzyEmailPrawidlowy(email.Text))
                 {
