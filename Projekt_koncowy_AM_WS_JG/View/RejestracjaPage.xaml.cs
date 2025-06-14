@@ -74,5 +74,17 @@ namespace Projekt_koncowy_AM_WS_JG.View
             set => powtorzhaslo.Password = value;
         }
 
+        public string Email
+        {
+            get => email.Text; 
+            set => email.Text = value;
+        }
+
+        public string NazwaUżytkownika
+        {
+            get => nazwaużytkownika.Text;
+            set => nazwaużytkownika.Text = value;
+        }
+
     }
 }

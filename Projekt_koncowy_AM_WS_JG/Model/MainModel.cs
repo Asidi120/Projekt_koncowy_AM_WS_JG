@@ -73,5 +73,21 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             }
         }
 
+        public void DodajDoBazyUzytkownika(string nazwauzytkownika, string haslo, string email)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand($"INSERT INTO uzytkownicy (nick, haslo, email) VALUES (@nick, @haslo, @email)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@nick", nazwauzytkownika);
+                    cmd.Parameters.AddWithValue("@haslo", haslo);
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

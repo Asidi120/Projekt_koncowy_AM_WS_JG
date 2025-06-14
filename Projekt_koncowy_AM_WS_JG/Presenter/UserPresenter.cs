@@ -63,6 +63,8 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     var homePage = new HomePage();
                     homePage.Wyloguj += GdyWyloguj;
                     _view.LoadView(homePage);
+
+                    _model.DodajDoBazyUzytkownika(rejestracja.NazwaUżytkownika, rejestracja.Haslo, rejestracja.Email);
                 }
                 else
                 {
@@ -73,6 +75,9 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             {
                 MessageBox.Show("Nazwa użytkownika już istnieje", "Nieprawidłowa nazwa użytkownika");
             }
+            
         }
+
+       
     }
 }
