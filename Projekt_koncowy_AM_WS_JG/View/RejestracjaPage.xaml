@@ -9,12 +9,12 @@
     <Grid>
         <Button Content="Rejestruj" HorizontalAlignment="Left" Margin="258,360,0,0" VerticalAlignment="Top" Height="35" Width="115" Click="RejestrujGotowaKliknieta"/>
         <TextBlock HorizontalAlignment="Left" Margin="253,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24"><Run Language="pl-pl" Text="Nazwa użytkownika:"/></TextBlock>
-        <TextBox HorizontalAlignment="Left" Margin="253,77,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="253,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="nazwaużytkownika" HorizontalAlignment="Left" Margin="253,77,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="email" HorizontalAlignment="Left" Margin="253,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Left" Margin="253,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24"><Run Language="pl-pl" Text="E-mail:"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="253,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24"><Run Language="pl-pl" Text="Hasło:"/></TextBlock>
-        <PasswordBox HorizontalAlignment="Left" Margin="253,315,0,0" VerticalAlignment="Top" Width="120" Password=""/>
-        <PasswordBox HorizontalAlignment="Left" Margin="253,215,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="253,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24"><Run Language="pl-pl" Text="Powtórz haslo:"/></TextBlock>
+        <PasswordBox x:Name="powtorzhaslo" HorizontalAlignment="Left" Margin="253,315,0,0" VerticalAlignment="Top" Width="120" Password=""/>
+        <PasswordBox x:Name="haslo" HorizontalAlignment="Left" Margin="253,215,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBlock  HorizontalAlignment="Left" Margin="253,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24"><Run Language="pl-pl" Text="Powtórz haslo:"/></TextBlock>
     </Grid>
 </UserControl>

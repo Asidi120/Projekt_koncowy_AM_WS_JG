@@ -31,7 +31,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             _view.LoadView(menu);
             var autorzy = _model.Autorzy_lista();
             string tekstDoWyswietlenia = string.Join("\n", autorzy);
-            System.Windows.MessageBox.Show(tekstDoWyswietlenia, "Lista autorów");
+            //System.Windows.MessageBox.Show(tekstDoWyswietlenia, "Lista autorów");
 
 
         }
@@ -62,6 +62,11 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             homePage.Wyloguj += GdyWyloguj;
             _view.LoadView(homePage);
             Console.WriteLine("Rejestracja użytkownika zakończona pomyślnie.");
+        }
+
+        public bool GetCzyUzytkownikIstnieje(string nazwauzytkownika)
+        {
+            return _model.CzyUzytkownikIstnieje(nazwauzytkownika);
         }
     }
 }

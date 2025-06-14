@@ -29,5 +29,27 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             return autorzy;
         }
 
+        public bool CzyUzytkownikIstnieje(string nazwauzytkownika)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand($"select count(*) from uzytkownicy where nick = @nick",conn))
+                {
+                    cmd.Parameters.AddWithValue("@nick", nazwauzytkownika);
+
+                    var liczbawystepowaniauzytkownika = Convert.ToInt32(cmd.ExecuteScalar());
+                    if(liczbawystepowaniauzytkownika > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
     }
 }
