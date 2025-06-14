@@ -25,12 +25,10 @@ namespace Projekt_koncowy_AM_WS_JG.View
     /// </summary>
     public partial class RejestracjaPage : UserControl
     {
-        //private UserPresenter _presenter;
         public event EventHandler RejestracjaGotowa;
         public RejestracjaPage()
         {
             InitializeComponent();
-            //_presenter = new UserPresenter();
         }
         public bool CzyEmailPrawidlowy(string email)
         {
@@ -59,7 +57,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
             }
             else
             {
-                MessageBox.Show("Nazwa użytkownika już istnieje", "Nieprawidłowa nazwa użytkownika");
+                MessageBox.Show("Podaj nazwę użytkownika", "Nieprawidłowa nazwa użytkownika");
             }
         }
         

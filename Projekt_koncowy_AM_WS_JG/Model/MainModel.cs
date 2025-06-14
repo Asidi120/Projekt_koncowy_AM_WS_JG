@@ -51,5 +51,27 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             }
         }
 
+        public bool CzyEmailIstnieje(string email)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand($"select count(*) from uzytkownicy where email = @email", conn))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    var liczbawystepowaniaemaila = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (liczbawystepowaniaemaila > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
     }
 }

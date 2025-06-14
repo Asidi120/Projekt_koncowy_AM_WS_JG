@@ -52,17 +52,22 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         {
             rejestracja = new RejestracjaPage();
             _view.LoadView(rejestracja);
-            Console.WriteLine("Rejestracja użytkownika została wywołana.");
             rejestracja.RejestracjaGotowa += GdyRejestracjaGotowa;
         }
         public void GdyRejestracjaGotowa(object sender, EventArgs e)
         {
             if(!_model.CzyUzytkownikIstnieje(rejestracja.nazwaużytkownika.Text.ToString()))
             {
-                var homePage = new HomePage();
-                homePage.Wyloguj += GdyWyloguj;
-                _view.LoadView(homePage);
-                Console.WriteLine("Rejestracja użytkownika zakończona pomyślnie.");
+                if (!_model.CzyEmailIstnieje(rejestracja.email.Text.ToString()))
+                {
+                    var homePage = new HomePage();
+                    homePage.Wyloguj += GdyWyloguj;
+                    _view.LoadView(homePage);
+                }
+                else
+                {
+                    MessageBox.Show("Adres email już istnieje", "Nieprawidłowy adres email");
+                }
             }
             else
             {
