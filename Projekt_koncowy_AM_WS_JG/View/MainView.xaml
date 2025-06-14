@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt_koncowy_AM_WS_JG.View"
         mc:Ignorable="d"
-        Title="Logowanie" Height="500" Width="700">
+        Title="LitLib" Height="500" Width="700">
     <DockPanel>
 
         <ContentControl x:Name="MainContent" Width="700" Content="" />

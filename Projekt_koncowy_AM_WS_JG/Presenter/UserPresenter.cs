@@ -5,6 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using CustomMenu = Projekt_koncowy_AM_WS_JG.View.Menu;
+using MySql.Data.MySqlClient;
+using System.Windows;
+
+
 
 namespace Projekt_koncowy_AM_WS_JG.Presenter
 {
@@ -19,32 +25,43 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         {
             _view = view;
             _model = model;
-
-            //_menu = new Menu();
-            //_homePage = new HomePage();
-
-            //_view.LoadView(_menu);
-            //_menu.Loguj += GdyLoguj;
-            //_homePage.Wyloguj += GdyWyloguj;
-
-            var menu = new Menu();
+            var menu = new CustomMenu();
             menu.Loguj += GdyLoguj;
-
+            menu.Rejestracja += GdyRejestracja;
             _view.LoadView(menu);
+            var autorzy = _model.Autorzy_lista();
+            string tekstDoWyswietlenia = string.Join("\n", autorzy);
+            System.Windows.MessageBox.Show(tekstDoWyswietlenia, "Lista autorów");
+
 
         }
         public void GdyLoguj(object sender, EventArgs e)
         {
-            var homePage = new HomePage(); 
+            var homePage = new HomePage();
             homePage.Wyloguj += GdyWyloguj;
             _view.LoadView(homePage);
         }
 
         public void GdyWyloguj(object sender, EventArgs e)
         {
-            var menu = new Menu();              
+            var menu = new CustomMenu();
             menu.Loguj += GdyLoguj;
+            menu.Rejestracja += GdyRejestracja;
             _view.LoadView(menu);
         }
-    }    
+        public void GdyRejestracja(object sender, EventArgs e)
+        {
+            var rejestracja = new RejestracjaPage();
+            _view.LoadView(rejestracja);
+            Console.WriteLine("Rejestracja użytkownika została wywołana.");
+            rejestracja.RejestracjaGotowa += GdyRejestracjaGotowa;
+        }
+        public void GdyRejestracjaGotowa(object sender, EventArgs e)
+        {
+            var homePage = new HomePage();
+            homePage.Wyloguj += GdyWyloguj;
+            _view.LoadView(homePage);
+            Console.WriteLine("Rejestracja użytkownika zakończona pomyślnie.");
+        }
+    }
 }

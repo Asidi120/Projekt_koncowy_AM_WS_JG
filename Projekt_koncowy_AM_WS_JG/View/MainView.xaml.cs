@@ -26,11 +26,6 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public MainView()
         {
             InitializeComponent();
-            //_menu = new Menu();
-
-            //_menu.Loguj += (s, e) => Loguj?.Invoke(this, EventArgs.Empty);
-
-            //MainContent.Content = _menu;
         }
         public void LoadView(UserControl view)
         {

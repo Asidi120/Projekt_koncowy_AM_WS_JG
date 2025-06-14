@@ -16,25 +16,19 @@ using System.Windows.Shapes;
 namespace Projekt_koncowy_AM_WS_JG.View
 {
     /// <summary>
-    /// Logika interakcji dla klasy Menu.xaml
+    /// Logika interakcji dla klasy RejestracjaPage.xaml
     /// </summary>
-    public partial class Menu : UserControl
+    public partial class RejestracjaPage : UserControl
     {
-        public event EventHandler Loguj;
-        public event EventHandler Rejestracja;
-        public Menu()
+        public event EventHandler RejestracjaGotowa;
+        public RejestracjaPage()
         {
             InitializeComponent();
         }
 
-        private void LogowanieKlikniete(object sender, EventArgs e)
+        private void RejestrujGotowaKliknieta(object sender, RoutedEventArgs e)
         {
-            Loguj?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void RejestracjaKliknieta(object sender, EventArgs e)
-        {
-            Rejestracja?.Invoke(this, EventArgs.Empty);
+            RejestracjaGotowa?.Invoke(this, EventArgs.Empty); 
         }
     }
 }
