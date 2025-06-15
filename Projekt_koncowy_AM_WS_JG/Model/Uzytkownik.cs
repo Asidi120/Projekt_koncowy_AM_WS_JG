@@ -12,6 +12,13 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         private string email;
         private string plec;
         private string data_zalozenia;
+        private string id_uzytkowika;
+
+        public string IDUzytkownika
+        {
+            get { return id_uzytkowika; }
+            set {  id_uzytkowika = value;}
+        }
         public string Nick
         {
             get { return nick; }

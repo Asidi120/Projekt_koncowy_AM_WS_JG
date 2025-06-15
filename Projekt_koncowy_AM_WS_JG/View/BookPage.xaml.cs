@@ -24,6 +24,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
     {
         public event EventHandler OpiniaNacisnieta;
         public event EventHandler WrocNacisniete;
+        string id_ksiazki_wybranej;
         public BookPage(Ksiazka ksiazka)
         {
             InitializeComponent();
@@ -46,6 +47,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
             LiczbaStronText.Text = $"Liczba stron: {ksiazka.LiczbaStron}";
             JezykText.Text = $"Język: {ksiazka.Jezyk}";
             SredniaOcenaText.Text = $"Średnia ocena: {ksiazka.JakieOpinie?.Średnia_Ocena ?? "Brak ocen"} ({ksiazka.JakieOpinie?.Liczba_Ocen ?? "0"} ocen)";
+            id_ksiazki_wybranej = ksiazka.IDKsiazki;
 
             // TU USTAWIAMY OPINIE
             if (ksiazka?.JakieOpinie?.Lista_Opinii != null)
@@ -69,6 +71,12 @@ namespace Projekt_koncowy_AM_WS_JG.View
         private void Wroc_Click(object sender, RoutedEventArgs e)
         {
             WrocNacisniete?.Invoke(this, EventArgs.Empty);
+        }
+
+        public string IDKsiazkiWybranej
+        {
+            get => id_ksiazki_wybranej;
+            set => id_ksiazki_wybranej = value;
         }
     }
 }

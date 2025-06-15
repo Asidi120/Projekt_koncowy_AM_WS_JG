@@ -120,6 +120,12 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             ratePage = new RatePage();
             _view.LoadView(ratePage);
             ratePage.Wroc += GdyWrocNacisniete1;
+            ratePage.WyslijOpinie += GdyWyslijOpinieNacisniete;
+           
+        }
+        private void GdyWyslijOpinieNacisniete(object? sender, EventArgs e)
+        {
+            _model.DodajDoBazyOpinie(_model.uzytkownik.IDUzytkownika, bookPage.IDKsiazkiWybranej, ratePage.RecenzjaWystawiona, ratePage.OcenaWystawiona);
         }
         public void GdyWrocNacisniete1(object? sender, EventArgs e)
         {

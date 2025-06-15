@@ -85,7 +85,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             using (var conn = GetConnection())
             {
                 conn.Open();
-                using (var cmd = new MySqlCommand($"select nick,data_zalozenia,email,plec from uzytkownicy where email = @email", conn))
+                using (var cmd = new MySqlCommand($"select id_uzytkownik,nick,data_zalozenia,email,plec from uzytkownicy where email = @email", conn))
                 {
                     cmd.Parameters.AddWithValue("@email", email);
                     using (var reader = cmd.ExecuteReader())
@@ -96,12 +96,14 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                             string data = $"{reader["data_zalozenia"]}";
                             string emaill = $"{reader["email"]}";
                             string plec = $"{reader["plec"]}";
+                            string id_uzytkownk = $"{reader["id_uzytkownik"]}";
                             uzytkownik = new Uzytkownik
                             {
                                 Nick = nick,
                                 Email = emaill,
                                 Plec = plec,
-                                Data_zalozenia = data
+                                Data_zalozenia = data,
+                                IDUzytkownika = id_uzytkownk
                             };
                         }
                     }
@@ -120,6 +122,23 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                     cmd.Parameters.AddWithValue("@nick", nazwauzytkownika);
                     cmd.Parameters.AddWithValue("@hashedPassword", hashedPassword);
                     cmd.Parameters.AddWithValue("@email", email);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DodajDoBazyOpinie(string id_uzytkownik, string id_ksiazka, string recenzja, string ocena)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand($"INSERT INTO opinia (id_uzytkownik, id_ksiazka, recenzja, ocena, data_wystawienia) VALUES (@id_uzytkownik, @id_ksiazka, @recenzja, @ocena, now())", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_uzytkownik", id_uzytkownik);
+                    cmd.Parameters.AddWithValue("@id_ksiazka", id_ksiazka);
+                    cmd.Parameters.AddWithValue("@recenzja", recenzja);
+                    cmd.Parameters.AddWithValue("@ocena", ocena);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -223,7 +242,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                                 }
                             }
                         }
-                        ksiazki.Add(new Ksiazka(tytul, autor, opis, gatunek, rok_wydania, liczba_stron, jezyk_oryginalu, wydawnictwo, opinie));
+                        ksiazki.Add(new Ksiazka(id_ksiazka,tytul, autor, opis, gatunek, rok_wydania, liczba_stron, jezyk_oryginalu, wydawnictwo, opinie));
                     }
                 }
             }
