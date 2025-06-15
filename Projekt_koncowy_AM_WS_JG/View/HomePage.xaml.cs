@@ -22,6 +22,8 @@ namespace Projekt_koncowy_AM_WS_JG.View
     public partial class HomePage : UserControl
     {
         public event EventHandler Wyloguj;
+        public event EventHandler<Ksiazka> PrzeniesNaTytul;
+
         public HomePage()
         {
             InitializeComponent();
@@ -36,10 +38,15 @@ namespace Projekt_koncowy_AM_WS_JG.View
             KsiazkiControl.ItemsSource = ksiazki;
             KsiazkiControl.ItemTemplate = (DataTemplate)this.Resources["KsiazkaTemplate"];
         }
-
         private void Tytul_Click(object sender, MouseButtonEventArgs e)
         {
+            var textBlock = sender as TextBlock;
+            var ksiazka = textBlock?.DataContext as Ksiazka;
 
+            if (ksiazka != null)
+            {
+                PrzeniesNaTytul?.Invoke(this, ksiazka);
+            }
         }
         private void ScrollLeft_Click(object sender, RoutedEventArgs e)
         {
