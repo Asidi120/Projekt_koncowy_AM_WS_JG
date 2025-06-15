@@ -10,7 +10,7 @@
         <DataTemplate x:Key="KsiazkaTemplate">
             <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Width="150">
                 <StackPanel>
-                    <Image Source="{Binding Okladka}" Height="175" Stretch="UniformToFill"/>
+                    <Image Source="{Binding Okladka}" Height="175" />
                     <TextBlock Text="{Binding Tytul}"
                            FontWeight="Bold"
                            Foreground="Blue"
@@ -27,7 +27,7 @@
 
             <TabItem Header="Strona Główna" Width="174" HorizontalAlignment="Left">
                 <Grid Background="#FFE5E5E5">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="175">
                         <ItemsControl x:Name="KsiazkiControl2">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -50,7 +50,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Strzałka w lewo -->
-                    <Button Grid.Column="0" Content="←" Width="40" Click="ScrollLeft_Click"/>
+                    <Button Grid.Column="0" Content="←" Width="40" Height="175" Click="ScrollLeft_Click"/>
 
                     <!-- Lista książek -->
                     <ScrollViewer x:Name="BookScrollViewer" Grid.Column="1"
@@ -67,7 +67,7 @@
                     </ScrollViewer>
 
                     <!-- Strzałka w prawo -->
-                    <Button Grid.Column="2" Content="→" Width="40" Click="ScrollRight_Click"/>
+                    <Button Grid.Column="2" Content="→" Width="40" Height="175" Click="ScrollRight_Click"/>
                     </Grid>
             </TabItem>
             <TabItem Header="Moje Książki" Width="174">
