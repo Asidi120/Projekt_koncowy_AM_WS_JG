@@ -34,19 +34,6 @@
 
             <TabItem Header="Strona Główna" Width="174" HorizontalAlignment="Left">
                 <Grid Background="#FFE5E5E5">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="175">
-                        <ItemsControl x:Name="KsiazkiControl2">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    </ScrollViewer>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Szukaj" Width="174">
-                <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <!-- Strzałka w lewo -->
@@ -61,10 +48,10 @@
 
                     <!-- Lista książek -->
                     <ScrollViewer x:Name="BookScrollViewer" Grid.Column="1"
-                      HorizontalScrollBarVisibility="Hidden"
-                      VerticalScrollBarVisibility="Disabled">
+      HorizontalScrollBarVisibility="Hidden"
+      VerticalScrollBarVisibility="Disabled">
                         <ItemsControl x:Name="KsiazkiControl"
-                          ItemTemplate="{StaticResource KsiazkaTemplate}">
+          ItemTemplate="{StaticResource KsiazkaTemplate}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal"/>
@@ -75,6 +62,57 @@
 
                     <!-- Strzałka w prawo -->
                     <Button Grid.Column="2" Content="→" Width="40" Height="175" Click="ScrollRight_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Szukaj" Width="174">
+                <Grid Background="#FFE5E5E5" Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Pole wyszukiwania -->
+                    <TextBox x:Name="SearchTextBox"
+                 Grid.Row="0"
+                 Margin="0,0,0,10"
+                 Height="30"
+                 
+                 FontSize="14"
+                 TextChanged="SearchTextBox_TextChanged"
+                 ToolTip="Wyszukaj książkę..."/>
+
+                    <!-- Lista wyników w WrapPanel z maks 4 książkami w wierszu -->
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="SearchResultsControl" >
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" ItemWidth="150" ItemHeight="175" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Width="150" Height="175" CornerRadius="5" Background="White" >
+                                        <StackPanel>
+                                            <Image Source="{Binding Okladka}" Height="140" Stretch="UniformToFill"/>
+                                            <TextBlock Text="{Binding Tytul}"
+                                           FontWeight="Bold"
+                                           Foreground="Blue"
+                                           FontSize="12"
+                                           TextTrimming="CharacterEllipsis"
+                                           TextWrapping="NoWrap"
+                                           HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Autor}" 
+                                           FontStyle="Italic"
+                                           FontSize="11"
+                                           HorizontalAlignment="Center"
+                                           TextTrimming="CharacterEllipsis"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </Grid>
             </TabItem>
             <TabItem Header="Moje Książki" Width="174">

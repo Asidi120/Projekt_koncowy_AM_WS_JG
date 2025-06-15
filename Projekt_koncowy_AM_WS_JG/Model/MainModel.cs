@@ -191,6 +191,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
 
         public void ZaladujKsiazkiZBazy()
         {
+            ksiazki = new List<Ksiazka>();
             using (var conn1 = GetConnection())
             {
                 conn1.Open();

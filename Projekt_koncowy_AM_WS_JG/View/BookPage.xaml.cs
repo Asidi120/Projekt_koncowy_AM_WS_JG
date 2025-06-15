@@ -72,7 +72,6 @@ namespace Projekt_koncowy_AM_WS_JG.View
         {
             WrocNacisniete?.Invoke(this, EventArgs.Empty);
         }
-
         public string IDKsiazkiWybranej
         {
             get => id_ksiazki_wybranej;

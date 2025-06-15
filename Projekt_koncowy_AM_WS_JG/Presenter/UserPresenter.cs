@@ -57,6 +57,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     homePage.Nick = _model.uzytkownik.Nick;
                     homePage.Plec = _model.uzytkownik.Plec;
                     homePage.DataZalozenia = _model.uzytkownik.Data_zalozenia;
+                    //homePage.SearchTextBox.TextChanged += (s, args) => homePage.Wyszukuje?.Invoke(this, EventArgs.Empty);
                 }
             }
             else
@@ -127,7 +128,10 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         private void GdyWyslijOpinieNacisniete(object? sender, EventArgs e)
         {
             _model.DodajDoBazyOpinie(_model.uzytkownik.IDUzytkownika, bookPage.IDKsiazkiWybranej, ratePage.RecenzjaWystawiona, ratePage.OcenaWystawiona);
-            if (bookPage != null)
+            _model.ZaladujKsiazkiZBazy();
+            var ksiazka = _model.ksiazki.FirstOrDefault(k => k.IDKsiazki == bookPage.IDKsiazkiWybranej);
+
+            if (ksiazka != null)
             {
                 bookPage = new BookPage(ksiazka);
                 bookPage.OpiniaNacisnieta += GdyOpiniaNacisnieta;

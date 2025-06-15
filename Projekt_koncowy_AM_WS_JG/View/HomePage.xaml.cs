@@ -23,6 +23,8 @@ namespace Projekt_koncowy_AM_WS_JG.View
     {
         public event EventHandler Wyloguj;
         public event EventHandler<Ksiazka> PrzeniesNaTytul;
+        public event EventHandler Wyszukuje;
+        private string searchText;
 
         public HomePage()
         {
@@ -59,6 +61,23 @@ namespace Projekt_koncowy_AM_WS_JG.View
         {
             double offset = BookScrollViewer.HorizontalOffset + 150;
             BookScrollViewer.ScrollToHorizontalOffset(offset);
+        }
+        public void PokazKsiazki(List<Ksiazka> ksiazki)
+        {
+            SearchResultsControl.ItemsSource = ksiazki;
+        }
+
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            searchText = SearchTextBox.Text.ToLowerInvariant().Trim();
+            SearchResultsControl.ItemsSource = ksiazki;
+            SearchResultsControl.ItemTemplate = (DataTemplate)this.Resources["KsiazkaTemplate"];
+            Wyszukuje?.Invoke(this, EventArgs.Empty);
+        }
+        public string SearchText
+        {
+            get => searchText;
+            set => searchText = value;
         }
         public string Nick
         {
