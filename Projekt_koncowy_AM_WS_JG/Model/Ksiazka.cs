@@ -17,11 +17,10 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         public string LiczbaStron { get; set; }
         public string Jezyk { get; set; }
         public string Wydawnictwo { get; set; }
-        public string Średnia_Ocena { get; set; }
-        public string Liczba_Ocen { get; set; }
-        public List<float> Lista_ocen { get; set; }
+        public Opinie JakieOpinie { get; set; }
+      
 
-        public Ksiazka (string tytul, string autor, string opis, string gatunek, string rokWydania, string liczbaStron, string jezyk, string wydawnictwo)
+        public Ksiazka (string tytul, string autor, string opis, string gatunek, string rokWydania, string liczbaStron, string jezyk, string wydawnictwo, Opinie jakieopinie)
         {
             Tytul = tytul;
             Autor = autor;
@@ -32,9 +31,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             LiczbaStron = liczbaStron;
             Jezyk = jezyk;
             Wydawnictwo = wydawnictwo;
-            //Średnia_Ocena = średnia_Ocena;
-            //Liczba_Ocen = liczba_Ocen;
-            //Lista_ocen = lista_ocen;
+            JakieOpinie = jakieopinie;
         }
     }
 }
