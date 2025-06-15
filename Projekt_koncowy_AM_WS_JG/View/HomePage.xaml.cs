@@ -41,5 +41,17 @@ namespace Projekt_koncowy_AM_WS_JG.View
         {
 
         }
+        private void ScrollLeft_Click(object sender, RoutedEventArgs e)
+        {
+            double offset = BookScrollViewer.HorizontalOffset - 150;
+            if (offset < 0) offset = 0;
+            BookScrollViewer.ScrollToHorizontalOffset(offset);
+        }
+
+        private void ScrollRight_Click(object sender, RoutedEventArgs e)
+        {
+            double offset = BookScrollViewer.HorizontalOffset + 150;
+            BookScrollViewer.ScrollToHorizontalOffset(offset);
+        }
     }
 }
