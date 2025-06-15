@@ -8,16 +8,23 @@
              d:DesignHeight="500" d:DesignWidth="700">
     <UserControl.Resources>
         <DataTemplate x:Key="KsiazkaTemplate">
-            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Width="150">
+            <Border BorderBrush="Gray" BorderThickness="1" Margin="3" Width="150" Height="175">
                 <StackPanel>
-                    <Image Source="{Binding Okladka}" Height="175" />
+                    <Image Source="{Binding Okladka}" Height="140" Stretch="UniformToFill"/>
                     <TextBlock Text="{Binding Tytul}"
-                           FontWeight="Bold"
-                           Foreground="Blue"
-                           Cursor="Hand"
-                           TextWrapping="Wrap"
-                           MouseLeftButtonDown="Tytul_Click"/>
-                    <TextBlock Text="{Binding Autor}" FontStyle="Italic"/>
+                       FontWeight="Bold"
+                       Foreground="Blue"
+                       FontSize="12"
+                       TextTrimming="CharacterEllipsis"
+                       TextWrapping="NoWrap"
+                       Cursor="Hand"
+                       HorizontalAlignment="Center"
+                       MouseLeftButtonDown="Tytul_Click"/>
+                    <TextBlock Text="{Binding Autor}" 
+                       FontStyle="Italic"
+                       FontSize="11"
+                       HorizontalAlignment="Center"
+                       TextTrimming="CharacterEllipsis"/>
                 </StackPanel>
             </Border>
         </DataTemplate>
