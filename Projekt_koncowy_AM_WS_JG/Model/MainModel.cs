@@ -5,8 +5,13 @@ namespace Projekt_koncowy_AM_WS_JG.Model
 {
     public class MainModel
     {
-        public List<Ksiazka> ksiazki = new List<Ksiazka>();
+        public List<Ksiazka> ksiazki;
         private string connStr = "server=localhost;user=root;password=123;database=ksiazki;";
+
+        public MainModel()
+        {
+            ksiazki = new List<Ksiazka>();
+        }
         public MySqlConnection GetConnection()
         {
             return new MySqlConnection(connStr);
