@@ -123,9 +123,17 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             ratePage.WyslijOpinie += GdyWyslijOpinieNacisniete;
            
         }
+
         private void GdyWyslijOpinieNacisniete(object? sender, EventArgs e)
         {
             _model.DodajDoBazyOpinie(_model.uzytkownik.IDUzytkownika, bookPage.IDKsiazkiWybranej, ratePage.RecenzjaWystawiona, ratePage.OcenaWystawiona);
+            if (bookPage != null)
+            {
+                bookPage = new BookPage(ksiazka);
+                bookPage.OpiniaNacisnieta += GdyOpiniaNacisnieta;
+                _view.LoadView(bookPage);
+                bookPage.WrocNacisniete += GdyWrocNacisniete;
+            }
         }
         public void GdyWrocNacisniete1(object? sender, EventArgs e)
         {
