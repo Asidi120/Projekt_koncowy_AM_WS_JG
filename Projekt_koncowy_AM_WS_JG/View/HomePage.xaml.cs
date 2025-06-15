@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Projekt_koncowy_AM_WS_JG.Model;
 
 namespace Projekt_koncowy_AM_WS_JG.View
 {
@@ -26,10 +27,19 @@ namespace Projekt_koncowy_AM_WS_JG.View
             InitializeComponent();
 
         }
-
         private void WylogujKlikniete(object sender, EventArgs e)
         {
             Wyloguj?.Invoke(this, EventArgs.Empty);
+        }
+        public void UstawKsiazka(IEnumerable<Ksiazka> ksiazki) 
+        {
+            KsiazkiControl.ItemsSource = ksiazki;
+            KsiazkiControl.ItemTemplate = (DataTemplate)this.Resources["KsiazkaTemplate"];
+        }
+
+        private void Tytul_Click(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

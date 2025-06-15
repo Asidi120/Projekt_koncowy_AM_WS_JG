@@ -6,11 +6,37 @@
              xmlns:local="clr-namespace:Projekt_koncowy_AM_WS_JG.View"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700">
+    <UserControl.Resources>
+        <DataTemplate x:Key="KsiazkaTemplate">
+            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Width="150">
+                <StackPanel>
+                    <Image Source="{Binding Okladka}" Height="175" Stretch="UniformToFill"/>
+                    <TextBlock Text="{Binding Tytul}"
+                           FontWeight="Bold"
+                           Foreground="Blue"
+                           Cursor="Hand"
+                           TextWrapping="Wrap"
+                           MouseLeftButtonDown="Tytul_Click"/>
+                    <TextBlock Text="{Binding Autor}" FontStyle="Italic"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <TabControl TabStripPlacement="Bottom">
 
             <TabItem Header="Strona Główna" Width="174" HorizontalAlignment="Left">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="KsiazkiControl">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
             </TabItem>
             <TabItem Header="Szukaj" Width="174">
                 <Grid Background="#FFE5E5E5"/>

@@ -18,8 +18,6 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
     public class UserPresenter
     {
         private readonly MainView _view;
-        //private readonly Menu _menu;
-        //private readonly HomePage _homePage;
         private RejestracjaPage rejestracja;
         private CustomMenu menu;
         private Model.MainModel _model;
@@ -50,6 +48,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     homePage = new HomePage();
                     homePage.Wyloguj += GdyWyloguj;
                     _view.LoadView(homePage);
+                    ZaladujKsiazki();
                 }
             }
             else
@@ -73,7 +72,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         }
         public void GdyRejestracjaGotowa(object sender, EventArgs e)
         {
-            if(!_model.CzyUzytkownikIstnieje(rejestracja.NazwaUżytkownika))
+            if (!_model.CzyUzytkownikIstnieje(rejestracja.NazwaUżytkownika))
             {
                 if (!_model.CzyEmailIstnieje(rejestracja.Email))
                 {
@@ -92,9 +91,17 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             {
                 MessageBox.Show("Nazwa użytkownika już istnieje", "Nieprawidłowa nazwa użytkownika");
             }
-            
-        }
 
-       
+        }
+        private void ZaladujKsiazki()
+        {
+            var ksiazki = new List<Ksiazka>
+        {
+            new Ksiazka { Tytul = "Metro 2033", Autor = "Dmitry Glukhovsky", Okladka = "Images/metro.jpg", Opis = "Opis..." },
+            new Ksiazka { Tytul = "Wiedźmin", Autor = "Andrzej Sapkowski", Okladka = "Images/wiedzmin.jpg", Opis = "Opis..." },
+        };
+
+            homePage.UstawKsiazka(ksiazki);
+        }
     }
 }
