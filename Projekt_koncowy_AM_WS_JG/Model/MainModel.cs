@@ -144,10 +144,11 @@ namespace Projekt_koncowy_AM_WS_JG.Model
 
         public void ZaladujKsiazkiZBazy()
         {
-            using (var conn = GetConnection())
+            using (var conn1 = GetConnection())
             {
-                conn.Open();
-                using (var cmd = new MySqlCommand("select k.id_ksiazka, tytul, gatunek, opis, jezyk_oryginalu, rok_wydania, liczba_stron, concat(imie, ' ', nazwisko) jakiautor, nazwa, avg(ocena) srednia_ocena, count(ocena) liczba_ocen from ksiazka k left join autor a on k.id_autor = a.id_autor left join wydawnictwo w on k.id_wydaw = w.id_wydaw left join opinia o on o.id_ksiazka = k.id_ksiazka group by k.id_ksiazka;", conn))
+                conn1.Open();
+
+                using (var cmd = new MySqlCommand("select k.id_ksiazka, tytul, gatunek, opis, jezyk_oryginalu, rok_wydania, liczba_stron, concat(imie, ' ', nazwisko) jakiautor, nazwa, avg(ocena) srednia_ocena, count(ocena) liczba_ocen from ksiazka k left join autor a on k.id_autor = a.id_autor left join wydawnictwo w on k.id_wydaw = w.id_wydaw left join opinia o on o.id_ksiazka = k.id_ksiazka group by k.id_ksiazka;", conn1))
                 using (var reader = cmd.ExecuteReader())
                 {
 
@@ -166,22 +167,30 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                         string liczba_ocen = $"{reader["liczba_ocen"]}";
 
                         Opinie opinie = new Opinie(srednia_ocena, liczba_ocen);
-                        }
 
-                        using (var cmd2 = new MySqlCommand($"select o.ocena, recenzja, data_wystawienia, nick from opinia o, uzytkownicy u where o.id_uzytkownik = u.id_uzytkownik and o.id_ksiazka = @id_ksiazka", conn))
-                        using (var reader2 = cmd2.ExecuteReader())
+                        using (var conn2 = GetConnection())
                         {
+                            conn2.Open();
+
+                            using (var cmd2 = new MySqlCommand($"select o.ocena, recenzja, data_wystawienia, nick from opinia o, uzytkownicy u where o.id_uzytkownik = u.id_uzytkownik and o.id_ksiazka = @id_ksiazka", conn2))
                             {
                                 cmd2.Parameters.AddWithValue("@id_ksiazka", id_ksiazka);
 
-                                while (reader2.Read())
+                                using (var reader2 = cmd2.ExecuteReader())
                                 {
-                                    string ocena = $"{reader2["ocena"]}";
-                                    string recenzja = $"{reader2["recenzja"]}";
-                                    string data_wystawienia = $"{reader2["data_wystawienia"]}";
-                                    string użytkownik = $"{reader2["nick"]}";
-                                    Opinia opinia = new Opinia(ocena, recenzja, użytkownik, data_wystawienia);
-                                    opinie.Lista_Opinii.Add(opinia);
+
+
+
+                                    while (reader2.Read())
+                                    {
+                                        string ocena = $"{reader2["ocena"]}";
+                                        string recenzja = $"{reader2["recenzja"]}";
+                                        string data_wystawienia = $"{reader2["data_wystawienia"]}";
+                                        string użytkownik = $"{reader2["nick"]}";
+                                        Opinia opinia = new Opinia(ocena, recenzja, użytkownik, data_wystawienia);
+                                        opinie.Lista_Opinii.Add(opinia);
+
+                                    }
 
                                 }
                             }
