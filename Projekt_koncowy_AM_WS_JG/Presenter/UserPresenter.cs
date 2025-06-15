@@ -57,7 +57,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     homePage.Nick = _model.uzytkownik.Nick;
                     homePage.Plec = _model.uzytkownik.Plec;
                     homePage.DataZalozenia = _model.uzytkownik.Data_zalozenia;
-                    //homePage.SearchTextBox.TextChanged += (s, args) => homePage.Wyszukuje?.Invoke(this, EventArgs.Empty);
+                    homePage.Wyszukuje += GdyWyszukuje;
                 }
             }
             else
@@ -65,7 +65,12 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 MessageBox.Show("Nieprawidłowy email lub hasło", "Błąd");
             }
         }
-
+        public void GdyWyszukuje(object sender, EventArgs e)
+        {
+            string searchText = homePage.SearchText;
+            var filteredBooks = _model.ksiazki.Where(k => k.Tytul.ToLower().Contains(searchText) || k.Autor.ToLower().Contains(searchText)).ToList();
+            homePage.PokazKsiazki(filteredBooks);
+        }
         public void GdyWyloguj(object sender, EventArgs e)
         {
             menu = new CustomMenu();

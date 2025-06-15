@@ -70,8 +70,6 @@ namespace Projekt_koncowy_AM_WS_JG.View
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             searchText = SearchTextBox.Text.ToLowerInvariant().Trim();
-            SearchResultsControl.ItemsSource = ksiazki;
-            SearchResultsControl.ItemTemplate = (DataTemplate)this.Resources["KsiazkaTemplate"];
             Wyszukuje?.Invoke(this, EventArgs.Empty);
         }
         public string SearchText
