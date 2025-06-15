@@ -75,14 +75,20 @@
 
                     <!-- Strzałka w prawo -->
                     <Button Grid.Column="2" Content="→" Width="40" Height="175" Click="ScrollRight_Click"/>
-                    </Grid>
+                </Grid>
             </TabItem>
             <TabItem Header="Moje Książki" Width="174">
-                    <Grid Background="#FFE5E5E5"/>
-                </TabItem>
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
             <TabItem Header="Mój Profil" Width="174" >
                 <Grid Background="#FFE5E5E5">
-                    <Button Content="Wyloguj" HorizontalAlignment="Left" Margin="281,297,0,0" VerticalAlignment="Top" Click="WylogujKlikniete"/>
+                    <Button Content="Wyloguj" HorizontalAlignment="Left" Margin="593,32,0,0" VerticalAlignment="Top" Click="WylogujKlikniete" Height="35" Width="91"/>
+                    <TextBlock x:Name="NickText" HorizontalAlignment="Left" Margin="29,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36"><Run Language="pl-pl" Text="Nick"/></TextBlock>
+                    <TextBlock x:Name="EmailText" HorizontalAlignment="Left" Margin="29,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22"><Run Language="pl-pl" Text="E-mail"/></TextBlock>
+                    <TextBlock x:Name="DataDodText" HorizontalAlignment="Left" Margin="389,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22"><Run Text="Data Dołączenia"/><Run Language="pl-pl" Text=": "/></TextBlock>
+                    <TextBlock x:Name="PlecText" HorizontalAlignment="Left" Margin="40,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="pl-pl" Text="Płeć:"/></TextBlock>
+                    <ComboBox HorizontalAlignment="Left" Margin="427,39,0,0" VerticalAlignment="Top" Width="120"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="427,18,0,0" TextWrapping="Wrap" Text="Płeć" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -23,6 +23,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
     public partial class BookPage : UserControl
     {
         public event EventHandler OpiniaNacisnieta;
+        public event EventHandler WrocNacisniete;
         public BookPage(Ksiazka ksiazka)
         {
             InitializeComponent();
@@ -41,6 +42,10 @@ namespace Projekt_koncowy_AM_WS_JG.View
             WydawnictwoText.Text = $"Wydawnictwo: {ksiazka.Wydawnictwo}";
             GatunekText.Text = $"Gatunek: {ksiazka.Gatunek}";
             OpisText.Text = ksiazka.Opis;
+            RokWydaniaText.Text = $"Rok wydania: {ksiazka.RokWydania}";
+            LiczbaStronText.Text = $"Liczba stron: {ksiazka.LiczbaStron}";
+            JezykText.Text = $"Język: {ksiazka.Jezyk}";
+            SredniaOcenaText.Text = $"Średnia ocena: {ksiazka.JakieOpinie?.Średnia_Ocena ?? "Brak ocen"} ({ksiazka.JakieOpinie?.Liczba_Ocen ?? "0"} ocen)";
 
             // TU USTAWIAMY OPINIE
             if (ksiazka?.JakieOpinie?.Lista_Opinii != null)
@@ -59,6 +64,11 @@ namespace Projekt_koncowy_AM_WS_JG.View
         private void NapiszOpinie_Click(object sender, RoutedEventArgs e)
         {
             OpiniaNacisnieta?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void Wroc_Click(object sender, RoutedEventArgs e)
+        {
+            WrocNacisniete?.Invoke(this, EventArgs.Empty);
         }
     }
 }

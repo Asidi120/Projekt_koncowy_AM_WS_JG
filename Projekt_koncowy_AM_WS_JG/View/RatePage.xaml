@@ -65,6 +65,7 @@
                     Width="150" 
                     HorizontalAlignment="Left"
                     Click="WyslijOpinie_Click"/>
+            <Button Content="Wróć" HorizontalAlignment="Left" Margin="85,95,0,0" Grid.Row="3" VerticalAlignment="Top" Click="WrocNacisniete"/>
         </Grid>
     </ScrollViewer>
 </UserControl>

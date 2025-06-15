@@ -7,7 +7,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
     {
         public List<Ksiazka> ksiazki;
         private string connStr = "server=localhost;user=root;password=123;database=ksiazki;";
-
+        public Uzytkownik uzytkownik;
         public MainModel()
         {
             ksiazki = new List<Ksiazka>();
@@ -80,6 +80,35 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             }
         }
 
+        public void PobierzUzytkownika(string email)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand($"select nick,data_zalozenia,email,plec from uzytkownicy where email = @email", conn))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string nick = $"{reader["nick"]}";
+                            string data = $"{reader["data_zalozenia"]}";
+                            string emaill = $"{reader["email"]}";
+                            string plec = $"{reader["plec"]}";
+                            uzytkownik = new Uzytkownik
+                            {
+                                Nick = nick,
+                                Email = emaill,
+                                Plec = plec,
+                                Data_zalozenia = data
+                            };
+                        }
+                    }
+                }
+            }
+        }
+
         public void DodajDoBazyUzytkownika(string nazwauzytkownika, string haslo, string email)
         {
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(haslo);
@@ -114,7 +143,6 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                         }
 
                     }
-
                 }
                 
             }

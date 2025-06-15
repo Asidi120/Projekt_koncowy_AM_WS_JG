@@ -20,6 +20,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
     /// </summary>
     public partial class RatePage : UserControl
     {
+        public event EventHandler Wroc;
         public RatePage()
         {
             InitializeComponent();
@@ -28,6 +29,11 @@ namespace Projekt_koncowy_AM_WS_JG.View
         private void WyslijOpinie_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void WrocNacisniete(object sender, RoutedEventArgs e)
+        {
+            Wroc?.Invoke(this, EventArgs.Empty);
         }
     }
 }

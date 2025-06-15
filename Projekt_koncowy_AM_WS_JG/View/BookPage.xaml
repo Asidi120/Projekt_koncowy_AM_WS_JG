@@ -12,52 +12,67 @@
                       BlurRadius="8"
                       ShadowDepth="2"/>
     </UserControl.Resources>
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="30">
-        <StackPanel Orientation="Vertical" MaxWidth="800" HorizontalAlignment="Center" >
+    <Grid>
+        <Button Content="← Wróć"
+                Width="80" Height="30"
+                Margin="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="#DDDDDD" Foreground="#333"
+                FontWeight="Bold"
+                Click="Wroc_Click"
+                Panel.ZIndex="10"/>
 
-            <!-- Sekcja główna: okładka + dane -->
-            <DockPanel Margin="0,0,0,20">
-                <!-- Okładka -->
-                <Border Width="200" Height="300" Margin="0,0,20,0" CornerRadius="8" Background="#f0f0f0" DockPanel.Dock="Left" >
-                    <Image x:Name="OkladkaImage" Stretch="UniformToFill" Margin="5"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="30">
+                <StackPanel Orientation="Vertical" MaxWidth="800" HorizontalAlignment="Center">
+                    <!-- Sekcja główna: okładka + dane -->
+                <DockPanel Margin="0,0,0,20">
+                    <!-- Okładka -->
+                    <Border Width="200" Height="300" Margin="0,0,20,0" CornerRadius="8" Background="#f0f0f0" DockPanel.Dock="Left" >
+                        <Image x:Name="OkladkaImage" Stretch="UniformToFill" Margin="5"/>
+                    </Border>
+
+                    <!-- Dane -->
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                        <TextBlock x:Name="TytulText" FontSize="26" FontWeight="Bold" TextWrapping="Wrap" Foreground="#222"/>
+                        <TextBlock x:Name="AutorText" FontSize="16" FontStyle="Italic" Margin="0,5,0,0" Foreground="#666"/>
+                        <TextBlock x:Name="WydawnictwoText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
+                        <TextBlock x:Name="GatunekText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
+                        <TextBlock x:Name="LiczbaStronText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
+                        <TextBlock x:Name="RokWydaniaText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
+                        <TextBlock x:Name="JezykText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
+                        <TextBlock x:Name="SredniaOcenaText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <!-- Opis -->
+                <Border Background="#f7f7f7" Padding="15" CornerRadius="5" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="Opis" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+                        <TextBlock x:Name="OpisText" TextWrapping="Wrap" FontSize="14" Foreground="#333"/>
+                    </StackPanel>
                 </Border>
-
-                <!-- Dane -->
-                <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                    <TextBlock x:Name="TytulText" FontSize="26" FontWeight="Bold" TextWrapping="Wrap" Foreground="#222"/>
-                    <TextBlock x:Name="AutorText" FontSize="16" FontStyle="Italic" Margin="0,5,0,0" Foreground="#666"/>
-                    <TextBlock x:Name="WydawnictwoText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
-                    <TextBlock x:Name="GatunekText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
-                </StackPanel>
-            </DockPanel>
-
-            <!-- Opis -->
-            <Border Background="#f7f7f7" Padding="15" CornerRadius="5" Margin="0,0,0,20">
-                <StackPanel>
-                    <TextBlock Text="Opis" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
-                    <TextBlock x:Name="OpisText" TextWrapping="Wrap" FontSize="14" Foreground="#333"/>
-                </StackPanel>
-            </Border>
-            <!-- Przycisk -->
-            <Button Content="Napisz opinię" Width="160" Height="40" Margin="0,20,0,0" HorizontalAlignment="Left"
+                <!-- Przycisk -->
+                <Button Content="Napisz opinię" Width="160" Height="40" Margin="0,20,0,0" HorizontalAlignment="Left"
                     Background="#4682B4" Foreground="White" FontWeight="Bold" Click="NapiszOpinie_Click"/>
-            <!-- Opinie -->
-            <ItemsControl x:Name="OpinieControl">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Background="LightPink" BorderBrush="#ddd" BorderThickness="1" CornerRadius="6"
+                <!-- Opinie -->
+                <ItemsControl x:Name="OpinieControl">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="LightPink" BorderBrush="#ddd" BorderThickness="1" CornerRadius="6"
                     Padding="12" Margin="0,0,0,15" Effect="{StaticResource DropShadow}">
-                            <StackPanel>
-                                <TextBlock Text="{Binding Użytkownik}" FontWeight="SemiBold" FontSize="14" Foreground="#444"/>
-                                <TextBlock Text="{Binding Data_Wystawienia}" FontSize="12" Foreground="#888" Margin="0,0,0,4"/>
-                                <TextBlock Text="Ocena: " FontSize="13" FontWeight="Bold" Foreground="#007ACC" />
-                                <TextBlock Text="{Binding Ocena}" FontSize="13" Foreground="#007ACC" Margin="0,0,0,4"/>
-                                <TextBlock Text="{Binding Recenzja}" TextWrapping="Wrap" FontSize="13" Foreground="#222" Margin="0,5,0,0"/>
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Użytkownik}" FontWeight="SemiBold" FontSize="14" Foreground="#444"/>
+                                    <TextBlock Text="{Binding Data_Wystawienia}" FontSize="12" Foreground="#888" Margin="0,0,0,4"/>
+                                    <TextBlock Text="Ocena: " FontSize="13" FontWeight="Bold" Foreground="#007ACC" />
+                                    <TextBlock Text="{Binding Ocena}" FontSize="13" Foreground="#007ACC" Margin="0,0,0,4"/>
+                                    <TextBlock Text="{Binding Recenzja}" TextWrapping="Wrap" FontSize="13" Foreground="#222" Margin="0,5,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
     </ScrollViewer>
+    </Grid>
 </UserControl>

@@ -33,7 +33,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
         {
             Wyloguj?.Invoke(this, EventArgs.Empty);
         }
-        public void UstawKsiazka(IEnumerable<Ksiazka> ksiazki) 
+        public void UstawKsiazka(IEnumerable<Ksiazka> ksiazki)
         {
             KsiazkiControl.ItemsSource = ksiazki;
             KsiazkiControl.ItemTemplate = (DataTemplate)this.Resources["KsiazkaTemplate"];
@@ -59,6 +59,26 @@ namespace Projekt_koncowy_AM_WS_JG.View
         {
             double offset = BookScrollViewer.HorizontalOffset + 150;
             BookScrollViewer.ScrollToHorizontalOffset(offset);
+        }
+        public string Nick
+        {
+            get => NickText.Text;
+            set => NickText.Text = value;
+        }
+        public string Email
+        {
+            get => EmailText.Text;
+            set => EmailText.Text = value;
+        }
+        public string Plec
+        {
+            get => PlecText.Text;
+            set => PlecText.Text = value;
+        }
+        public string DataZalozenia
+        {
+            get => DataDodText.Text;
+            set => DataDodText.Text = value;
         }
     }
 }
