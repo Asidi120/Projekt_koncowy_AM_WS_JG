@@ -26,6 +26,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public BookPage(Ksiazka ksiazka)
         {
             InitializeComponent();
+
             if (!string.IsNullOrWhiteSpace(ksiazka.Okladka))
             {
                 OkladkaImage.Source = new BitmapImage(new Uri(ksiazka.Okladka, UriKind.Absolute));
@@ -34,13 +35,27 @@ namespace Projekt_koncowy_AM_WS_JG.View
             {
                 OkladkaImage.Source = new BitmapImage(new Uri("Images/brak_okladki.png", UriKind.Relative));
             }
+
             TytulText.Text = ksiazka.Tytul;
             AutorText.Text = $"Autor: {ksiazka.Autor}";
             WydawnictwoText.Text = $"Wydawnictwo: {ksiazka.Wydawnictwo}";
             GatunekText.Text = $"Gatunek: {ksiazka.Gatunek}";
             OpisText.Text = ksiazka.Opis;
+
+            // TU USTAWIAMY OPINIE
+            if (ksiazka?.JakieOpinie?.Lista_Opinii != null)
+            {
+                OpinieControl.ItemsSource = ksiazka.JakieOpinie.Lista_Opinii;
+            }
         }
 
+        public void UstawOpinieZKsiazki(Ksiazka ksiazka)
+        {
+            if (ksiazka?.JakieOpinie?.Lista_Opinii != null)
+            {
+                OpinieControl.ItemsSource = ksiazka.JakieOpinie.Lista_Opinii;
+            }
+        }
         private void NapiszOpinie_Click(object sender, RoutedEventArgs e)
         {
             OpiniaNacisnieta?.Invoke(this, EventArgs.Empty);

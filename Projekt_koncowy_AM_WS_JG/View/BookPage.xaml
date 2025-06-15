@@ -38,27 +38,26 @@
                     <TextBlock x:Name="OpisText" TextWrapping="Wrap" FontSize="14" Foreground="#333"/>
                 </StackPanel>
             </Border>
-
+            <!-- Przycisk -->
+            <Button Content="Napisz opinię" Width="160" Height="40" Margin="0,20,0,0" HorizontalAlignment="Left"
+                    Background="#4682B4" Foreground="White" FontWeight="Bold" Click="NapiszOpinie_Click"/>
             <!-- Opinie -->
-            <TextBlock Text="Opinie" FontWeight="Bold" FontSize="18" Margin="0,0,0,10"/>
             <ItemsControl x:Name="OpinieControl">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="White" BorderBrush="#ddd" BorderThickness="1" CornerRadius="6"
-                                Padding="12" Margin="0,0,0,15" Effect="{StaticResource DropShadow}">
+                        <Border Background="LightPink" BorderBrush="#ddd" BorderThickness="1" CornerRadius="6"
+                    Padding="12" Margin="0,0,0,15" Effect="{StaticResource DropShadow}">
                             <StackPanel>
-                                <TextBlock Text="{Binding Autor}" FontWeight="SemiBold" FontSize="14" Foreground="#444"/>
-                                <TextBlock Text="{Binding Tresc}" TextWrapping="Wrap" FontSize="13" Foreground="#222" Margin="0,5,0,0"/>
+                                <TextBlock Text="{Binding Użytkownik}" FontWeight="SemiBold" FontSize="14" Foreground="#444"/>
+                                <TextBlock Text="{Binding Data_Wystawienia}" FontSize="12" Foreground="#888" Margin="0,0,0,4"/>
+                                <TextBlock Text="Ocena: " FontSize="13" FontWeight="Bold" Foreground="#007ACC" />
+                                <TextBlock Text="{Binding Ocena}" FontSize="13" Foreground="#007ACC" Margin="0,0,0,4"/>
+                                <TextBlock Text="{Binding Recenzja}" TextWrapping="Wrap" FontSize="13" Foreground="#222" Margin="0,5,0,0"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-
-            <!-- Przycisk -->
-            <Button Content="Napisz opinię" Width="160" Height="40" Margin="0,20,0,0" HorizontalAlignment="Left"
-                    Background="#4682B4" Foreground="White" FontWeight="Bold" Click="NapiszOpinie_Click"/>
-
         </StackPanel>
     </ScrollViewer>
 </UserControl>
