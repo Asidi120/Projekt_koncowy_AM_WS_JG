@@ -147,9 +147,10 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             using (var conn = GetConnection())
             {
                 conn.Open();
-                using (var cmd = new MySqlCommand("select id_ksiazka tytul, gatunek, opis, jezyk_oryginalu, rok_wydania, liczba_stron, concat(imie, ' ', nazwisko) jakiautor, nazwa, avg(ocena) srednia_ocena, count(ocena) liczba_ocen from ksiazka k left join autor a on k.id_autor = a.id_autor left join wydawnictwo w on k.id_wydaw = w.id_wydaw left join opinia o on o.id_ksiazka = k.id_ksiazka group by k.id_ksiazka;", conn))
+                using (var cmd = new MySqlCommand("select k.id_ksiazka, tytul, gatunek, opis, jezyk_oryginalu, rok_wydania, liczba_stron, concat(imie, ' ', nazwisko) jakiautor, nazwa, avg(ocena) srednia_ocena, count(ocena) liczba_ocen from ksiazka k left join autor a on k.id_autor = a.id_autor left join wydawnictwo w on k.id_wydaw = w.id_wydaw left join opinia o on o.id_ksiazka = k.id_ksiazka group by k.id_ksiazka;", conn))
                 using (var reader = cmd.ExecuteReader())
                 {
+
                     while (reader.Read())
                     {
                         string id_ksiazka = $"{reader["id_ksiazka"]}";
@@ -165,23 +166,25 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                         string liczba_ocen = $"{reader["liczba_ocen"]}";
 
                         Opinie opinie = new Opinie(srednia_ocena, liczba_ocen);
+                        }
 
-                        using (var cmd2 = new MySqlCommand($"select ocena, recenzja, data_wystawienia, nick from opinia o, uzytkownicy u where o.id_uzytkownik = u.id_uzytkownik and o.id_ksiazka = @id_ksiazka", conn))
+                        using (var cmd2 = new MySqlCommand($"select o.ocena, recenzja, data_wystawienia, nick from opinia o, uzytkownicy u where o.id_uzytkownik = u.id_uzytkownik and o.id_ksiazka = @id_ksiazka", conn))
+                        using (var reader2 = cmd2.ExecuteReader())
                         {
-                            cmd.Parameters.AddWithValue("@id_ksiazka", id_ksiazka);
-
-                            while (reader.Read())
                             {
-                                string ocena = $"{reader["ocena"]}";
-                                string recenzja = $"{reader["recenzja"]}";
-                                string data_wystawienia = $"{reader["data_wystawienia"]}";
-                                string użytkownik = $"{reader["nick"]}";
+                                cmd2.Parameters.AddWithValue("@id_ksiazka", id_ksiazka);
 
-                                Opinia opinia = new Opinia(ocena, recenzja, użytkownik, data_wystawienia);
-                                opinie.Lista_Opinii.Add(opinia);
+                                while (reader2.Read())
+                                {
+                                    string ocena = $"{reader2["ocena"]}";
+                                    string recenzja = $"{reader2["recenzja"]}";
+                                    string data_wystawienia = $"{reader2["data_wystawienia"]}";
+                                    string użytkownik = $"{reader2["nick"]}";
+                                    Opinia opinia = new Opinia(ocena, recenzja, użytkownik, data_wystawienia);
+                                    opinie.Lista_Opinii.Add(opinia);
 
+                                }
                             }
-                           
                         }
                         ksiazki.Add(new Ksiazka(tytul, autor, opis, gatunek, rok_wydania, liczba_stron, jezyk_oryginalu, wydawnictwo, opinie));
                     }

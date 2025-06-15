@@ -24,5 +24,10 @@ namespace Projekt_koncowy_AM_WS_JG.View
         {
             InitializeComponent();
         }
+
+        private void WyslijOpinie_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

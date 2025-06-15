@@ -3,10 +3,68 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Projekt_koncowy_AM_WS_JG.View"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="700" Background="Wheat">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="500" d:DesignWidth="700"
+             Background="White">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Tytuł strony -->
+            <TextBlock Text="Wystaw opinię" 
+                       FontSize="24" 
+                       FontWeight="Bold"
+                       Margin="0 0 0 20"/>
+
+            <!-- Ocena -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 20">
+                <TextBlock Text="Ocena (1-10):" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <ComboBox x:Name="OcenaComboBox" Width="60">
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="1.5"/>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="2.5"/>
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="3.5"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="4.5"/>
+                    <ComboBoxItem Content="5"/>
+                    <ComboBoxItem Content="5.5"/>
+                    <ComboBoxItem Content="6"/>
+                    <ComboBoxItem Content="6.5"/>
+                    <ComboBoxItem Content="7"/>
+                    <ComboBoxItem Content="7.5"/>
+                    <ComboBoxItem Content="8"/>
+                    <ComboBoxItem Content="8.5"/>
+                    <ComboBoxItem Content="9"/>
+                    <ComboBoxItem Content="9.5"/>
+                    <ComboBoxItem Content="10"/>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Pole na opinię -->
+            <StackPanel Grid.Row="2" Margin="0 0 0 20">
+                <TextBlock Text="Twoja opinia:" Margin="0 0 0 5"/>
+                <TextBox x:Name="OpiniaTextBox"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         Height="150"
+                         VerticalScrollBarVisibility="Auto"/>
+            </StackPanel>
+
+            <!-- Przycisk wysyłania -->
+            <Button Grid.Row="4" 
+                    Content="Wyślij opinię" 
+                    Width="150" 
+                    HorizontalAlignment="Left"
+                    Click="WyslijOpinie_Click"/>
+        </Grid>
+    </ScrollViewer>
 </UserControl>
