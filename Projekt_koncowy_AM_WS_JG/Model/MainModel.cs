@@ -5,6 +5,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
 {
     public class MainModel
     {
+        public List<Ksiazka> ksiazki = new List<Ksiazka>();
         private string connStr = "server=localhost;user=root;password=123;database=ksiazki;";
         public MySqlConnection GetConnection()
         {
@@ -131,6 +132,32 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                     else
                     {
                         return false;
+                    }
+                }
+            }
+        }
+
+        public void ZaladujKsiazkiZBazy()
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand("select tytul, gatunek, opis, jezyk_oryginalu, rok_wydania, liczba_stron, concat(imie, ' ', nazwisko) jakiautor, nazwa" +
+                    " from ksiazka k, autor a, wydawnictwo w where k.id_autor = a.id_autor and k.id_wydaw = w.id_wydaw", conn))
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string tytul = $"{reader["tytul"]}";
+                        string gatunek = $"{reader["gatunek"]}";
+                        string opis = $"{reader["opis"]}";
+                        string jezyk_oryginalu = $"{reader["jezyk_oryginalu"]}";
+                        string rok_wydania = $"{reader["rok_wydania"]}";
+                        string liczba_stron = $"{reader["liczba_stron"]}";
+                        string autor = $"{reader["jakiautor"]}";
+                        string wydawnictwo = $"{reader["nazwa"]}";
+
+                        ksiazki.Add(new Ksiazka(tytul, autor, opis, gatunek, rok_wydania, liczba_stron, jezyk_oryginalu, wydawnictwo));
                     }
                 }
             }
