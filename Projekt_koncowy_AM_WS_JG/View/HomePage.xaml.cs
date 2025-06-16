@@ -35,7 +35,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
         {
             Wyloguj?.Invoke(this, EventArgs.Empty);
         }
-        public void UstawKsiazka(IEnumerable<Ksiazka> ksiazki)
+        public void UstawKsiazka(List<Ksiazka> ksiazki)
         {
             KsiazkiControl.ItemsSource = ksiazki;
             ChcePrzeczytacControl.ItemsSource = ksiazki;

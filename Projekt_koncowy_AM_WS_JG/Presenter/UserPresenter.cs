@@ -159,7 +159,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         private void ZaladujKsiazki()
         {
             _model.ZaladujKsiazkiZBazy();
-            homePage.UstawKsiazka(_model.ksiazki);
+            homePage.UstawKsiazka(_model.najnowsze_ksiazki); 
         }
     }
 }

@@ -6,11 +6,15 @@ namespace Projekt_koncowy_AM_WS_JG.Model
     public class MainModel
     {
         public List<Ksiazka> ksiazki;
+        public List<Ksiazka> najpopularniejsze_ksiazki;
+        public List<Ksiazka> najnowsze_ksiazki;
         private string connStr = "server=localhost;user=root;password=123;database=ksiazki;";
         public Uzytkownik uzytkownik;
         public MainModel()
         {
             ksiazki = new List<Ksiazka>();
+            najpopularniejsze_ksiazki = new List<Ksiazka>();
+            najnowsze_ksiazki = new List<Ksiazka>();
         }
         public MySqlConnection GetConnection()
         {
@@ -247,6 +251,17 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                     }
                 }
             }
+            najpopularniejsze_ksiazki = ksiazki
+             .Where(k => k.JakieOpinie != null && int.TryParse(k.JakieOpinie.Liczba_Ocen, out _))
+             .OrderByDescending(k => int.Parse(k.JakieOpinie.Liczba_Ocen))
+             .Take(10)
+             .ToList();
+
+            najnowsze_ksiazki = ksiazki
+            .Where(k => k.RokWydania != null && int.TryParse(k.RokWydania, out _))
+            .OrderByDescending(k => int.Parse(k.RokWydania))
+            .Take(3)
+            .ToList();
         }
         public bool CzyUzytkownikWyslalOpinie(string id_uzytkownik, string id_ksiazka)
         {
