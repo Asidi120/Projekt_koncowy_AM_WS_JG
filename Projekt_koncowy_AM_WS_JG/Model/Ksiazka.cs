@@ -19,7 +19,6 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         public string Jezyk { get; set; }
         public string Wydawnictwo { get; set; }
         public Opinie JakieOpinie { get; set; }
-      
 
         public Ksiazka (string id_ksiazki, string tytul, string autor, string opis, string gatunek, string rokWydania, string liczbaStron, string jezyk, string wydawnictwo, Opinie jakieopinie)
         {

@@ -24,7 +24,9 @@
                        FontStyle="Italic"
                        FontSize="11"
                        HorizontalAlignment="Center"
-                       TextTrimming="CharacterEllipsis"/>
+                       TextTrimming="CharacterEllipsis"
+                       Cursor="Hand"
+                       MouseLeftButtonDown="Autor_Click"/>
                 </StackPanel>
             </Border>
         </DataTemplate>
@@ -54,7 +56,8 @@
           ItemTemplate="{StaticResource KsiazkaTemplate}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
+                                    <StackPanel Orientation="Horizontal"
+                                                />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                         </ItemsControl>
@@ -107,7 +110,8 @@
                                            FontStyle="Italic"
                                            FontSize="11"
                                            HorizontalAlignment="Center"
-                                           TextTrimming="CharacterEllipsis"/>
+                                           TextTrimming="CharacterEllipsis"
+                                           x:Name="AutorDane"/>
                                         </StackPanel>
                                     </Border>
                                 </DataTemplate>

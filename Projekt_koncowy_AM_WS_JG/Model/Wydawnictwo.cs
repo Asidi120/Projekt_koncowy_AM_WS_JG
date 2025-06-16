@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Projekt_koncowy_AM_WS_JG.Model
+{
+    public class Wydawnictwo
+    {
+        public string Nazwa { get; set; }
+        public string Kraj_zalozenia { get; set; }
+        public string Rok_zalozenia { get; set; }
+        public List<Ksiazka> Ksiazki { get; set; }
+        public Wydawnictwo()
+        {
+            Ksiazki = new List<Ksiazka>();
+        }
+    }
+}

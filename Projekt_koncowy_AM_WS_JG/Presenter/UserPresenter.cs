@@ -25,6 +25,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         private HomePageRoot homePageRoot;
         private BookPage bookPage;
         private RatePage ratePage;
+        private AutorPage autorpage;
         public UserPresenter(MainView view, MainModel model)
         {
             _view = view;
@@ -52,6 +53,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     _view.LoadView(homePage);
                     ZaladujKsiazki();
                     homePage.PrzeniesNaTytul += PrzeniesNaTytul;
+                    homePage.PrzeniesNaAutora += PrzeniesNaAutora;
                     _model.PobierzUzytkownika(menu.EmailLogowanie);
                     homePage.Email=_model.uzytkownik.Email;
                     homePage.Nick = _model.uzytkownik.Nick;
@@ -63,6 +65,19 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             else
             {
                 MessageBox.Show("Nieprawidłowy email lub hasło", "Błąd");
+            }
+        }
+        public void PrzeniesNaAutora(object sender, Autor autor)
+        {
+            autorpage = new AutorPage(autor);
+            _view.LoadView(autorpage);
+            autorpage.WrocNacisniete += GdyWrocNacisnieteAutor;
+        }
+        private void GdyWrocNacisnieteAutor(object? sender, EventArgs e)
+        {
+            if (homePage != null)
+            {
+                _view.LoadView(homePage);
             }
         }
         public void GdyWyszukuje(object sender, EventArgs e)
