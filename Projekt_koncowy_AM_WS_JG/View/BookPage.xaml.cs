@@ -122,7 +122,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
 
         private void DodajDoListy_Click(object sender, SelectionChangedEventArgs e)
         {
-            string status = StatusComboBox.SelectedItem.Content.ToString();
+            string status = StatusComboBox.SelectedItem.ToString();
             string id_ksiazki = id_ksiazki_wybranej;
             string wynik=id_ksiazki+";"+status;
             DodajDoListy?.Invoke(this, wynik);
