@@ -117,113 +117,125 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Moje Książki" Width="174" HorizontalAlignment="Left">
-                <Grid Background="#FFE5E5E5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <!-- Główny ScrollViewer obejmuje cały Grid (przewijanie pionowe) -->
+                <ScrollViewer  x:Name="MainScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <Grid Background="#FFE5E5E5" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <!-- Sekcja: Chcę Przeczytać -->
-                    <Grid Grid.Row="0" Margin="0,10">
-                        <TextBlock Text="Chcę Przeczytać" FontWeight="Bold" Margin="10"/>
-                        <Grid Margin="0,30,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+                        <!-- Sekcja 1: Chcę Przeczytać -->
+                        <StackPanel Grid.Row="0" Margin="0,10">
+                            <TextBlock Text="Chcę Przeczytać" FontWeight="Bold" FontSize="16" Margin="10,0"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
 
-                            <Button Grid.Column="0" Content="←" Width="40" Height="175"/>
-                            <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Grid.Column="1">
-                                <ItemsControl ItemTemplate="{StaticResource KsiazkaTemplate}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal"/>
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                    <!-- Przykładowe dane -->
-                                    <TextBlock Text="Książka 1"/>
-                                    <TextBlock Text="Książka 2"/>
-                                </ItemsControl>
-                            </ScrollViewer>
-                            <Button Grid.Column="2" Content="→" Width="40" Height="175"/>
-                        </Grid>
+                                <Button Grid.Column="0" Content="←" Width="40" Height="175" Click="ScrollLeft_ChcePrzeczytac"/>
+                                <ScrollViewer x:Name="ChcePrzeczytacScrollViewer" Grid.Column="1" PreviewMouseWheel="HorizontalScrollViewer_PreviewMouseWheel"
+                                  HorizontalScrollBarVisibility="Hidden"
+                                  VerticalScrollBarVisibility="Disabled">
+                                    <ItemsControl x:Name="ChcePrzeczytacControl"
+                                      ItemTemplate="{StaticResource KsiazkaTemplate}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                                <Button Grid.Column="2" Content="→" Width="40" Height="175" Click="ScrollRight_ChcePrzeczytac"/>
+                            </Grid>
+                        </StackPanel>
+
+                        <!-- Sekcja 2: Przeczytane -->
+                        <StackPanel Grid.Row="1" Margin="0,10">
+                            <TextBlock Text="Przeczytane" FontWeight="Bold" FontSize="16" Margin="10,0"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0" Content="←" Width="40" Height="175" Click="ScrollLeft_Przeczytane"/>
+                                <ScrollViewer x:Name="PrzeczytaneScrollViewer" Grid.Column="1"
+                                  HorizontalScrollBarVisibility="Hidden" PreviewMouseWheel="HorizontalScrollViewer_PreviewMouseWheel"
+                                  VerticalScrollBarVisibility="Disabled">
+                                    <ItemsControl x:Name="PrzeczytaneControl"
+                                      ItemTemplate="{StaticResource KsiazkaTemplate}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                                <Button Grid.Column="2" Content="→" Width="40" Height="175" Click="ScrollRight_Przeczytane"/>
+                            </Grid>
+                        </StackPanel>
+
+                        <!-- Sekcja 3: W trakcie -->
+                        <StackPanel Grid.Row="2" Margin="0,10">
+                            <TextBlock Text="W trakcie" FontWeight="Bold" FontSize="16" Margin="10,0"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0" Content="←" Width="40" Height="175" Click="ScrollLeft_WTrakcie"/>
+                                <ScrollViewer x:Name="WTrakcieScrollViewer" Grid.Column="1"
+                                  HorizontalScrollBarVisibility="Hidden" PreviewMouseWheel="HorizontalScrollViewer_PreviewMouseWheel"
+                                  VerticalScrollBarVisibility="Disabled">
+                                    <ItemsControl x:Name="WTrakcieControl"
+                                      ItemTemplate="{StaticResource KsiazkaTemplate}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                                <Button Grid.Column="2" Content="→" Width="40" Height="175" Click="ScrollRight_WTrakcie"/>
+                            </Grid>
+                        </StackPanel>
+
+                        <!-- Sekcja 4: Porzucone -->
+                        <StackPanel Grid.Row="3" Margin="0,10">
+                            <TextBlock Text="Porzucone" FontWeight="Bold" FontSize="16" Margin="10,0"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0" Content="←" Width="40" Height="175" Click="ScrollLeft_Porzucone"/>
+                                <ScrollViewer x:Name="PorzuconeScrollViewer" Grid.Column="1"
+                                  HorizontalScrollBarVisibility="Hidden" PreviewMouseWheel="HorizontalScrollViewer_PreviewMouseWheel"
+                                  VerticalScrollBarVisibility="Disabled">
+                                    <ItemsControl x:Name="PorzuconeControl"
+                                      ItemTemplate="{StaticResource KsiazkaTemplate}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                                <Button Grid.Column="2" Content="→" Width="40" Height="175" Click="ScrollRight_Porzucone"/>
+                            </Grid>
+                        </StackPanel>
                     </Grid>
-
-                    <!-- Sekcja: Przeczytane -->
-                    <Grid Grid.Row="1" Margin="0,10">
-                        <TextBlock Text="Przeczytane" FontWeight="Bold" Margin="10"/>
-                        <Grid Margin="0,30,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Button Grid.Column="0" Content="←" Width="40" Height="175"/>
-                            <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Grid.Column="1">
-                                <ItemsControl ItemTemplate="{StaticResource KsiazkaTemplate}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal"/>
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
-                            </ScrollViewer>
-                            <Button Grid.Column="2" Content="→" Width="40" Height="175"/>
-                        </Grid>
-                    </Grid>
-
-                    <!-- Sekcja: W trakcie -->
-                    <Grid Grid.Row="2" Margin="0,10">
-                        <TextBlock Text="W trakcie" FontWeight="Bold" Margin="10"/>
-                        <Grid Margin="0,30,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Button Grid.Column="0" Content="←" Width="40" Height="175"/>
-                            <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Grid.Column="1">
-                                <ItemsControl ItemTemplate="{StaticResource KsiazkaTemplate}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal"/>
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
-                            </ScrollViewer>
-                            <Button Grid.Column="2" Content="→" Width="40" Height="175"/>
-                        </Grid>
-                    </Grid>
-
-                    <!-- Sekcja: Porzucone -->
-                    <Grid Grid.Row="3" Margin="0,10">
-                        <TextBlock Text="Porzucone" FontWeight="Bold" Margin="10"/>
-                        <Grid Margin="0,30,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Button Grid.Column="0" Content="←" Width="40" Height="175"/>
-                            <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Grid.Column="1">
-                                <ItemsControl ItemTemplate="{StaticResource KsiazkaTemplate}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal"/>
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
-                            </ScrollViewer>
-                            <Button Grid.Column="2" Content="→" Width="40" Height="175"/>
-                        </Grid>
-                    </Grid>
-                </Grid>
+                </ScrollViewer>
             </TabItem>
 
             <TabItem Header="Mój Profil" Width="174" >

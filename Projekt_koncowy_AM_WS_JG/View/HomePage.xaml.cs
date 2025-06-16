@@ -40,8 +40,8 @@ namespace Projekt_koncowy_AM_WS_JG.View
             KsiazkiControl.ItemsSource = ksiazki;
             ChcePrzeczytacControl.ItemsSource = ksiazki;
             PrzeczytaneControl.ItemsSource = ksiazki;
-
-
+            WTrakcieControl.ItemsSource = ksiazki;
+            PorzuconeControl.ItemsSource = ksiazki;
             KsiazkiControl.ItemTemplate = (DataTemplate)this.Resources["KsiazkaTemplate"];
         }
         private void Tytul_Click(object sender, MouseButtonEventArgs e)
@@ -101,5 +101,73 @@ namespace Projekt_koncowy_AM_WS_JG.View
             get => DataDodText.Text;
             set => DataDodText.Text = value;
         }
+
+        private void ScrollLeft_ChcePrzeczytac(object sender, RoutedEventArgs e)
+        {
+            double offset = ChcePrzeczytacScrollViewer.HorizontalOffset - 150;
+            if (offset < 0) offset = 0;
+            ChcePrzeczytacScrollViewer.ScrollToHorizontalOffset(offset);
+        }
+
+        private void ScrollRight_ChcePrzeczytac(object sender, RoutedEventArgs e)
+        {
+            double offset = ChcePrzeczytacScrollViewer.HorizontalOffset + 150;
+            ChcePrzeczytacScrollViewer.ScrollToHorizontalOffset(offset);
+        }
+
+        private void ScrollLeft_Przeczytane(object sender, RoutedEventArgs e)
+        {
+            double offset = PrzeczytaneScrollViewer.HorizontalOffset - 150;
+            if (offset < 0) offset = 0;
+            PrzeczytaneScrollViewer.ScrollToHorizontalOffset(offset);
+        }
+
+        private void ScrollRight_Przeczytane(object sender, RoutedEventArgs e)
+        {
+            double offset = PrzeczytaneScrollViewer.HorizontalOffset + 150;
+            PrzeczytaneScrollViewer.ScrollToHorizontalOffset(offset);
+        }
+
+        private void ScrollLeft_WTrakcie(object sender, RoutedEventArgs e)
+        {
+            double offset = WTrakcieScrollViewer.HorizontalOffset - 150;
+            if (offset < 0) offset = 0;
+            WTrakcieScrollViewer.ScrollToHorizontalOffset(offset);
+        }
+
+        private void ScrollRight_WTrakcie(object sender, RoutedEventArgs e)
+        {
+            double offset = WTrakcieScrollViewer.HorizontalOffset + 150;
+            WTrakcieScrollViewer.ScrollToHorizontalOffset(offset);
+        }
+
+        private void ScrollLeft_Porzucone(object sender, RoutedEventArgs e)
+        {
+            double offset = PorzuconeScrollViewer.HorizontalOffset - 150;
+            if (offset < 0) offset = 0;
+            PorzuconeScrollViewer.ScrollToHorizontalOffset(offset);
+        }
+
+        private void ScrollRight_Porzucone(object sender, RoutedEventArgs e)
+        {
+            double offset = PorzuconeScrollViewer.HorizontalOffset + 150;
+            PorzuconeScrollViewer.ScrollToHorizontalOffset(offset);
+        }
+
+        private void HorizontalScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            // Przekieruj zdarzenie do nadrzędnego ScrollViewer-a (np. ten który zawija cały TabItem)
+            e.Handled = true;
+
+            var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
+            {
+                RoutedEvent = UIElement.MouseWheelEvent,
+                Source = sender
+            };
+
+            // Znajdź główny pionowy ScrollViewer – zamień na swój, np. "MainScrollViewer"
+            MainScrollViewer.RaiseEvent(eventArg);
+        }
+
     }
 }
