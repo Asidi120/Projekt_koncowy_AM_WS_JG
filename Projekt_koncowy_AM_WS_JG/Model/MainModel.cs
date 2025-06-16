@@ -325,5 +325,60 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                 }
             }
         }
+
+        public bool CzyKsiazkaWLiscie(string id_ksiazka, string id_uzytkownik)
+        {
+
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand($"select count(*) ile_statusow from status where id_uzytkownik = @id_uzytkownik and id_ksiazka = @id_ksiazka", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_uzytkownik", id_uzytkownik);
+                    cmd.Parameters.AddWithValue("@id_ksiazka", id_ksiazka);
+                    var ile = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (ile >= 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        public void DodajStatusDoBazy(string id_ksiazka, string id_uzytkownik, string status)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand($"INSERT INTO status (id_uzytkownik, id_ksiazka, status) VALUES (@id_uzytkownik, @id_ksiazka, @status)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_uzytkownik", id_uzytkownik);
+                    cmd.Parameters.AddWithValue("@id_ksiazka", id_ksiazka);
+                    cmd.Parameters.AddWithValue("@status", status);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void ZamienStatusWBazie(string id_ksiazka, string id_uzytkownik, string status)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand($"update status set status = @status where id_uzytkownik = @id_uzytkownik and id_ksiazka = @id_ksiazka;", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_uzytkownik", id_uzytkownik);
+                    cmd.Parameters.AddWithValue("@id_ksiazka", id_ksiazka);
+                    cmd.Parameters.AddWithValue("@status", status);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

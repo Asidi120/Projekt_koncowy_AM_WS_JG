@@ -139,7 +139,15 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         {
             string idksiazki = wynikzbook.Split(";")[0];
             string status = wynikzbook.Split(";")[1];
-            //tutaj bedzie funkcja
+            MessageBox.Show(status);
+            //if(_model.CzyKsiazkaWLiscie(idksiazki, _model.uzytkownik.IDUzytkownika)) 
+            //{
+            //    _model.ZamienStatusWBazie(idksiazki, _model.uzytkownik.IDUzytkownika,status);
+            //}
+            //else
+            //{
+            //    _model.DodajStatusDoBazy(idksiazki, _model.uzytkownik.IDUzytkownika, status);
+            //}
         }
         public void PrzeniesNaAutorazbook(object sender, String idautora)
         {
