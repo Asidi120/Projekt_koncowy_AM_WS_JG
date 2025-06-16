@@ -248,5 +248,26 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                 }
             }
         }
+        public bool CzyUzytkownikWyslalOpinie(string id_uzytkownik, string id_ksiazka)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand($"select count(*) ile_opinii from opinia where id_uzytkownik = @id_uzytkownik and id_ksiazka = @id_ksiazka", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_uzytkownik", id_uzytkownik);
+                    cmd.Parameters.AddWithValue("@id_ksiazka", id_ksiazka);
+                    var ile = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (ile >= 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
     }
 }

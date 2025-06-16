@@ -38,6 +38,10 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public void UstawKsiazka(IEnumerable<Ksiazka> ksiazki)
         {
             KsiazkiControl.ItemsSource = ksiazki;
+            ChcePrzeczytacControl.ItemsSource = ksiazki;
+            PrzeczytaneControl.ItemsSource = ksiazki;
+
+
             KsiazkiControl.ItemTemplate = (DataTemplate)this.Resources["KsiazkaTemplate"];
         }
         private void Tytul_Click(object sender, MouseButtonEventArgs e)

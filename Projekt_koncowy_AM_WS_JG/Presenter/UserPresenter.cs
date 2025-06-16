@@ -123,13 +123,18 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         }
         private void GdyOpiniaNacisnieta(object? sender, EventArgs e)
         {
-            ratePage = new RatePage();
-            _view.LoadView(ratePage);
-            ratePage.Wroc += GdyWrocNacisniete1;
-            ratePage.WyslijOpinie += GdyWyslijOpinieNacisniete;
-           
+            if (!_model.CzyUzytkownikWyslalOpinie(_model.uzytkownik.IDUzytkownika, bookPage.IDKsiazkiWybranej))
+            {
+                ratePage = new RatePage();
+                _view.LoadView(ratePage);
+                ratePage.Wroc += GdyWrocNacisniete1;
+                ratePage.WyslijOpinie += GdyWyslijOpinieNacisniete;
+            }
+            else
+            {
+                MessageBox.Show("Nie możesz ponownie wystawić opinii");
+            }
         }
-
         private void GdyWyslijOpinieNacisniete(object? sender, EventArgs e)
         {
             _model.DodajDoBazyOpinie(_model.uzytkownik.IDUzytkownika, bookPage.IDKsiazkiWybranej, ratePage.RecenzjaWystawiona, ratePage.OcenaWystawiona);
