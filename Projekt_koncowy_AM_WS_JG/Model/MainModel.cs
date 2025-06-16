@@ -392,14 +392,11 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                 {
                     cmd.Parameters.AddWithValue("@id_uzytkownik", id_uzytkownik);
                     cmd.Parameters.AddWithValue("@id_ksiazka", id_ksiazka);
-
                     using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             statuswybrany = $"{reader["status"]}";
-                            
-
                         }
                     }
                 }

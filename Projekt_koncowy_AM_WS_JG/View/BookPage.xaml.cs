@@ -57,6 +57,22 @@ namespace Projekt_koncowy_AM_WS_JG.View
                 wybraneWydawnictwo = value;
             }
         }
+        public void UstawStatus(string nowystatus)
+        {
+            status_wybranej_ksiazki = nowystatus;
+            foreach (ComboBoxItem item in StatusComboBox.Items)
+            {
+                if (item.Content.ToString() == status_wybranej_ksiazki)
+                {
+                    StatusComboBox.SelectedItem = item;
+                    break;
+                }
+                else
+                {
+                    StatusComboBox.SelectedIndex = 0;
+                }
+            }
+        }
         public BookPage(Ksiazka ksiazka)
         {
             InitializeComponent();
@@ -87,7 +103,6 @@ namespace Projekt_koncowy_AM_WS_JG.View
             {
                 OpinieControl.ItemsSource = ksiazka.JakieOpinie.Lista_Opinii;
             }
-            StatusComboBox.SelectedItem = StatusWybranejKsiazki;
         }
 
         public void UstawOpinieZKsiazki(Ksiazka ksiazka)

@@ -134,13 +134,12 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             bookPage.PrzeniesNaWydawnictwo += PrzeniesNaWydawnictwo;
             bookPage.PrzeniesNaAutora += PrzeniesNaAutorazbook;
             bookPage.DodajDoListy += DodajDoListyNacisniete;
-            bookPage.StatusWybranejKsiazki = _model.ZwrocStatusWybranejKsiazki(bookPage.IDKsiazkiWybranej, _model.uzytkownik.IDUzytkownika);
+            bookPage.UstawStatus(_model.ZwrocStatusWybranejKsiazki(bookPage.IDKsiazkiWybranej, _model.uzytkownik.IDUzytkownika));
         }
         public void DodajDoListyNacisniete(object sender, String wynikzbook)
         {
             string idksiazki = wynikzbook.Split(";")[0];
             string status = wynikzbook.Split(";")[1];
-            MessageBox.Show(status);
             if (_model.CzyKsiazkaWLiscie(idksiazki, _model.uzytkownik.IDUzytkownika))
             {
                 _model.ZamienStatusWBazie(idksiazki, _model.uzytkownik.IDUzytkownika, status);
