@@ -25,13 +25,17 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public event EventHandler OpiniaNacisnieta;
         public event EventHandler WrocNacisniete;
         public event EventHandler<string> DodajDoListy;
+        public event EventHandler<string> UsunZListy;
         string id_ksiazki_wybranej;
         public event EventHandler<string> PrzeniesNaWydawnictwo;
         public event EventHandler<string> PrzeniesNaAutora;
         private string wybraneWydawnictwo = "";
         private string wybranyAutorIndex = "";
         private string status_wybranej_ksiazki = "";
-       
+        private bool czyUzytkownikZmienilStatus;
+        private bool byloUstawianieStatusu;
+
+
         public string WybranyAutor
         {
             get => wybranyAutorIndex;
@@ -72,6 +76,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
                     StatusComboBox.SelectedIndex = 0;
                 }
             }
+            byloUstawianieStatusu = true;
         }
         public BookPage(Ksiazka ksiazka)
         {
@@ -98,6 +103,8 @@ namespace Projekt_koncowy_AM_WS_JG.View
             id_ksiazki_wybranej = ksiazka.IDKsiazki;
             wybraneWydawnictwo= ksiazka.IDWydawnictwa;
             wybranyAutorIndex= ksiazka.IDAutora;
+            czyUzytkownikZmienilStatus = false;
+            byloUstawianieStatusu = false;
             // TU USTAWIAMY OPINIE
             if (ksiazka?.JakieOpinie?.Lista_Opinii != null)
             {
@@ -149,11 +156,25 @@ namespace Projekt_koncowy_AM_WS_JG.View
 
         private void DodajDoListy_Click(object sender, SelectionChangedEventArgs e)
         {
+            if (!czyUzytkownikZmienilStatus && byloUstawianieStatusu)
+            {
+                MessageBox.Show("Skibidi");
+                czyUzytkownikZmienilStatus = true;
+                return;
+            }
+
             var selectedItem = StatusComboBox.SelectedItem as ComboBoxItem;
             string status = selectedItem?.Content.ToString() ?? string.Empty;
             string id_ksiazki = id_ksiazki_wybranej;
             string wynik = id_ksiazki + ";" + status;
-            DodajDoListy?.Invoke(this, wynik);
+            if (status == "Niedodane")
+            {
+                UsunZListy?.Invoke(this, id_ksiazki);
+            }
+            else
+            {
+                DodajDoListy?.Invoke(this, wynik);
+            }
         }
 
 

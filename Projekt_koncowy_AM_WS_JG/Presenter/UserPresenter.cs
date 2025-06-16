@@ -134,7 +134,16 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             bookPage.PrzeniesNaWydawnictwo += PrzeniesNaWydawnictwo;
             bookPage.PrzeniesNaAutora += PrzeniesNaAutorazbook;
             bookPage.DodajDoListy += DodajDoListyNacisniete;
+            bookPage.UsunZListy += UsunZListyNacisniete;
             bookPage.UstawStatus(_model.ZwrocStatusWybranejKsiazki(bookPage.IDKsiazkiWybranej, _model.uzytkownik.IDUzytkownika));
+        }
+
+        public void UsunZListyNacisniete(object sender, String id_ksiazki)
+        {
+            if (_model.CzyKsiazkaWLiscie(id_ksiazki, _model.uzytkownik.IDUzytkownika))
+            {
+                _model.UsunStatusZBazy(id_ksiazki, _model.uzytkownik.IDUzytkownika);
+            }
         }
         public void DodajDoListyNacisniete(object sender, String wynikzbook)
         {

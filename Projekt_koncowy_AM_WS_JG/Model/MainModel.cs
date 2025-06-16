@@ -365,6 +365,21 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             }
         }
 
+        public void UsunStatusZBazy(string id_ksiazka, string id_uzytkownik)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand($"delete from status where id_uzytkownik = @id_uzytkownik and id_ksiazka = @id_ksiazka;", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_uzytkownik", id_uzytkownik);
+                    cmd.Parameters.AddWithValue("@id_ksiazka", id_ksiazka);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public void ZamienStatusWBazie(string id_ksiazka, string id_uzytkownik, string status)
         {
             using (var conn = GetConnection())
