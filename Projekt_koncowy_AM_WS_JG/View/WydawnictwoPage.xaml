@@ -5,8 +5,52 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Projekt_koncowy_AM_WS_JG.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="700" Background="White">
+
+    <UserControl.Resources>
+        <DropShadowEffect x:Key="DropShadow"
+                          Color="#888"
+                          BlurRadius="8"
+                          ShadowDepth="2"/>
+    </UserControl.Resources>
+
     <Grid>
-            
+        <Button Content="← Wróć"
+                Width="80" Height="30"
+                Margin="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="#DDDDDD" Foreground="#333"
+                FontWeight="Bold"
+                Click="Wroc_Click"
+                Panel.ZIndex="10"/>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="30">
+            <StackPanel Orientation="Vertical" MaxWidth="800" HorizontalAlignment="Center">
+
+                <!-- Sekcja: dane wydawnictwa -->
+                <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+                    <TextBlock x:Name="NazwaText" FontSize="26" FontWeight="Bold" TextWrapping="Wrap" Foreground="#222"/>
+                    <TextBlock x:Name="KrajText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
+                    <TextBlock x:Name="RokText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
+                </StackPanel>
+
+                <!-- Lista książek -->
+                <TextBlock Text="Książki wydawnictwa" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                <ItemsControl x:Name="KsiazkiWydawnictwaControl">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="LightYellow" BorderBrush="#ccc" BorderThickness="1" CornerRadius="6"
+                                    Padding="10" Margin="0,0,0,10" Effect="{StaticResource DropShadow}">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Tytul}" FontWeight="Bold" FontSize="14" Foreground="#222"/>
+                                    <TextBlock Text="{Binding RokWydania}" FontSize="12" Foreground="#666"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

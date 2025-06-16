@@ -111,7 +111,9 @@
                                            FontSize="11"
                                            HorizontalAlignment="Center"
                                            TextTrimming="CharacterEllipsis"
-                                           x:Name="AutorDane"/>
+                                           x:Name="AutorDane"
+                                           Cursor="Hand"
+                                           MouseLeftButtonDown="Autor_Click"/>
                                         </StackPanel>
                                     </Border>
                                 </DataTemplate>

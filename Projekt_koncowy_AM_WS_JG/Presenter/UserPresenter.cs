@@ -26,6 +26,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         private BookPage bookPage;
         private RatePage ratePage;
         private AutorPage autorpage;
+        private WydawnictwoPage wydawnictwoPage;
         public UserPresenter(MainView view, MainModel model)
         {
             _view = view;
@@ -53,7 +54,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     _view.LoadView(homePage);
                     ZaladujKsiazki();
                     homePage.PrzeniesNaTytul += PrzeniesNaTytul;
-                    homePage.PrzeniesNaAutora += PrzeniesNaAutora;
+                    homePage.PrzeniesNaAutora += PrzeniesNaAutorazhome;
                     _model.PobierzUzytkownika(menu.EmailLogowanie);
                     homePage.Email=_model.uzytkownik.Email;
                     homePage.Nick = _model.uzytkownik.Nick;
@@ -67,13 +68,12 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 MessageBox.Show("Nieprawidłowy email lub hasło", "Błąd");
             }
         }
-        public void PrzeniesNaAutora(object sender, String idautorazhome)
+        public void PrzeniesNaAutorazhome(object sender, String idautorazhome)
         {
             int idautora = int.Parse(idautorazhome)-1;
             var autor = _model.autorzy[idautora];
             autorpage = new AutorPage(autor);
             _view.LoadView(autorpage);
-            autorpage.UstawAutora(autor);
             autorpage.WrocNacisniete += GdyWrocNacisnieteAutor;
         }
         private void GdyWrocNacisnieteAutor(object? sender, EventArgs e)
@@ -131,6 +131,24 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             bookPage.OpiniaNacisnieta += GdyOpiniaNacisnieta;
             _view.LoadView(bookPage);
             bookPage.WrocNacisniete += GdyWrocNacisniete;
+            bookPage.PrzeniesNaWydawnictwo += PrzeniesNaWydawnictwo;
+            bookPage.PrzeniesNaAutora += PrzeniesNaAutorazbook;
+        }
+        public void PrzeniesNaAutorazbook(object sender, String idautora)
+        {
+            int idautoraIndex = int.Parse(idautora)-1;
+            var autor = _model.autorzy[idautoraIndex];
+            autorpage = new AutorPage(autor);
+            _view.LoadView(autorpage);
+            autorpage.WrocNacisniete += GdyWrocNacisniete1;
+        }
+        public void PrzeniesNaWydawnictwo(object sender, String idwydawnictwazbook)
+        {
+            int idwydawnictwa = int.Parse(idwydawnictwazbook)-1;
+            var wydawnictwo = _model.wydawnictwa[idwydawnictwa];
+            wydawnictwoPage = new WydawnictwoPage(wydawnictwo);
+            _view.LoadView(wydawnictwoPage);
+            wydawnictwoPage.WrocNacisniete += GdyWrocNacisniete1;
         }
         private void GdyWrocNacisniete(object? sender, EventArgs e)
         {

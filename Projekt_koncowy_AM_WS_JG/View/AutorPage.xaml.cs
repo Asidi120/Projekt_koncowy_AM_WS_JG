@@ -25,6 +25,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public AutorPage(Autor autor)
         {
             InitializeComponent();
+            UstawAutora(autor);
         }
         public void Wroc_Click(object sender, RoutedEventArgs e)
         {
@@ -35,7 +36,6 @@ namespace Projekt_koncowy_AM_WS_JG.View
             ImieNazwiskoText.Text = $"{autor.ImieNazwisko}";
             DataUrodzeniaText.Text = $"Data urodzenia: {autor.DataUrodzenia}";
             NarodowoscText.Text = $"Narodowość: {autor.Narodowosc}";
-            //DataSmierciText.Text = $"Data śmierci: {autor.DataSmierci}";
             if (autor.Ksiazki != null && autor.Ksiazki.Count > 0)
             {
                 KsiazkiAutoraControl.ItemsSource = autor.Ksiazki;
