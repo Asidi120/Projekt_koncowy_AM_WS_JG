@@ -380,5 +380,31 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                 }
             }
         }
+
+        public string ZwrocStatusWybranejKsiazki(string id_ksiazka, string id_uzytkownik)
+        {
+            string statuswybrany = "";
+            using (var conn = GetConnection())
+           
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand($"select status from status where id_ksiazka = @id_ksiazka and id_uzytkownik = @id_uzytkownik;", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_uzytkownik", id_uzytkownik);
+                    cmd.Parameters.AddWithValue("@id_ksiazka", id_ksiazka);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            statuswybrany = $"{reader["status"]}";
+                            
+
+                        }
+                    }
+                }
+            }
+            return statuswybrany;
+        }
     }
 }

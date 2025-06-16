@@ -30,12 +30,23 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public event EventHandler<string> PrzeniesNaAutora;
         private string wybraneWydawnictwo = "";
         private string wybranyAutorIndex = "";
+        private string status_wybranej_ksiazki = "";
+       
         public string WybranyAutor
         {
             get => wybranyAutorIndex;
             set
             {
                 wybranyAutorIndex = value;
+            }
+        }
+
+        public string StatusWybranejKsiazki
+        {
+            get => status_wybranej_ksiazki;
+            set
+            {
+                status_wybranej_ksiazki = value;
             }
         }
         public string WybraneWydawnictwo
@@ -76,6 +87,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
             {
                 OpinieControl.ItemsSource = ksiazka.JakieOpinie.Lista_Opinii;
             }
+            StatusComboBox.SelectedItem = StatusWybranejKsiazki;
         }
 
         public void UstawOpinieZKsiazki(Ksiazka ksiazka)
@@ -122,9 +134,10 @@ namespace Projekt_koncowy_AM_WS_JG.View
 
         private void DodajDoListy_Click(object sender, SelectionChangedEventArgs e)
         {
-            string status = StatusComboBox.SelectedItem.ToString();
+            var selectedItem = StatusComboBox.SelectedItem as ComboBoxItem;
+            string status = selectedItem?.Content.ToString() ?? string.Empty;
             string id_ksiazki = id_ksiazki_wybranej;
-            string wynik=id_ksiazki+";"+status;
+            string wynik = id_ksiazki + ";" + status;
             DodajDoListy?.Invoke(this, wynik);
         }
 
