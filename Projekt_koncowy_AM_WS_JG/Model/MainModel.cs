@@ -10,6 +10,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         public List<Ksiazka> najpopularniejsze_ksiazki;
         public List<Ksiazka> najnowsze_ksiazki;
         public List<Autor> autorzy;
+        public List<Wydawnictwo> wydawnictwa;
         private string connStr = "server=localhost;user=root;password=123;database=ksiazki;";
         public Uzytkownik uzytkownik;
         public MainModel()
@@ -18,10 +19,31 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             najpopularniejsze_ksiazki = new List<Ksiazka>();
             najnowsze_ksiazki = new List<Ksiazka>();
             autorzy = new List<Autor>();
+            wydawnictwa = new List<Wydawnictwo>();
         }
         public MySqlConnection GetConnection()
         {
             return new MySqlConnection(connStr);
+        }
+
+        public void PobierzWydawnictwa()
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand("SELECT nazwa, kraj_zalozenia, rok_zalozenia FROM wydawnictwo", conn))
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string nazwa = $"{reader["nazwa"]}";
+                        string kraj_zalozenia = $"{reader["kraj_zalozenia"]}";
+                        string rok_zalozenia = $"{reader["rok_zalozenia"]}";
+                        Wydawnictwo wydawnictwo = new Wydawnictwo(nazwa, kraj_zalozenia, rok_zalozenia);
+                        wydawnictwa.Add(wydawnictwo);
+                    }
+                }
+            }
         }
         public void PobierzAutorow()
         {
@@ -200,11 +222,12 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         {
             ksiazki = new List<Ksiazka>();
             PobierzAutorow();
+            PobierzWydawnictwa();
             using (var conn1 = GetConnection())
             {
                 conn1.Open();
 
-                using (var cmd = new MySqlCommand("select k.id_ksiazka, a.id_autor, tytul, gatunek, opis, jezyk_oryginalu, rok_wydania, liczba_stron, concat(imie, ' ', nazwisko) jakiautor, nazwa, avg(ocena) srednia_ocena, count(ocena) liczba_ocen from ksiazka k left join autor a on k.id_autor = a.id_autor left join wydawnictwo w on k.id_wydaw = w.id_wydaw left join opinia o on o.id_ksiazka = k.id_ksiazka group by k.id_ksiazka;", conn1))
+                using (var cmd = new MySqlCommand("select k.id_ksiazka, a.id_autor, w.id_wydaw, tytul, gatunek, opis, jezyk_oryginalu, rok_wydania, liczba_stron, concat(imie, ' ', nazwisko) jakiautor, nazwa, avg(ocena) srednia_ocena, count(ocena) liczba_ocen from ksiazka k left join autor a on k.id_autor = a.id_autor left join wydawnictwo w on k.id_wydaw = w.id_wydaw left join opinia o on o.id_ksiazka = k.id_ksiazka group by k.id_ksiazka;", conn1))
                 using (var reader = cmd.ExecuteReader())
                 {
 
@@ -212,6 +235,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                     {
                         string id_ksiazka = $"{reader["id_ksiazka"]}";
                         string id_autor = $"{reader["id_autor"]}";
+                        string id_wydaw = $"{reader["id_wydaw"]}";
                         string tytul = $"{reader["tytul"]}";
                         string gatunek = $"{reader["gatunek"]}";
                         string opis = $"{reader["opis"]}";
@@ -252,10 +276,15 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                                 }
                             }
                         }
-                        ksiazki.Add(new Ksiazka(id_ksiazka,id_autor,tytul, autor, opis, gatunek, rok_wydania, liczba_stron, jezyk_oryginalu, wydawnictwo, opinie));
+                        ksiazki.Add(new Ksiazka(id_ksiazka,id_autor,id_wydaw,tytul, autor, opis, gatunek, rok_wydania, liczba_stron, jezyk_oryginalu, wydawnictwo, opinie));
                         int indeks_autora = int.Parse(id_autor) - 1;
                         autorzy[indeks_autora].Ksiazki = ksiazki
                         .Where(k => k.IDAutora == id_autor)
+                        .ToList();
+
+                        int indeks_wydawnictwa = int.Parse(id_wydaw) - 1;
+                        wydawnictwa[indeks_wydawnictwa].Ksiazki = ksiazki
+                        .Where(k => k.IDWydawnictwa == id_wydaw)
                         .ToList();
 
                     }
