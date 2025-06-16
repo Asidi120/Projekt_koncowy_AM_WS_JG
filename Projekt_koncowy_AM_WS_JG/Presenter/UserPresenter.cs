@@ -133,6 +133,13 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             bookPage.WrocNacisniete += GdyWrocNacisniete;
             bookPage.PrzeniesNaWydawnictwo += PrzeniesNaWydawnictwo;
             bookPage.PrzeniesNaAutora += PrzeniesNaAutorazbook;
+            bookPage.DodajDoListy += DodajDoListyNacisniete;
+        }
+        public void DodajDoListyNacisniete(object sender, String wynikzbook)
+        {
+            string idksiazki = wynikzbook.Split(";")[0];
+            string status = wynikzbook.Split(";")[1];
+            //tutaj bedzie funkcja
         }
         public void PrzeniesNaAutorazbook(object sender, String idautora)
         {

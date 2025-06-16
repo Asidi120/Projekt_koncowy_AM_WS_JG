@@ -24,6 +24,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
     {
         public event EventHandler OpiniaNacisnieta;
         public event EventHandler WrocNacisniete;
+        public event EventHandler<string> DodajDoListy;
         string id_ksiazki_wybranej;
         public event EventHandler<string> PrzeniesNaWydawnictwo;
         public event EventHandler<string> PrzeniesNaAutora;
@@ -117,6 +118,14 @@ namespace Projekt_koncowy_AM_WS_JG.View
             {
                 PrzeniesNaWydawnictwo?.Invoke(this, wybraneWydawnictwo);
             }
+        }
+
+        private void DodajDoListy_Click(object sender, SelectionChangedEventArgs e)
+        {
+            string status = StatusComboBox.Text;
+            string id_ksiazki = id_ksiazki_wybranej;
+            string wynik=id_ksiazki+";"+status;
+            DodajDoListy?.Invoke(this, wynik);
         }
     }
 }

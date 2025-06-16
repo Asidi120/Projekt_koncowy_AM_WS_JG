@@ -42,6 +42,17 @@
                         <TextBlock x:Name="RokWydaniaText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
                         <TextBlock x:Name="JezykText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
                         <TextBlock x:Name="SredniaOcenaText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
+                        <ComboBox x:Name="StatusComboBox"
+                            Width="150"
+                            Margin="25,45,10,20"
+                            SelectedIndex="0"
+                            SelectionChanged="DodajDoListy_Click">
+                            <ComboBoxItem Content="Niedodane" />
+                            <ComboBoxItem Content="Przeczytane" />
+                            <ComboBoxItem Content="Chcę przeczytać" />
+                            <ComboBoxItem Content="W trakcie" />
+                            <ComboBoxItem Content="Porzucone" />
+                        </ComboBox>
                     </StackPanel>
                 </DockPanel>
 
