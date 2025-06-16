@@ -24,8 +24,9 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public event EventHandler Wyloguj;
         public event EventHandler<Ksiazka> PrzeniesNaTytul;
         public event EventHandler Wyszukuje;
-        public event EventHandler<Autor> PrzeniesNaAutora;
+        public event EventHandler<string> PrzeniesNaAutora;
         private string searchText;
+        private string wybranyAutorIndex = "";
 
         public HomePage()
         {
@@ -102,7 +103,14 @@ namespace Projekt_koncowy_AM_WS_JG.View
             get => DataDodText.Text;
             set => DataDodText.Text = value;
         }
-
+        public string WybranyAutor
+        {
+            get => wybranyAutorIndex;
+            set
+            {
+                wybranyAutorIndex = value;
+            }
+        }
         private void ScrollLeft_ChcePrzeczytac(object sender, RoutedEventArgs e)
         {
             double offset = ChcePrzeczytacScrollViewer.HorizontalOffset - 150;
@@ -172,19 +180,13 @@ namespace Projekt_koncowy_AM_WS_JG.View
 
         private void Autor_Click(object sender, MouseButtonEventArgs e)
         {
-            //MessageBox.Show("Przenoszę do autora", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
-            //if (sender is TextBlock tb && tb.DataContext is Ksiazka ksiazka)
-            //{
-            //    string imieNazwisko = ksiazka.Autor;
-            //    if (autor != null)
-            //    {
-            //        PrzeniesNaAutora?.Invoke(this, autor);
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Nie znaleziono autora.");
-            //    }
-            //}
+            var textBlock = sender as TextBlock;
+            var ksiazka = textBlock?.DataContext as Ksiazka;
+            WybranyAutor = ksiazka?.IDAutora ?? string.Empty;
+            if (ksiazka != null && ksiazka.Autor != null)
+            {
+                PrzeniesNaAutora?.Invoke(this, WybranyAutor);
+            }
         }
 
     }

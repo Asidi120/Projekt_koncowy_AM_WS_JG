@@ -30,5 +30,20 @@ namespace Projekt_koncowy_AM_WS_JG.View
         {
             WrocNacisniete?.Invoke(this, EventArgs.Empty);
         }
+        public void UstawAutora(Autor autor)
+        {
+            ImieNazwiskoText.Text = $"{autor.ImieNazwisko}";
+            DataUrodzeniaText.Text = $"Data urodzenia: {autor.DataUrodzenia}";
+            NarodowoscText.Text = $"Narodowość: {autor.Narodowosc}";
+            //DataSmierciText.Text = $"Data śmierci: {autor.DataSmierci}";
+            if (autor.Ksiazki != null && autor.Ksiazki.Count > 0)
+            {
+                KsiazkiAutoraControl.ItemsSource = autor.Ksiazki;
+            }
+            else
+            {
+                KsiazkiAutoraControl.ItemsSource = null;
+            }
+        }
     }
 }

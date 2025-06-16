@@ -67,10 +67,13 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 MessageBox.Show("Nieprawidłowy email lub hasło", "Błąd");
             }
         }
-        public void PrzeniesNaAutora(object sender, Autor autor)
+        public void PrzeniesNaAutora(object sender, String idautorazhome)
         {
+            int idautora = int.Parse(idautorazhome)-1;
+            var autor = _model.autorzy[idautora];
             autorpage = new AutorPage(autor);
             _view.LoadView(autorpage);
+            autorpage.UstawAutora(autor);
             autorpage.WrocNacisniete += GdyWrocNacisnieteAutor;
         }
         private void GdyWrocNacisnieteAutor(object? sender, EventArgs e)
