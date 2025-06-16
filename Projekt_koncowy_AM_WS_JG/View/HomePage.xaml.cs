@@ -172,33 +172,20 @@ namespace Projekt_koncowy_AM_WS_JG.View
 
         private void Autor_Click(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("Przenoszę do autora", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
-            if (sender is TextBlock tb && tb.DataContext is Ksiazka ksiazka)
-            {
-                string imieNazwisko = ksiazka.Autor;
-                if (autor != null)
-                {
-                    PrzeniesNaAutora?.Invoke(this, autor);
-                }
-                else
-                {
-                    MessageBox.Show("Nie znaleziono autora.");
-                }
-            }
+            //MessageBox.Show("Przenoszę do autora", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+            //if (sender is TextBlock tb && tb.DataContext is Ksiazka ksiazka)
+            //{
+            //    string imieNazwisko = ksiazka.Autor;
+            //    if (autor != null)
+            //    {
+            //        PrzeniesNaAutora?.Invoke(this, autor);
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Nie znaleziono autora.");
+            //    }
+            //}
         }
-        
-        private Autor ZnajdzAutoraPoNazwie(string imieNazwisko)
-        {
-            // Tu powinna być Twoja logika dostępu do danych
-            return BazaDanych.Autorzy.FirstOrDefault(a => a.ImieNazwisko == imieNazwisko);
-        }
-        var textBlock = sender as TextBlock;
-            var autor =AutorDane.Text;
 
-            if (autor != null)
-            {
-                PrzeniesNaAutora?.Invoke(this, autor);
-            }
-        }
     }
 }

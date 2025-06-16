@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using BCrypt.Net;
+using System.Windows;
 
 namespace Projekt_koncowy_AM_WS_JG.Model
 {
@@ -8,6 +9,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         public List<Ksiazka> ksiazki;
         public List<Ksiazka> najpopularniejsze_ksiazki;
         public List<Ksiazka> najnowsze_ksiazki;
+        public List<Autor> autorzy;
         private string connStr = "server=localhost;user=root;password=123;database=ksiazki;";
         public Uzytkownik uzytkownik;
         public MainModel()
@@ -15,29 +17,30 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             ksiazki = new List<Ksiazka>();
             najpopularniejsze_ksiazki = new List<Ksiazka>();
             najnowsze_ksiazki = new List<Ksiazka>();
+            autorzy = new List<Autor>();
         }
         public MySqlConnection GetConnection()
         {
             return new MySqlConnection(connStr);
         }
-        public List<string> Autorzy_lista()
+        public void PobierzAutorow()
         {
-            var autorzy = new List<string>();
-
             using (var conn = GetConnection())
             {
                 conn.Open();
-                using (var cmd = new MySqlCommand("SELECT * FROM autor", conn))
+                using (var cmd = new MySqlCommand("SELECT concat(imie, ' ', nazwisko) imie_nazwisko, rok_urodzenia, kraj_pochodzenia FROM autor", conn))
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        string autor = $"{reader["imie"]} {reader["nazwisko"]} ({reader["rok_urodzenia"]}) - {reader["kraj_pochodzenia"]}";
+                        string imie_nazwisko = $"{reader["imie_nazwisko"]}";
+                        string rok_urodzenia = $"{reader["rok_urodzenia"]}"; 
+                        string kraj_pochodzenia = $"{reader["kraj_pochodzenia"]}";
+                        Autor autor = new Autor(imie_nazwisko, rok_urodzenia, kraj_pochodzenia);
                         autorzy.Add(autor);
                     }
                 }
             }
-            return autorzy;
         }
 
         public bool CzyUzytkownikIstnieje(string nazwauzytkownika)
@@ -196,17 +199,19 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         public void ZaladujKsiazkiZBazy()
         {
             ksiazki = new List<Ksiazka>();
+            PobierzAutorow();
             using (var conn1 = GetConnection())
             {
                 conn1.Open();
 
-                using (var cmd = new MySqlCommand("select k.id_ksiazka, tytul, gatunek, opis, jezyk_oryginalu, rok_wydania, liczba_stron, concat(imie, ' ', nazwisko) jakiautor, nazwa, avg(ocena) srednia_ocena, count(ocena) liczba_ocen from ksiazka k left join autor a on k.id_autor = a.id_autor left join wydawnictwo w on k.id_wydaw = w.id_wydaw left join opinia o on o.id_ksiazka = k.id_ksiazka group by k.id_ksiazka;", conn1))
+                using (var cmd = new MySqlCommand("select k.id_ksiazka, a.id_autor, tytul, gatunek, opis, jezyk_oryginalu, rok_wydania, liczba_stron, concat(imie, ' ', nazwisko) jakiautor, nazwa, avg(ocena) srednia_ocena, count(ocena) liczba_ocen from ksiazka k left join autor a on k.id_autor = a.id_autor left join wydawnictwo w on k.id_wydaw = w.id_wydaw left join opinia o on o.id_ksiazka = k.id_ksiazka group by k.id_ksiazka;", conn1))
                 using (var reader = cmd.ExecuteReader())
                 {
 
                     while (reader.Read())
                     {
                         string id_ksiazka = $"{reader["id_ksiazka"]}";
+                        string id_autor = $"{reader["id_autor"]}";
                         string tytul = $"{reader["tytul"]}";
                         string gatunek = $"{reader["gatunek"]}";
                         string opis = $"{reader["opis"]}";
@@ -247,7 +252,12 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                                 }
                             }
                         }
-                        ksiazki.Add(new Ksiazka(id_ksiazka,tytul, autor, opis, gatunek, rok_wydania, liczba_stron, jezyk_oryginalu, wydawnictwo, opinie));
+                        ksiazki.Add(new Ksiazka(id_ksiazka,id_autor,tytul, autor, opis, gatunek, rok_wydania, liczba_stron, jezyk_oryginalu, wydawnictwo, opinie));
+                        int indeks_autora = int.Parse(id_autor) - 1;
+                        autorzy[indeks_autora].Ksiazki = ksiazki
+                        .Where(k => k.IDAutora == id_autor)
+                        .ToList();
+
                     }
                 }
             }
@@ -262,6 +272,8 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             .OrderByDescending(k => int.Parse(k.RokWydania))
             .Take(3)
             .ToList();
+
+           
         }
         public bool CzyUzytkownikWyslalOpinie(string id_uzytkownik, string id_ksiazka)
         {
