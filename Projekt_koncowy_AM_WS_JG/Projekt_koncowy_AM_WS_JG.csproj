@@ -13,6 +13,8 @@
     <None Remove="View\logo1.jpg" />
     <None Remove="View\ludek.jpg" />
     <None Remove="View\ludek1.jpg" />
+    <None Remove="View\lupa1.jpg" />
+    <None Remove="View\Projekt bez nazwy %283%29.jpg" />
     <None Remove="Zdjecia\logo.png" />
     <None Remove="Zdjecia\logo1.jpg" />
   </ItemGroup>
@@ -28,6 +30,8 @@
     <Resource Include="View\logo1.jpg" />
     <Resource Include="View\ludek.jpg" />
     <Resource Include="View\ludek1.jpg" />
+    <Resource Include="View\lupa1.jpg" />
+    <Resource Include="View\Projekt bez nazwy (3).jpg" />
     <Resource Include="Zdjecia\logo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

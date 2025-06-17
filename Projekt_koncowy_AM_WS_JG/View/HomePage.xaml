@@ -39,7 +39,7 @@
                     <Setter Property="Width" Value="174"/>
                     <Setter Property="Height" Value="35"/>
                     <Setter Property="HorizontalAlignment" Value="Left"/>
-                    <Setter Property="Background" Value="#FF4E6986"/>
+                    <Setter Property="Background" Value="#FF1A2C40"/>
                     <Setter Property="Foreground" Value="White"/>
                     <Setter Property="Padding" Value="10,5"/>
                     <Setter Property="Margin" Value="2,2,0,0"/>
@@ -124,7 +124,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Szukaj">
-                <Grid Background="#FFE5E5E5" Margin="10">
+                <Grid Background="#FFE5E5E5" Margin="5,10,10,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -133,7 +133,7 @@
                     <!-- Pole wyszukiwania -->
                     <TextBox x:Name="SearchTextBox"
                  Grid.Row="0"
-                 Margin="0,0,0,10"
+                 Margin="28,0,0,10"
                  Height="30"
                  
                  FontSize="14"
@@ -142,21 +142,22 @@
 
                     <!-- Lista wyników w WrapPanel z maks 4 książkami w wierszu -->
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                        <ItemsControl x:Name="SearchResultsControl" >
+                        <ItemsControl x:Name="SearchResultsControl" HorizontalAlignment="Center">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel Orientation="Horizontal" ItemWidth="155" ItemHeight="185" />
+                                    <WrapPanel Orientation="Horizontal" ItemWidth="155" ItemHeight="215" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
 
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border BorderBrush="Gray" BorderThickness="1" Margin="8" Width="155" Height="175" Background="White" >
+                                    <Border BorderBrush="#FF1A2C40" Background="#FF1A2C40" Margin="13" Width="130" Height="185" >
                                         <StackPanel>
-                                            <Image Source="{Binding Okladka}" Height="140"/>
+                                            <Image Source="{Binding Okladka}" Height="150" Stretch="UniformToFill"/>
                                             <TextBlock Text="{Binding Tytul}"
                                              FontWeight="Bold"
-                                             Foreground="#FF1A2C40"
+                                             Foreground="#FFF9C763"
+                                             Background="#FF1A2C40"
                                              FontSize="12"
                                              TextTrimming="CharacterEllipsis"
                                              TextWrapping="NoWrap"
@@ -165,6 +166,7 @@
                                             <TextBlock Text="{Binding Autor}" 
                                              FontStyle="Italic"
                                              FontSize="11"
+                                             Foreground="white"
                                              HorizontalAlignment="Center"
                                              TextTrimming="CharacterEllipsis"
                                              x:Name="AutorDane"
@@ -176,6 +178,7 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </ScrollViewer>
+                    <Image HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="28" Source="/View/lupa1.jpg"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Moje Książki">
