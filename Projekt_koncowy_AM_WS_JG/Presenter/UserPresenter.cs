@@ -199,6 +199,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         private void GdyWrocNacisniete2(object? sender, EventArgs e)
         {
             int indeks_zakladki = homePage.KtoraZakladka;
+            string wyszukiwane = homePage.SearchText;
             homePage=new HomePage();
             homePage.Wyloguj += GdyWyloguj;
             _view.LoadView(homePage);
@@ -222,6 +223,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     break;
               case 1:
                     homePage.KtoraZakladka = 1;
+                    homePage.SearchTextBox.Text = wyszukiwane;
                     break;
               case 2:
                     homePage.KtoraZakladka = 2;

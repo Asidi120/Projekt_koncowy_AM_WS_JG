@@ -97,7 +97,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="Szukaj" Width="174">
+            <TabItem Header="Szukaj" Width="174" Height="20" VerticalAlignment="Top">
                 <Grid Background="#FFE5E5E5" Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
