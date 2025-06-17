@@ -63,6 +63,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     homePage.Wyszukuje += GdyWyszukuje;
                     homePage.ZmianaPlci += GdyZmianaPlci;
                     homePage.ZmienPlec(_model.uzytkownik.Plec);
+
                 }
             }
             else
@@ -77,6 +78,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 _model.uzytkownik.Plec=plec;
                 _model.ZmienPlecUzytkownika(_model.uzytkownik.IDUzytkownika, plec);
                 homePage.ZmienPlec(plec);
+
             }
         }
         public void PrzeniesNaAutorazhome(object sender, String idautorazhome)

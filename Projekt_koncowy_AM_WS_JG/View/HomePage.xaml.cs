@@ -205,28 +205,32 @@ namespace Projekt_koncowy_AM_WS_JG.View
         }
         public void ZmienPlec(string nowaplec)
         {
-            byloUstawianiePlci = true;
+            bool znaleziono = false;
+
             foreach (ComboBoxItem item in PlecComboBox.Items)
             {
-                if (item.Content.ToString().ToLower() == nowaplec)
+                if (item.Content.ToString().ToLower() == nowaplec.ToLower())
                 {
                     PlecComboBox.SelectedItem = item;
+                    PlecText.Text = nowaplec.Substring(0,1).ToUpper()+nowaplec.Substring(1,nowaplec.Length-1).ToLower();
+                    znaleziono = true;
                     break;
                 }
-                else
-                {
-                    PlecComboBox.SelectedIndex = 2;
-                }
             }
+
+            if (!znaleziono)
+            {
+                PlecComboBox.SelectedIndex = 2;
+            }
+            byloUstawianiePlci = true;
         }
         private void ProceduraZmiantPlci_Click(object sender, SelectionChangedEventArgs e)
         {
-            if (!byloUstawianiePlci)
+            if (byloUstawianiePlci)
             {
                 var selectedItem = PlecComboBox.SelectedItem as ComboBoxItem;
                 string wynik = selectedItem?.Content.ToString() ?? string.Empty;
                 ZmianaPlci?.Invoke(this, wynik);
-                byloUstawianiePlci = false;
             }
             else
             {
