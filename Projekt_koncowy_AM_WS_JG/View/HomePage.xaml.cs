@@ -261,5 +261,9 @@ namespace Projekt_koncowy_AM_WS_JG.View
                 return;
             }
         }
+        public void UstawZakladke()
+        {
+            Zakladki.SelectedIndex = 2;
+        }
     }
 }

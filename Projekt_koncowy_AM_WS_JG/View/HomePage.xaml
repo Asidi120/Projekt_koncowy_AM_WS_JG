@@ -32,7 +32,7 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <TabControl TabStripPlacement="Bottom">
+        <TabControl TabStripPlacement="Bottom" x:Name="Zakladki">
 
             <TabItem Header="Strona Główna" Width="174" HorizontalAlignment="Left">
                 <Grid Background="#FFE5E5E5" Margin="5,5,10,0">

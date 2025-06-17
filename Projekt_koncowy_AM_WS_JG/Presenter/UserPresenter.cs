@@ -65,8 +65,6 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     homePage.Wyszukuje += GdyWyszukuje;
                     homePage.ZmianaPlci += GdyZmianaPlci;
                     homePage.ZmienPlec(_model.uzytkownik.Plec);
-
-
                 }
             }
             else
@@ -146,7 +144,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             bookPage = new BookPage(ksiazka);
             bookPage.OpiniaNacisnieta += GdyOpiniaNacisnieta;
             _view.LoadView(bookPage);
-            bookPage.WrocNacisniete += GdyWrocNacisniete;
+            bookPage.WrocNacisniete += GdyWrocNacisniete2;
             bookPage.PrzeniesNaWydawnictwo += PrzeniesNaWydawnictwo;
             bookPage.PrzeniesNaAutora += PrzeniesNaAutorazbook;
             bookPage.DodajDoListy += DodajDoListyNacisniete;
@@ -197,6 +195,26 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             {
                 _view.LoadView(homePage);
             }
+        }
+        private void GdyWrocNacisniete2(object? sender, EventArgs e)
+        {
+            homePage=new HomePage();
+            homePage.Wyloguj += GdyWyloguj;
+            _view.LoadView(homePage);
+            ZaladujKsiazki();
+            homePage.PrzeniesNaTytul += PrzeniesNaTytul;
+            homePage.PrzeniesNaAutora += PrzeniesNaAutorazhome;
+            _model.PobierzUzytkownika(menu.EmailLogowanie);
+            _model.ZaladujKsiazkiStatusowe(_model.uzytkownik.IDUzytkownika);
+            UstawKsiazka();
+            homePage.Email = _model.uzytkownik.Email;
+            homePage.Nick = _model.uzytkownik.Nick;
+            homePage.Plec = _model.uzytkownik.Plec;
+            homePage.DataZalozenia = _model.uzytkownik.Data_zalozenia;
+            homePage.Wyszukuje += GdyWyszukuje;
+            homePage.ZmianaPlci += GdyZmianaPlci;
+            homePage.ZmienPlec(_model.uzytkownik.Plec);
+            homePage.UstawZakladke();
         }
         private void GdyOpiniaNacisnieta(object? sender, EventArgs e)
         {
