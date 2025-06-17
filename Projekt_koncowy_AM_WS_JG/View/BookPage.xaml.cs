@@ -156,7 +156,6 @@ namespace Projekt_koncowy_AM_WS_JG.View
         {
             if (byloUstawianieStatusu)
             {
-                MessageBox.Show("Skibidi");
                 var selectedItem = StatusComboBox.SelectedItem as ComboBoxItem;
                 string status = selectedItem?.Content.ToString() ?? string.Empty;
                 string id_ksiazki = id_ksiazki_wybranej;

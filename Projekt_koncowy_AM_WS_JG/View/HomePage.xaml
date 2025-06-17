@@ -8,7 +8,7 @@
              d:DesignHeight="500" d:DesignWidth="700">
     <UserControl.Resources>
         <DataTemplate x:Key="KsiazkaTemplate">
-            <Border BorderBrush="Gray" BorderThickness="1" Margin="3" Width="150" Height="175">
+            <Border BorderBrush="Gray" BorderThickness="1" Margin="3" Width="120" Height="175">
                 <StackPanel>
                     <Image Source="{Binding Okladka}" Height="140" Stretch="UniformToFill"/>
                     <TextBlock Text="{Binding Tytul}"
@@ -35,36 +35,66 @@
         <TabControl TabStripPlacement="Bottom">
 
             <TabItem Header="Strona Główna" Width="174" HorizontalAlignment="Left">
-                <Grid Background="#FFE5E5E5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <!-- Strzałka w lewo -->
-                        <ColumnDefinition Width="*"/>
-                        <!-- Lista książek -->
-                        <ColumnDefinition Width="Auto"/>
-                        <!-- Strzałka w prawo -->
-                    </Grid.ColumnDefinitions>
+                <Grid Background="#FFE5E5E5" Margin="5,5,10,0">
+                    <StackPanel Margin="10,0,10,0">
+                        <!-- Sekcja 1: Najpopularniejsze -->
+                        <TextBlock Text="Najpopularniejsze:" FontSize="16" FontWeight="Bold" Margin="0,5,0,5"/>
 
-                    <!-- Strzałka w lewo -->
-                    <Button Grid.Column="0" Content="←" Width="40" Height="175" Click="ScrollLeft_Click"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                    <!-- Lista książek -->
-                    <ScrollViewer x:Name="BookScrollViewer" Grid.Column="1"
-      HorizontalScrollBarVisibility="Hidden"
-      VerticalScrollBarVisibility="Disabled">
-                        <ItemsControl x:Name="KsiazkiControl"
-          ItemTemplate="{StaticResource KsiazkaTemplate}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"
-                                                />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    </ScrollViewer>
+                            <!-- Strzałka w lewo -->
+                            <Button Grid.Column="0" Content="←" Width="40" Height="175" Click="ScrollLeft_Click"/>
+                            <!-- ScrollViewer z książkami -->
+                            <ScrollViewer x:Name="BookScrollViewer"
+                              Grid.Column="1"
+                              HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Disabled">
+                                <ItemsControl x:Name="KsiazkiControl" ItemTemplate="{StaticResource KsiazkaTemplate}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </ScrollViewer>
+                            <!-- Strzałka w prawo -->
+                            <Button Grid.Column="2" Content="→" Width="40" Height="175" Click="ScrollRight_Click"/>
+                        </Grid>
 
-                    <!-- Strzałka w prawo -->
-                    <Button Grid.Column="2" Content="→" Width="40" Height="175" Click="ScrollRight_Click"/>
+                        <!-- Sekcja 2: Najnowsze -->
+                        <TextBlock Text="Najnowsze:" FontSize="16" FontWeight="Bold" Margin="0,5,0,5"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Strzałka w lewo -->
+                            <Button Grid.Column="0" Content="←" Width="40" Height="175" Click="ScrollLeft1_Click"/>
+                            <!-- ScrollViewer z książkami -->
+                            <ScrollViewer x:Name="BookScrollViewer2"
+                              Grid.Column="1"
+                              HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Disabled">
+                                <ItemsControl x:Name="KsiazkiControl2" ItemTemplate="{StaticResource KsiazkaTemplate}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </ScrollViewer>
+                            <!-- Strzałka w prawo -->
+                            <Button Grid.Column="2" Content="→" Width="40" Height="175" Click="ScrollRight1_Click"/>
+                        </Grid>
+                    </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Szukaj" Width="174">
@@ -95,7 +125,7 @@
 
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Width="155" Height="175" Background="White" >
+                                    <Border BorderBrush="Gray" BorderThickness="1" Margin="8" Width="155" Height="175" Background="White" >
                                         <StackPanel>
                                             <Image Source="{Binding Okladka}" Height="140"/>
                                             <TextBlock Text="{Binding Tytul}"
@@ -251,7 +281,11 @@
                     <TextBlock x:Name="EmailText" HorizontalAlignment="Left" Margin="29,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22"><Run Language="pl-pl" Text="E-mail"/></TextBlock>
                     <TextBlock x:Name="DataDodText" HorizontalAlignment="Left" Margin="389,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22"><Run Text="Data Dołączenia"/><Run Language="pl-pl" Text=": "/></TextBlock>
                     <TextBlock x:Name="PlecText" HorizontalAlignment="Left" Margin="40,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="pl-pl" Text="Płeć:"/></TextBlock>
-                    <ComboBox HorizontalAlignment="Left" Margin="427,39,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="PlecComboBox" HorizontalAlignment="Left" Margin="427,39,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="2" SelectionChanged="ProceduraZmiantPlci_Click">
+                        <ComboBoxItem Content="Mężczyzna" />
+                        <ComboBoxItem Content="Kobieta" />
+                        <ComboBoxItem Content="Brak" />
+                    </ComboBox>
                     <TextBlock HorizontalAlignment="Left" Margin="427,18,0,0" TextWrapping="Wrap" Text="Płeć" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>

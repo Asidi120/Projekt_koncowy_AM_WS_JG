@@ -25,13 +25,14 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public event EventHandler<Ksiazka> PrzeniesNaTytul;
         public event EventHandler Wyszukuje;
         public event EventHandler<string> PrzeniesNaAutora;
+        public event EventHandler<string> ZmianaPlci;
         private string searchText;
         private string wybranyAutorIndex = "";
-
+        public bool byloUstawianiePlci = false;
         public HomePage()
         {
             InitializeComponent();
-
+            byloUstawianiePlci = false;
         }
         private void WylogujKlikniete(object sender, EventArgs e)
         {
@@ -44,6 +45,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
             PrzeczytaneControl.ItemsSource = ksiazki;
             WTrakcieControl.ItemsSource = ksiazki;
             PorzuconeControl.ItemsSource = ksiazki;
+            KsiazkiControl2.ItemsSource = ksiazki;
             KsiazkiControl.ItemTemplate = (DataTemplate)this.Resources["KsiazkaTemplate"];
         }
         private void Tytul_Click(object sender, MouseButtonEventArgs e)
@@ -189,5 +191,47 @@ namespace Projekt_koncowy_AM_WS_JG.View
             }
         }
 
+        private void ScrollRight1_Click(object sender, RoutedEventArgs e)
+        {
+            double offset = BookScrollViewer2.HorizontalOffset + 150;
+            BookScrollViewer2.ScrollToHorizontalOffset(offset);
+        }
+
+        private void ScrollLeft1_Click(object sender, RoutedEventArgs e)
+        {
+            double offset = BookScrollViewer2.HorizontalOffset - 150;
+            if (offset < 0) offset = 0;
+            BookScrollViewer2.ScrollToHorizontalOffset(offset);
+        }
+        public void ZmienPlec(string nowaplec)
+        {
+            byloUstawianiePlci = true;
+            foreach (ComboBoxItem item in PlecComboBox.Items)
+            {
+                if (item.Content.ToString().ToLower() == nowaplec)
+                {
+                    PlecComboBox.SelectedItem = item;
+                    break;
+                }
+                else
+                {
+                    PlecComboBox.SelectedIndex = 2;
+                }
+            }
+        }
+        private void ProceduraZmiantPlci_Click(object sender, SelectionChangedEventArgs e)
+        {
+            if (!byloUstawianiePlci)
+            {
+                var selectedItem = PlecComboBox.SelectedItem as ComboBoxItem;
+                string wynik = selectedItem?.Content.ToString() ?? string.Empty;
+                ZmianaPlci?.Invoke(this, wynik);
+                byloUstawianiePlci = false;
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 }

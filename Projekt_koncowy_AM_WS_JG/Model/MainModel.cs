@@ -56,7 +56,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                     while (reader.Read())
                     {
                         string imie_nazwisko = $"{reader["imie_nazwisko"]}";
-                        string rok_urodzenia = $"{reader["rok_urodzenia"]}"; 
+                        string rok_urodzenia = $"{reader["rok_urodzenia"]}";
                         string kraj_pochodzenia = $"{reader["kraj_pochodzenia"]}";
                         Autor autor = new Autor(imie_nazwisko, rok_urodzenia, kraj_pochodzenia);
                         autorzy.Add(autor);
@@ -70,12 +70,12 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             using (var conn = GetConnection())
             {
                 conn.Open();
-                using (var cmd = new MySqlCommand($"select count(*) from uzytkownicy where nick = @nick",conn))
+                using (var cmd = new MySqlCommand($"select count(*) from uzytkownicy where nick = @nick", conn))
                 {
                     cmd.Parameters.AddWithValue("@nick", nazwauzytkownika);
 
                     var liczbawystepowaniauzytkownika = Convert.ToInt32(cmd.ExecuteScalar());
-                    if(liczbawystepowaniauzytkownika > 0)
+                    if (liczbawystepowaniauzytkownika > 0)
                     {
                         return true;
                     }
@@ -192,7 +192,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
 
                     }
                 }
-                
+
             }
             return haslouzytkownika;
         }
@@ -276,7 +276,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                                 }
                             }
                         }
-                        ksiazki.Add(new Ksiazka(id_ksiazka,id_autor,id_wydaw,tytul, autor, opis, gatunek, rok_wydania, liczba_stron, jezyk_oryginalu, wydawnictwo, opinie));
+                        ksiazki.Add(new Ksiazka(id_ksiazka, id_autor, id_wydaw, tytul, autor, opis, gatunek, rok_wydania, liczba_stron, jezyk_oryginalu, wydawnictwo, opinie));
                         int indeks_autora = int.Parse(id_autor) - 1;
                         autorzy[indeks_autora].Ksiazki = ksiazki
                         .Where(k => k.IDAutora == id_autor)
@@ -302,7 +302,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             .Take(3)
             .ToList();
 
-           
+
         }
         public bool CzyUzytkownikWyslalOpinie(string id_uzytkownik, string id_ksiazka)
         {
@@ -400,7 +400,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         {
             string statuswybrany = "";
             using (var conn = GetConnection())
-           
+
             {
                 conn.Open();
                 using (var cmd = new MySqlCommand($"select status from status where id_ksiazka = @id_ksiazka and id_uzytkownik = @id_uzytkownik;", conn))
@@ -417,6 +417,19 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                 }
             }
             return statuswybrany;
+        }
+        public void ZmienPlecUzytkownika(string id_uzytkownika, string plec)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand($"update uzytkownicy set plec = @plec where id_uzytkownik = @id_uzytkownika;", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_uzytkownika", id_uzytkownika);
+                    cmd.Parameters.AddWithValue("@plec", plec);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

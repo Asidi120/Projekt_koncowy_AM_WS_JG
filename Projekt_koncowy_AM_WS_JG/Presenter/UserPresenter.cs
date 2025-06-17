@@ -61,11 +61,22 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     homePage.Plec = _model.uzytkownik.Plec;
                     homePage.DataZalozenia = _model.uzytkownik.Data_zalozenia;
                     homePage.Wyszukuje += GdyWyszukuje;
+                    homePage.ZmianaPlci += GdyZmianaPlci;
+                    homePage.ZmienPlec(_model.uzytkownik.Plec);
                 }
             }
             else
             {
                 MessageBox.Show("Nieprawidłowy email lub hasło", "Błąd");
+            }
+        }
+        public void GdyZmianaPlci(object sender, string plec)
+        {
+            if (homePage != null)
+            {
+                _model.uzytkownik.Plec=plec;
+                _model.ZmienPlecUzytkownika(_model.uzytkownik.IDUzytkownika, plec);
+                homePage.ZmienPlec(plec);
             }
         }
         public void PrzeniesNaAutorazhome(object sender, String idautorazhome)
@@ -158,6 +169,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 _model.DodajStatusDoBazy(idksiazki, _model.uzytkownik.IDUzytkownika, status);
             }
         }
+
         public void PrzeniesNaAutorazbook(object sender, String idautora)
         {
             int idautoraIndex = int.Parse(idautora)-1;
