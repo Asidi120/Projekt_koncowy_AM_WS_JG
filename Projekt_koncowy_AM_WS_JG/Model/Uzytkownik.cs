@@ -14,6 +14,18 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         private string data_zalozenia;
         private string id_uzytkowika;
 
+        public List<Ksiazka> KsiazkiChcePrzeczytac;
+        public List<Ksiazka> KsiazkiPrzeczytane;
+        public List<Ksiazka> KsiazkiWTrakcie;
+        public List<Ksiazka> KsiazkiPorzucone;
+
+        public Uzytkownik()
+        {
+            KsiazkiChcePrzeczytac = new List<Ksiazka>();
+            KsiazkiPrzeczytane = new List<Ksiazka>();
+            KsiazkiWTrakcie = new List<Ksiazka>();
+            KsiazkiPorzucone = new List<Ksiazka>();
+        }
         public string IDUzytkownika
         {
             get { return id_uzytkowika; }

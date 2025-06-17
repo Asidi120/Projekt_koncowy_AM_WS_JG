@@ -38,15 +38,39 @@ namespace Projekt_koncowy_AM_WS_JG.View
         {
             Wyloguj?.Invoke(this, EventArgs.Empty);
         }
-        public void UstawKsiazka(List<Ksiazka> ksiazki)
+        public void UstawKsiazkaNajpopularniejsze(List<Ksiazka> ksiazki)
         {
             KsiazkiControl.ItemsSource = ksiazki;
-            ChcePrzeczytacControl.ItemsSource = ksiazki;
-            PrzeczytaneControl.ItemsSource = ksiazki;
-            WTrakcieControl.ItemsSource = ksiazki;
-            PorzuconeControl.ItemsSource = ksiazki;
-            KsiazkiControl2.ItemsSource = ksiazki;
             KsiazkiControl.ItemTemplate = (DataTemplate)this.Resources["KsiazkaTemplate"];
+        }
+
+        public void UstawKsiazkaNajnowsze(List<Ksiazka> ksiazki)
+        {
+            KsiazkiControl2.ItemsSource = ksiazki;
+            KsiazkiControl2.ItemTemplate = (DataTemplate)this.Resources["KsiazkaTemplate"];
+        }
+
+        public void UstawKsiazkaChcePrzeczytac(List<Ksiazka> ksiazki)
+        {
+            ChcePrzeczytacControl.ItemsSource = ksiazki;
+            ChcePrzeczytacControl.ItemTemplate = (DataTemplate)this.Resources["KsiazkaTemplate"];
+        }
+
+        public void UstawKsiazkaPrzeczytane(List<Ksiazka> ksiazki)
+        {
+            PrzeczytaneControl.ItemsSource = ksiazki;
+            PrzeczytaneControl.ItemTemplate = (DataTemplate)this.Resources["KsiazkaTemplate"];
+        }
+
+        public void UstawKsiazkaWTrakcie(List<Ksiazka> ksiazki)
+        {
+            WTrakcieControl.ItemsSource = ksiazki;
+            WTrakcieControl.ItemTemplate = (DataTemplate)this.Resources["KsiazkaTemplate"];
+        }
+        public void UstawKsiazkaPorzucone(List<Ksiazka> ksiazki)
+        {
+            PorzuconeControl.ItemsSource = ksiazki;
+            PorzuconeControl.ItemTemplate = (DataTemplate)this.Resources["KsiazkaTemplate"];
         }
         private void Tytul_Click(object sender, MouseButtonEventArgs e)
         {

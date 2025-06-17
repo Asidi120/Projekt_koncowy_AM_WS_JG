@@ -431,5 +431,98 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                 }
             }
         }
+
+        public void ZaladujKsiazkiStatusowe(string id_uzytkownik)
+        {
+            string status = "";
+            string id_ksiazki_string = "";
+            int id_ksiazki;
+
+            //Chcę przeczytać
+            using (var conn1 = GetConnection())
+
+            {
+                conn1.Open();
+                using (var cmd1 = new MySqlCommand($"select id_ksiazka, status from status where id_uzytkownik = @id_uzytkownik and status = 'Chcę przeczytać';", conn1))
+                {
+                    cmd1.Parameters.AddWithValue("@id_uzytkownik", id_uzytkownik);
+                    using (var reader = cmd1.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            status = $"{reader["status"]}";
+                            id_ksiazki_string = $"{reader["id_ksiazka"]}";
+                            id_ksiazki = int.Parse(id_ksiazki_string) - 1;
+
+                            uzytkownik.KsiazkiChcePrzeczytac.Add(ksiazki[id_ksiazki]);
+                        }
+                    }
+                }
+            }
+            //Przeczytane
+            using (var conn2 = GetConnection())
+
+            {
+                conn2.Open();
+                using (var cmd2 = new MySqlCommand($"select id_ksiazka, status from status where id_uzytkownik = @id_uzytkownik and status = 'Przeczytane';", conn2))
+                {
+                    cmd2.Parameters.AddWithValue("@id_uzytkownik", id_uzytkownik);
+                    using (var reader = cmd2.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            status = $"{reader["status"]}";
+                            id_ksiazki_string = $"{reader["id_ksiazka"]}";
+                            id_ksiazki = int.Parse(id_ksiazki_string) - 1;
+
+                            uzytkownik.KsiazkiPrzeczytane.Add(ksiazki[id_ksiazki]);
+                        }
+                    }
+                }
+            }
+
+            //W trakcie
+            using (var conn3 = GetConnection())
+
+            {
+                conn3.Open();
+                using (var cmd3 = new MySqlCommand($"select id_ksiazka, status from status where id_uzytkownik = @id_uzytkownik and status = 'W trakcie';", conn3))
+                {
+                    cmd3.Parameters.AddWithValue("@id_uzytkownik", id_uzytkownik);
+                    using (var reader = cmd3.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            status = $"{reader["status"]}";
+                            id_ksiazki_string = $"{reader["id_ksiazka"]}";
+                            id_ksiazki = int.Parse(id_ksiazki_string) - 1;
+
+                            uzytkownik.KsiazkiWTrakcie.Add(ksiazki[id_ksiazki]);
+                        }
+                    }
+                }
+            }
+            //Porzucone
+            using (var conn4 = GetConnection())
+
+            {
+                conn4.Open();
+                using (var cmd4 = new MySqlCommand($"select id_ksiazka, status from status where id_uzytkownik = @id_uzytkownik and status = 'Porzucone';", conn4))
+                {
+                    cmd4.Parameters.AddWithValue("@id_uzytkownik", id_uzytkownik);
+                    using (var reader = cmd4.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            status = $"{reader["status"]}";
+                            id_ksiazki_string = $"{reader["id_ksiazka"]}";
+                            id_ksiazki = int.Parse(id_ksiazki_string) - 1;
+
+                            uzytkownik.KsiazkiPorzucone.Add(ksiazki[id_ksiazki]);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

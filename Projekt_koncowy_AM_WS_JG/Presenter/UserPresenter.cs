@@ -56,6 +56,8 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     homePage.PrzeniesNaTytul += PrzeniesNaTytul;
                     homePage.PrzeniesNaAutora += PrzeniesNaAutorazhome;
                     _model.PobierzUzytkownika(menu.EmailLogowanie);
+                    _model.ZaladujKsiazkiStatusowe(_model.uzytkownik.IDUzytkownika);
+                    UstawKsiazka();
                     homePage.Email=_model.uzytkownik.Email;
                     homePage.Nick = _model.uzytkownik.Nick;
                     homePage.Plec = _model.uzytkownik.Plec;
@@ -63,6 +65,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     homePage.Wyszukuje += GdyWyszukuje;
                     homePage.ZmianaPlci += GdyZmianaPlci;
                     homePage.ZmienPlec(_model.uzytkownik.Plec);
+
 
                 }
             }
@@ -233,7 +236,17 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         private void ZaladujKsiazki()
         {
             _model.ZaladujKsiazkiZBazy();
-            homePage.UstawKsiazka(_model.najnowsze_ksiazki); 
         }
+
+        private void UstawKsiazka()
+        {
+            homePage.UstawKsiazkaNajpopularniejsze(_model.najpopularniejsze_ksiazki);
+            homePage.UstawKsiazkaNajnowsze(_model.najnowsze_ksiazki);
+            homePage.UstawKsiazkaChcePrzeczytac(_model.uzytkownik.KsiazkiChcePrzeczytac);
+            homePage.UstawKsiazkaPrzeczytane(_model.uzytkownik.KsiazkiPrzeczytane);
+            homePage.UstawKsiazkaWTrakcie(_model.uzytkownik.KsiazkiWTrakcie);
+            homePage.UstawKsiazkaPorzucone(_model.uzytkownik.KsiazkiPorzucone);
+        }
+
     }
 }
