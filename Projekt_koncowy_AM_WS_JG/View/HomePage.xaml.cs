@@ -261,9 +261,12 @@ namespace Projekt_koncowy_AM_WS_JG.View
                 return;
             }
         }
-        public void UstawZakladke()
+
+        public int KtoraZakladka
         {
-            Zakladki.SelectedIndex = 2;
+            get => Zakladki.SelectedIndex;
+            set => Zakladki.SelectedIndex = value;
         }
+
     }
 }

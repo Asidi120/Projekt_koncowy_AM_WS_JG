@@ -198,6 +198,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         }
         private void GdyWrocNacisniete2(object? sender, EventArgs e)
         {
+            int indeks_zakladki = homePage.KtoraZakladka;
             homePage=new HomePage();
             homePage.Wyloguj += GdyWyloguj;
             _view.LoadView(homePage);
@@ -214,7 +215,23 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             homePage.Wyszukuje += GdyWyszukuje;
             homePage.ZmianaPlci += GdyZmianaPlci;
             homePage.ZmienPlec(_model.uzytkownik.Plec);
-            homePage.UstawZakladke();
+            switch (indeks_zakladki)
+            {
+              case 0:
+                    homePage.KtoraZakladka = 0;
+                    break;
+              case 1:
+                    homePage.KtoraZakladka = 1;
+                    break;
+              case 2:
+                    homePage.KtoraZakladka = 2;
+                    break;
+              case 3:
+                    homePage.KtoraZakladka = 3;
+                    break;
+
+            }
+
         }
         private void GdyOpiniaNacisnieta(object? sender, EventArgs e)
         {
