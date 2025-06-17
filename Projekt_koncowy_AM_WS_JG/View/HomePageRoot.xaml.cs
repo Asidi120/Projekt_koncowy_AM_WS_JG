@@ -20,15 +20,88 @@ namespace Projekt_koncowy_AM_WS_JG.View
     /// </summary>
     public partial class HomePageRoot : UserControl
     {
-        public event EventHandler Wyloguj;  
+        public event EventHandler Wyloguj;
+        public event EventHandler Dodaj;
         public HomePageRoot()
         {
             InitializeComponent();
         }
 
-        private void WylogujKlikniete(object sender, EventArgs e)
+        private void DodajOkladke_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Dodaj_Click(object sender, RoutedEventArgs e)
+        {
+            Dodaj?.Invoke(this, EventArgs.Empty);
+
+        }
+
+        private void Wyloguj_Click(object sender, RoutedEventArgs e)
         {
             Wyloguj?.Invoke(this, EventArgs.Empty);
+        }
+        public string TytulDoDodaj
+        {
+            get => TytulBox.Text;
+            set => TytulBox.Text = value;
+        }
+        public string AutorDoDodaj
+        {
+            get => AutorBox.Text;
+            set => AutorBox.Text = value;
+        }
+        public string WydawnictwoDoDodaj
+        {
+            get => WydawnictwoBox.Text;
+            set => WydawnictwoBox.Text = value;
+        }
+        public string GatunekDoDodaj
+        {
+            get => GatunekBox.Text;
+            set => GatunekBox.Text = value;
+        }
+        public string RokWydaniaDoDodaj
+        {
+            get => RokBox.Text;
+            set => RokBox.Text = value;
+        }
+        public string LiczbaStronDoDodaj
+        {
+            get => StronyBox.Text;
+            set => StronyBox.Text = value;
+        }
+        public string JezykDoDodaj
+        {
+            get => JezykBox.Text;
+            set => JezykBox.Text = value;
+        }
+        public string OpisDoDodaj
+        {
+            get => OpisBox.Text;
+            set => OpisBox.Text = value;
+
+        }
+        public string IDAutoraDoDodaj
+        {
+            get => IDAutoraBox.Text;
+            set => IDAutoraBox.Text = value;
+        }
+        public string IDWydawnictwaDoDodaj
+        {
+            get => IDWydawnictwaBox.Text;
+            set => IDWydawnictwaBox.Text = value;
+        }
+
+        private void DodajAutora_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DodajWydawnictwo_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
