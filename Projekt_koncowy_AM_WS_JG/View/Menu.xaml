@@ -5,14 +5,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Projekt_koncowy_AM_WS_JG.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="700" Background="White">
+             d:DesignHeight="450" d:DesignWidth="700" Background="#FFFAFAFA">
     <Grid>
-        <Button Content="Loguj" Margin="245,210,300,0" VerticalAlignment="Top" Click="LogowanieKlikniete" Height="60" Width="155"/>
-        <TextBlock HorizontalAlignment="Left" Margin="300,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Height="31" Text="E-mail:" FontSize="22"/>
-        <TextBox x:Name="email" HorizontalAlignment="Left" Margin="305,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="300,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22"><Run Language="pl-pl" Text="Hasło:"/></TextBlock>
-        <Button Content="Rejestruj" Margin="300,315,215,0" VerticalAlignment="Top" Click="RejestracjaKliknieta" Height="60" Width="185"/>
-        <PasswordBox x:Name="haslo" HorizontalAlignment="Left" Margin="310,165,0,0" VerticalAlignment="Top" Width="120"/>
+        <Rectangle 
+    Width="420" 
+    Height="228" 
+    Fill="#FFDDDDDD" 
+    RadiusX="20" 
+    RadiusY="20" 
+    Stroke="#FFDDDDDD" 
+    StrokeThickness="2"
+    HorizontalAlignment="Left" 
+    VerticalAlignment="Top" 
+    Margin="134,184,0,0"/>
+
+        <Image HorizontalAlignment="Center" Source="/Zdjecia/logo1.jpg" Height="232" VerticalAlignment="Top" Width="286" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" Margin="0,1,0,0">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.424"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0.993"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Button Content="Zaloguj się" Margin="369,354,241,0" VerticalAlignment="Top" Click="LogowanieKlikniete" Height="27" Foreground="White" Background="#FF49BB46" BorderBrush="#FF49BB46"/>
+        <TextBlock HorizontalAlignment="Left" Margin="222,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Height="31" Text="E-mail:" FontSize="22" Foreground="#FF1A2C40" FontFamily="Segoe UI Variable Text Semibold"/>
+        <TextBox x:Name="email" HorizontalAlignment="Left" Margin="245,251,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="214" Height="25" Background="White" BorderBrush="White" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="230,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" Foreground="#FF1A2C40" FontFamily="Segoe UI Variable Text Semibold" Height="29" Width="61"><Run Language="pl-pl" Text="Hasło:"/></TextBlock>
+        <Button Content="Rejestruj" Margin="222,354,340,0" VerticalAlignment="Top" Click="RejestracjaKliknieta" Height="27" Foreground="White" Background="#FFF9C763" BorderBrush="#FFF9C763"/>
+        <PasswordBox x:Name="haslo" HorizontalAlignment="Left" Margin="245,310,0,0" VerticalAlignment="Top" Width="214" Height="25" BorderBrush="White"/>
+        <Image HorizontalAlignment="Left" Height="29" Margin="220,251,0,0" VerticalAlignment="Top" Width="25" Source="/View/ludek1.jpg"/>
+        <Image HorizontalAlignment="Left" Height="25" Margin="220,310,0,0" VerticalAlignment="Top" Width="25" Source="/View/klodka.jpg"/>
 
     </Grid>
 </UserControl>

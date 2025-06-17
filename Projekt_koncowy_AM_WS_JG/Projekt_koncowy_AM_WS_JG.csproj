@@ -9,9 +9,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="View\klodka.jpg" />
+    <None Remove="View\logo1.jpg" />
+    <None Remove="View\ludek.jpg" />
+    <None Remove="View\ludek1.jpg" />
+    <None Remove="Zdjecia\logo.png" />
+    <None Remove="Zdjecia\logo1.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="EntityFramework" Version="6.5.1" />
     <PackageReference Include="MySql.Data" Version="9.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="View\klodka.jpg" />
+    <Resource Include="View\logo1.jpg" />
+    <Resource Include="View\ludek.jpg" />
+    <Resource Include="View\ludek1.jpg" />
+    <Resource Include="Zdjecia\logo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Zdjecia\logo1.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
