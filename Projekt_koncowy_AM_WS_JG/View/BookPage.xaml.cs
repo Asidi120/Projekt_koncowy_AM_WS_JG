@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Projekt_koncowy_AM_WS_JG.Model;
+using System.IO;
+
 
 namespace Projekt_koncowy_AM_WS_JG.View
 {
@@ -80,14 +82,17 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public BookPage(Ksiazka ksiazka)
         {
             InitializeComponent();
-
-            if (!string.IsNullOrWhiteSpace(ksiazka.Okladka))
+            string rootFolder = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)!.Parent!.Parent!.Parent!.FullName;
+            string okladkiFolder = System.IO.Path.Combine(rootFolder, "Okładki");
+            string sciezkaDoOkladki = System.IO.Path.Combine(okladkiFolder, $"{ksiazka.IDKsiazki}.jpg");
+            if (File.Exists(sciezkaDoOkladki))
             {
-                OkladkaImage.Source = new BitmapImage(new Uri(ksiazka.Okladka, UriKind.Absolute));
+                OkladkaImage.Source = new BitmapImage(new Uri(sciezkaDoOkladki));
             }
             else
             {
-                OkladkaImage.Source = new BitmapImage(new Uri("Images/brak_okladki.png", UriKind.Relative));
+                string sciezkaDomyslna = System.IO.Path.Combine(okladkiFolder, "1.jpg");
+                OkladkaImage.Source = new BitmapImage(new Uri(sciezkaDomyslna));
             }
 
             TytulText.Text = ksiazka.Tytul;

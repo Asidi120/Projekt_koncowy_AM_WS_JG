@@ -15,7 +15,6 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         public string Autor { get; set; }
         public string Opis { get; set; }
         public string Gatunek { get; set; }
-        public string Okladka { get; set; }
         public string RokWydania { get; set; }
         public string LiczbaStron { get; set; }
         public string Jezyk { get; set; }
@@ -31,7 +30,6 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             Autor = autor;
             Opis = opis;
             Gatunek = gatunek;
-            //Okladka = okladka;
             RokWydania = rokWydania;
             LiczbaStron = liczbaStron;
             Jezyk = jezyk;
