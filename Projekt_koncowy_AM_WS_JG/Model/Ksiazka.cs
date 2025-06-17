@@ -20,8 +20,9 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         public string Jezyk { get; set; }
         public string Wydawnictwo { get; set; }
         public Opinie JakieOpinie { get; set; }
+        public string Okladka { get; set; }
 
-        public Ksiazka (string id_ksiazki, string id_autora, string id_wydawnictwa, string tytul, string autor, string opis, string gatunek, string rokWydania, string liczbaStron, string jezyk, string wydawnictwo, Opinie jakieopinie)
+        public Ksiazka (string id_ksiazki, string id_autora, string id_wydawnictwa, string tytul, string autor, string opis, string gatunek, string rokWydania, string liczbaStron, string jezyk, string wydawnictwo, Opinie jakieopinie, string okladka)
         {
             IDKsiazki = id_ksiazki;
             IDAutora = id_autora;
@@ -35,6 +36,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             Jezyk = jezyk;
             Wydawnictwo = wydawnictwo;
             JakieOpinie = jakieopinie;
+            Okladka = okladka;
         }
     }
 }

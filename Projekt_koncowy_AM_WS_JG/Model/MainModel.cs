@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using BCrypt.Net;
 using System.Windows;
+using System.IO;
 
 namespace Projekt_koncowy_AM_WS_JG.Model
 {
@@ -246,7 +247,9 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                         string wydawnictwo = $"{reader["nazwa"]}";
                         string srednia_ocena = $"{reader["srednia_ocena"]}";
                         string liczba_ocen = $"{reader["liczba_ocen"]}";
-
+                        string rootFolder = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)!.Parent!.Parent!.Parent!.FullName;
+                        string okladkiFolder = System.IO.Path.Combine(rootFolder, "Okładki");
+                        string okladka = System.IO.Path.Combine(okladkiFolder, $"{id_ksiazka}.jpg");
                         Opinie opinie = new Opinie(srednia_ocena, liczba_ocen);
 
                         using (var conn2 = GetConnection())
@@ -276,7 +279,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                                 }
                             }
                         }
-                        ksiazki.Add(new Ksiazka(id_ksiazka, id_autor, id_wydaw, tytul, autor, opis, gatunek, rok_wydania, liczba_stron, jezyk_oryginalu, wydawnictwo, opinie));
+                        ksiazki.Add(new Ksiazka(id_ksiazka, id_autor, id_wydaw, tytul, autor, opis, gatunek, rok_wydania, liczba_stron, jezyk_oryginalu, wydawnictwo, opinie,okladka));
                         int indeks_autora = int.Parse(id_autor) - 1;
                         autorzy[indeks_autora].Ksiazki = ksiazki
                         .Where(k => k.IDAutora == id_autor)
