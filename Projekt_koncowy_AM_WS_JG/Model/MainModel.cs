@@ -222,6 +222,8 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         public void ZaladujKsiazkiZBazy()
         {
             ksiazki = new List<Ksiazka>();
+            najnowsze_ksiazki = new List<Ksiazka>();
+            najpopularniejsze_ksiazki = new List<Ksiazka>();
             PobierzAutorow();
             PobierzWydawnictwa();
             using (var conn1 = GetConnection())

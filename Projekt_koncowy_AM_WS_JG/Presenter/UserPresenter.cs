@@ -258,7 +258,12 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 bookPage = new BookPage(ksiazka);
                 bookPage.OpiniaNacisnieta += GdyOpiniaNacisnieta;
                 _view.LoadView(bookPage);
-                bookPage.WrocNacisniete += GdyWrocNacisniete;
+                bookPage.WrocNacisniete += GdyWrocNacisniete2;
+                bookPage.PrzeniesNaWydawnictwo += PrzeniesNaWydawnictwo;
+                bookPage.PrzeniesNaAutora += PrzeniesNaAutorazbook;
+                bookPage.DodajDoListy += DodajDoListyNacisniete;
+                bookPage.UsunZListy += UsunZListyNacisniete;
+                bookPage.UstawStatus(_model.ZwrocStatusWybranejKsiazki(bookPage.IDKsiazkiWybranej, _model.uzytkownik.IDUzytkownika));
             }
         }
         public void GdyWrocNacisniete1(object? sender, EventArgs e)
