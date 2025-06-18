@@ -27,6 +27,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         private RatePage ratePage;
         private AutorPage autorpage;
         private WydawnictwoPage wydawnictwoPage;
+        private DodajEdytujPage dodajEdytujPage;
         public UserPresenter(MainView view, MainModel model)
         {
             _view = view;
