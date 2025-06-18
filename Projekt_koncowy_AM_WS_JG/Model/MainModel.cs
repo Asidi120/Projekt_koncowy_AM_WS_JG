@@ -316,7 +316,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             najnowsze_ksiazki = ksiazki
             .Where(k => k.RokWydania != null && int.TryParse(k.RokWydania, out _))
             .OrderByDescending(k => int.Parse(k.RokWydania))
-            .Take(3)
+            .Take(10)
             .ToList();
 
 
@@ -486,7 +486,8 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                         {
                             status = $"{reader["status"]}";
                             id_ksiazki_string = $"{reader["id_ksiazka"]}";
-                            id_ksiazki = int.Parse(id_ksiazki_string) - 1;
+                           
+                            id_ksiazki = ksiazki.FindIndex(k => k.IDKsiazki == id_ksiazki_string);
 
                             uzytkownik.KsiazkiChcePrzeczytac.Add(ksiazki[id_ksiazki]);
                         }
@@ -507,7 +508,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                         {
                             status = $"{reader["status"]}";
                             id_ksiazki_string = $"{reader["id_ksiazka"]}";
-                            id_ksiazki = int.Parse(id_ksiazki_string) - 1;
+                            id_ksiazki = ksiazki.FindIndex(k => k.IDKsiazki == id_ksiazki_string);
 
                             uzytkownik.KsiazkiPrzeczytane.Add(ksiazki[id_ksiazki]);
                         }
@@ -529,7 +530,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                         {
                             status = $"{reader["status"]}";
                             id_ksiazki_string = $"{reader["id_ksiazka"]}";
-                            id_ksiazki = int.Parse(id_ksiazki_string) - 1;
+                            id_ksiazki = ksiazki.FindIndex(k => k.IDKsiazki == id_ksiazki_string);
 
                             uzytkownik.KsiazkiWTrakcie.Add(ksiazki[id_ksiazki]);
                         }
@@ -550,7 +551,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                         {
                             status = $"{reader["status"]}";
                             id_ksiazki_string = $"{reader["id_ksiazka"]}";
-                            id_ksiazki = int.Parse(id_ksiazki_string) - 1;
+                            id_ksiazki = ksiazki.FindIndex(k => k.IDKsiazki == id_ksiazki_string);
 
                             uzytkownik.KsiazkiPorzucone.Add(ksiazki[id_ksiazki]);
                         }

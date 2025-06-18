@@ -293,7 +293,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         }
         public void PrzeniesNaWydawnictwo(object sender, String idwydawnictwazbook)
         {
-            int idwydawnictwa = int.Parse(idwydawnictwazbook)-1;
+            int idwydawnictwa = _model.wydawnictwa.FindIndex(w => w.IDWydawnictwa == idwydawnictwazbook);
             var wydawnictwo = _model.wydawnictwa[idwydawnictwa];
             wydawnictwoPage = new WydawnictwoPage(wydawnictwo);
             _view.LoadView(wydawnictwoPage);
