@@ -30,16 +30,19 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public DodajEdytujPage(Ksiazka ksiazka)
         {
             InitializeComponent();
-            TytulDoDodaj = ksiazka.Tytul;
-            AutorDoDodaj = ksiazka.Autor;
-            WydawnictwoDoDodaj = ksiazka.Wydawnictwo;
-            GatunekDoDodaj = ksiazka.Gatunek;
-            RokWydaniaDoDodaj = ksiazka.RokWydania;
-            LiczbaStronDoDodaj = ksiazka.LiczbaStron;
-            JezykDoDodaj = ksiazka.Jezyk;
-            OpisDoDodaj = ksiazka.Opis;
-            IDAutoraDoDodaj = ksiazka.IDAutora;
-            IDWydawnictwaDoDodaj = ksiazka.IDWydawnictwa;
+            if(ksiazka !=null)
+            {
+                TytulDoDodaj = ksiazka.Tytul;
+                AutorDoDodaj = ksiazka.Autor;
+                WydawnictwoDoDodaj = ksiazka.Wydawnictwo;
+                GatunekDoDodaj = ksiazka.Gatunek;
+                RokWydaniaDoDodaj = ksiazka.RokWydania;
+                LiczbaStronDoDodaj = ksiazka.LiczbaStron;
+                JezykDoDodaj = ksiazka.Jezyk;
+                OpisDoDodaj = ksiazka.Opis;
+                IDAutoraDoDodaj = ksiazka.IDAutora;
+                IDWydawnictwaDoDodaj = ksiazka.IDWydawnictwa;
+            }
         }
         public string TytulDoDodaj
         {

@@ -43,9 +43,12 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public DodajEdytujeWydawnictwoPage(Wydawnictwo wydawnictwo)
         {
             InitializeComponent();
-            NazwaWydawnictwa= wydawnictwo.Nazwa;
-            KrajZalozeniaWydawnictwa = wydawnictwo.Kraj_zalozenia;
-            RokZalozeniaWydawnictwa = wydawnictwo.Rok_zalozenia;
+            if (wydawnictwo != null)
+            {
+                NazwaWydawnictwa= wydawnictwo.Nazwa;
+                KrajZalozeniaWydawnictwa = wydawnictwo.Kraj_zalozenia;
+                RokZalozeniaWydawnictwa = wydawnictwo.Rok_zalozenia;
+            }
         }
 
         private void DodajWydawnictwo_Click(object sender, RoutedEventArgs e)

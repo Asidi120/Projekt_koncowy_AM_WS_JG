@@ -48,10 +48,13 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public DodajEdytujAutorPage(Autor autor)
         {
             InitializeComponent();
-            ImieBox.Text = autor.Imie;
-            NazwiskoBox.Text = autor.Nazwisko;
-            RokBox.Text = autor.DataUrodzenia;
-            KrajBox.Text = autor.Narodowosc;
+            if (autor != null)
+            {
+                ImieDoDodaj = autor.Imie;
+                NazwiskoDoDodaj = autor.Nazwisko;
+                DataUrodzeniaDoDodaj = autor.DataUrodzenia;
+                NarodowoscDoDodaj = autor.Narodowosc;
+            }
         }
 
         private void DodajAutora_Click(object sender, RoutedEventArgs e)

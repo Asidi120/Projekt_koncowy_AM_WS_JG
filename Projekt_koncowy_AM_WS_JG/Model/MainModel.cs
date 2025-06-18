@@ -561,7 +561,9 @@ namespace Projekt_koncowy_AM_WS_JG.Model
 
         public void ZaladujBaze()
         {
+            baza = new InformacjeZBazy();
             // Ładowanie książek
+            
             using (var conn1 = GetConnection())
             {
                 conn1.Open();
