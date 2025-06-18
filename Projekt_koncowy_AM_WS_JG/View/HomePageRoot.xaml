@@ -85,9 +85,8 @@
         <TabItem Header="Użytkownicy">
             <DockPanel>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
-                    <Button Content="Dodaj" Margin="5" Width="80"/>
-                    <Button Content="Edytuj" Margin="5" Width="80"/>
-                    <Button Content="Usuń" Margin="5" Width="80"/>
+                    <Button Content="Zmin_root" Margin="5" Width="80" Click="Zmien_root_Click"/>
+                    <Button Content="Usuń" Margin="5" Width="80" Click="Usun_uzytkownika_Click"/>
                 </StackPanel>
 
                 <DataGrid x:Name="UzytkownicyGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
@@ -108,8 +107,6 @@
             <DockPanel>
 
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
-                    <Button Content="Dodaj" Margin="5" Width="80"/>
-                    <Button Content="Edytuj" Margin="5" Width="80"/>
                     <Button Content="Usuń" Margin="5" Width="80"/>
                 </StackPanel>
 
@@ -130,8 +127,6 @@
         <TabItem Header="Status">
             <DockPanel>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
-                    <Button Content="Dodaj" Margin="5" Width="80"/>
-                    <Button Content="Edytuj" Margin="5" Width="80"/>
                     <Button Content="Usuń" Margin="5" Width="80"/>
                 </StackPanel>
 
