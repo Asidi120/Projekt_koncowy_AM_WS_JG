@@ -90,12 +90,12 @@
 
                 <DataGrid x:Name="UzytkownicyGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding id_uzytkownik}" Width="40"/>
-                        <DataGridTextColumn Header="Nick" Binding="{Binding nick}" Width="100"/>
-                        <DataGridTextColumn Header="Email" Binding="{Binding email}" Width="200"/>
-                        <DataGridTextColumn Header="Płeć" Binding="{Binding plec}" Width="80"/>
-                        <DataGridTextColumn Header="Root" Binding="{Binding root}" Width="60"/>
-                        <DataGridTextColumn Header="Data założenia" Binding="{Binding data_zalozenia}" Width="100"/>
+                        <DataGridTextColumn Header="ID" Binding="{Binding IDUzytkownika}" Width="40"/>
+                        <DataGridTextColumn Header="Nick" Binding="{Binding Nick}" Width="100"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200"/>
+                        <DataGridTextColumn Header="Płeć" Binding="{Binding Plec}" Width="80"/>
+                        <DataGridTextColumn Header="Root" Binding="{Binding Root}" Width="60"/>
+                        <DataGridTextColumn Header="Data założenia" Binding="{Binding Data_zalozenia}" Width="100"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
