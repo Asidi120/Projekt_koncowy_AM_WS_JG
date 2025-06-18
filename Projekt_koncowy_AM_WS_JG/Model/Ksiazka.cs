@@ -38,5 +38,17 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             JakieOpinie = jakieopinie;
             Okladka = okladka;
         }
+        public Ksiazka(string id_ksiazki, string tytul,string gatunek,string opis,string jezyk,string rokWydania,string liczbaStron,string id_autora,string id_wydawnictwa)
+        {
+            IDKsiazki = id_ksiazki;
+            Tytul = tytul;
+            Gatunek = gatunek;
+            Opis = opis;
+            Jezyk = jezyk;
+            RokWydania = rokWydania;
+            LiczbaStron = liczbaStron;
+            IDAutora = id_autora;
+            IDWydawnictwa = id_wydawnictwa;
+        }
     }
 }

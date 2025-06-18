@@ -47,6 +47,10 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     homePageRoot = new HomePageRoot();
                     homePageRoot.Wyloguj += GdyWyloguj;
                     _view.LoadView(homePageRoot);
+                    ZaladujKsiazki();
+                    homePageRoot.Edytuj += GdyEdytujNacisniete;
+                    homePageRoot.Dodaj += GdyDodajNacisniete;
+                    homePageRoot.Usun += GdyUsunNacisniete;
                 }
                 else
                 {
@@ -71,6 +75,39 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             else
             {
                 MessageBox.Show("Nieprawidłowy email lub hasło", "Błąd");
+            }
+        }
+        public void GdyEdytujNacisniete(object sender, Ksiazka ksiazka)
+        {
+            if (homePageRoot != null)
+            {
+                dodajEdytujPage = new DodajEdytujPage(ksiazka);
+                _view.LoadView(dodajEdytujPage);
+                dodajEdytujPage.WrocNacisniete += GdyWrocNacisniete3;
+            }
+        }
+        public void GdyDodajNacisniete(object sender, Ksiazka ksiazka)
+        {
+            if (homePageRoot != null)
+            {
+                dodajEdytujPage = new DodajEdytujPage(null);
+                _view.LoadView(dodajEdytujPage);
+                dodajEdytujPage.WrocNacisniete += GdyWrocNacisniete3;
+            }
+        }
+        public void GdyWrocNacisniete3(object? sender, EventArgs e)
+        {
+            if (homePageRoot != null)
+            {
+                homePageRoot = new HomePageRoot();
+                _view.LoadView(homePageRoot);
+            }
+        }
+        public void GdyUsunNacisniete(object sender, String usun)
+        {
+            if (homePageRoot != null)
+            {
+                //tutaj bedzie usuwanie po id_ksiazki
             }
         }
         public void GdyZmianaPlci(object sender, string plec)

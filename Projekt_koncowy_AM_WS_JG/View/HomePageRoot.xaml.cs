@@ -24,11 +24,16 @@ namespace Projekt_koncowy_AM_WS_JG.View
     {
         public event EventHandler Wyloguj;
         public event EventHandler<Ksiazka> Edytuj;
-        public event EventHandler Dodaj;
+        public event EventHandler<Ksiazka> Dodaj;
         public event EventHandler<string> Usun;
         public HomePageRoot()
         {
             InitializeComponent();
+
+        }
+        public void UstawKsiazkiwroot(List<Ksiazka> ksiazki)
+        {
+            KsiazkiGrid.ItemsSource = ksiazki;
         }
         private void Wyloguj_Click(object sender, RoutedEventArgs e)
         {
@@ -36,7 +41,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
         }
         private void Dodaj_Click(object sender, RoutedEventArgs e)
         {
-            Dodaj?.Invoke(this, EventArgs.Empty);
+            Dodaj?.Invoke(this, null);
         }
         private void Edytuj_Click(object sender, RoutedEventArgs e)
         {
@@ -61,6 +66,5 @@ namespace Projekt_koncowy_AM_WS_JG.View
                 MessageBox.Show("Wybierz książkę do usunięcia.");
             }
         }
-
     }
 }

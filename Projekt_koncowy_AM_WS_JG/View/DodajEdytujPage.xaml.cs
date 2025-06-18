@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projekt_koncowy_AM_WS_JG.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,12 +21,13 @@ namespace Projekt_koncowy_AM_WS_JG.View
     /// </summary>
     public partial class DodajEdytujPage : UserControl
     {
-        public DodajEdytujPage()
+        public event EventHandler Wyloguj;
+        public event EventHandler WrocNacisniete;
+        public event EventHandler Dodaj;
+        public DodajEdytujPage(Ksiazka ksiazka)
         {
             InitializeComponent();
         }
-        public event EventHandler Wyloguj;
-        public event EventHandler Dodaj;
         public string TytulDoDodaj
         {
             get => TytulBox.Text;
@@ -101,6 +103,11 @@ namespace Projekt_koncowy_AM_WS_JG.View
         private void DodajWydawnictwo_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Wroc_Click(object sender, RoutedEventArgs e)
+        {
+            WrocNacisniete?.Invoke(this, EventArgs.Empty);
         }
     }
 }
