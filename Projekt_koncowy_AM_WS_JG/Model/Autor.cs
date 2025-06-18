@@ -15,8 +15,9 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         public string DataUrodzenia { get; set; }
         public string Narodowosc { get; set; }
         public List<Ksiazka> Ksiazki { get; set; }
-        public Autor(string imie_nazwisko, string data_urodzenia, string narodowosc)
+        public Autor(string id_autora, string imie_nazwisko, string data_urodzenia, string narodowosc)
         {
+            IDAutora = id_autora;
             ImieNazwisko = imie_nazwisko;
             DataUrodzenia = data_urodzenia;
             Narodowosc = narodowosc;

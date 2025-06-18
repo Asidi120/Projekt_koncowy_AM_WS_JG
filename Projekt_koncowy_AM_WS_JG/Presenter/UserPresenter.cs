@@ -124,7 +124,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         }
         public void PrzeniesNaAutorazhome(object sender, String idautorazhome)
         {
-            int idautora = int.Parse(idautorazhome)-1;
+            int idautora = _model.autorzy.FindIndex(a => a.IDAutora == idautorazhome);
             var autor = _model.autorzy[idautora];
             autorpage = new AutorPage(autor);
             _view.LoadView(autorpage);
@@ -215,7 +215,8 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
 
         public void PrzeniesNaAutorazbook(object sender, String idautora)
         {
-            int idautoraIndex = int.Parse(idautora)-1;
+            int idautoraIndex = _model.autorzy.FindIndex(a => a.IDAutora == idautora);
+
             var autor = _model.autorzy[idautoraIndex];
             autorpage = new AutorPage(autor);
             _view.LoadView(autorpage);

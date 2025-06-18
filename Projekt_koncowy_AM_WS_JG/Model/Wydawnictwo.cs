@@ -13,13 +13,13 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         public string Kraj_zalozenia { get; set; }
         public string Rok_zalozenia { get; set; }
         public List<Ksiazka> Ksiazki { get; set; }
-        public Wydawnictwo(string nazwa, string kraj_zalozenia, string rok_zalozenia)
-        {
-            Nazwa = nazwa;
-            Kraj_zalozenia = kraj_zalozenia;
-            Rok_zalozenia= rok_zalozenia;
-            Ksiazki = new List<Ksiazka>();
-        }
+        //public Wydawnictwo(string nazwa, string kraj_zalozenia, string rok_zalozenia)
+        //{
+        //    Nazwa = nazwa;
+        //    Kraj_zalozenia = kraj_zalozenia;
+        //    Rok_zalozenia= rok_zalozenia;
+        //    Ksiazki = new List<Ksiazka>();
+        //}
 
         public Wydawnictwo(string id_wydaw,string nazwa, string kraj_zalozenia, string rok_zalozenia)
         {
@@ -27,6 +27,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             Nazwa = nazwa;
             Kraj_zalozenia = kraj_zalozenia;
             Rok_zalozenia = rok_zalozenia;
+            Ksiazki = new List<Ksiazka>();
         }
     }
 }

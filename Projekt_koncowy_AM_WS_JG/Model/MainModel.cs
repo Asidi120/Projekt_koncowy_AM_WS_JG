@@ -34,15 +34,16 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             using (var conn = GetConnection())
             {
                 conn.Open();
-                using (var cmd = new MySqlCommand("SELECT nazwa, kraj_zalozenia, rok_zalozenia FROM wydawnictwo", conn))
+                using (var cmd = new MySqlCommand("SELECT id_wydaw, nazwa, kraj_zalozenia, rok_zalozenia FROM wydawnictwo", conn))
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
+                        string id_wydaw = $"{reader["id_wydaw"]}";
                         string nazwa = $"{reader["nazwa"]}";
                         string kraj_zalozenia = $"{reader["kraj_zalozenia"]}";
                         string rok_zalozenia = $"{reader["rok_zalozenia"]}";
-                        Wydawnictwo wydawnictwo = new Wydawnictwo(nazwa, kraj_zalozenia, rok_zalozenia);
+                        Wydawnictwo wydawnictwo = new Wydawnictwo(id_wydaw, nazwa, kraj_zalozenia, rok_zalozenia);
                         wydawnictwa.Add(wydawnictwo);
                     }
                 }
@@ -53,15 +54,16 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             using (var conn = GetConnection())
             {
                 conn.Open();
-                using (var cmd = new MySqlCommand("SELECT concat(imie, ' ', nazwisko) imie_nazwisko, rok_urodzenia, kraj_pochodzenia FROM autor", conn))
+                using (var cmd = new MySqlCommand("SELECT id_autor,concat(imie, ' ', nazwisko) imie_nazwisko, rok_urodzenia, kraj_pochodzenia FROM autor", conn))
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
+                        string id_autor = $"{reader["id_autor"]}";
                         string imie_nazwisko = $"{reader["imie_nazwisko"]}";
                         string rok_urodzenia = $"{reader["rok_urodzenia"]}";
                         string kraj_pochodzenia = $"{reader["kraj_pochodzenia"]}";
-                        Autor autor = new Autor(imie_nazwisko, rok_urodzenia, kraj_pochodzenia);
+                        Autor autor = new Autor(id_autor,imie_nazwisko, rok_urodzenia, kraj_pochodzenia);
                         autorzy.Add(autor);
                     }
                 }
@@ -236,9 +238,11 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                 using (var cmd = new MySqlCommand("select k.id_ksiazka, a.id_autor, w.id_wydaw, tytul, gatunek, opis, jezyk_oryginalu, rok_wydania, liczba_stron, concat(imie, ' ', nazwisko) jakiautor, nazwa, round(avg(ocena),2) srednia_ocena, count(ocena) liczba_ocen from ksiazka k left join autor a on k.id_autor = a.id_autor left join wydawnictwo w on k.id_wydaw = w.id_wydaw left join opinia o on o.id_ksiazka = k.id_ksiazka group by k.id_ksiazka;", conn1))
                 using (var reader = cmd.ExecuteReader())
                 {
+                    //int licznik = 0;
 
                     while (reader.Read())
                     {
+
                         string id_ksiazka = $"{reader["id_ksiazka"]}";
                         string id_autor = $"{reader["id_autor"]}";
                         string id_wydaw = $"{reader["id_wydaw"]}";
@@ -286,17 +290,21 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                             }
                         }
                         ksiazki.Add(new Ksiazka(id_ksiazka, id_autor, id_wydaw, tytul, autor, opis, gatunek, rok_wydania, liczba_stron, jezyk_oryginalu, wydawnictwo, opinie,okladka));
-                        int indeks_autora = int.Parse(id_autor) - 1;
-                        autorzy[indeks_autora].Ksiazki = ksiazki
-                        .Where(k => k.IDAutora == id_autor)
-                        .ToList();
+                        ////int indeks_autora = int.Parse(id_autor) - 1;
+                        //autorzy[licznik].Ksiazki = ksiazki
+                        //.Where(k => k.IDAutora == id_autor)
+                        //.ToList();
 
-                        int indeks_wydawnictwa = int.Parse(id_wydaw) - 1;
-                        wydawnictwa[indeks_wydawnictwa].Ksiazki = ksiazki
-                        .Where(k => k.IDWydawnictwa == id_wydaw)
-                        .ToList();
+
+                        //int indeks_wydawnictwa = int.Parse(id_wydaw) - 1;
+                        //wydawnictwa[licznik].Ksiazki = ksiazki
+                        //.Where(k => k.IDWydawnictwa == id_wydaw)
+                        //.ToList();
+
+                        ///*licznik*/++;
 
                     }
+                    PobierzKsiazkiAutorowIWydawnictw();
                 }
             }
             najpopularniejsze_ksiazki = ksiazki
@@ -312,6 +320,23 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             .ToList();
 
 
+        }
+
+        public void PobierzKsiazkiAutorowIWydawnictw()
+        {
+            for (int i = 0; i < autorzy.Count; i++) 
+            {
+                autorzy[i].Ksiazki = ksiazki
+                        .Where(k => k.IDAutora == autorzy[i].IDAutora)
+                        .ToList();
+            }
+
+            for (int i = 0; i < wydawnictwa.Count; i++)
+            {
+                wydawnictwa[i].Ksiazki = ksiazki
+                        .Where(k => k.IDWydawnictwa == wydawnictwa[i].IDWydawnictwa)
+                        .ToList();
+            }
         }
         public bool CzyUzytkownikWyslalOpinie(string id_uzytkownik, string id_ksiazka)
         {
