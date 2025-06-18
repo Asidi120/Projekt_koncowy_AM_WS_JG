@@ -13,6 +13,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         private string plec;
         private string data_zalozenia;
         private string id_uzytkowika;
+        private string root;
 
         public List<Ksiazka> KsiazkiChcePrzeczytac;
         public List<Ksiazka> KsiazkiPrzeczytane;
@@ -26,13 +27,14 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             KsiazkiWTrakcie = new List<Ksiazka>();
             KsiazkiPorzucone = new List<Ksiazka>();
         }
-        public Uzytkownik(string nick, string email, string plec, string data_zalozenia, string id_uzytkowika)
+        public Uzytkownik(string nick, string email, string plec, string data_zalozenia, string id_uzytkowika, string root)
         {
             Nick = nick;
             Email = email;
             Plec = plec;
             Data_zalozenia = data_zalozenia;
             this.id_uzytkowika = id_uzytkowika;
+            this.root = root;
         }
 
         public string IDUzytkownika

@@ -616,8 +616,9 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                         string email = $"{reader["email"]}";
                         string plec = $"{reader["plec"]}";
                         string data = $"{reader["data_zalozenia"]}";
+                        string root = $"{reader["root"]}";
 
-                        Uzytkownik uz = new Uzytkownik(nick, email, plec, data, id);
+                        Uzytkownik uz = new Uzytkownik(nick, email, plec, data, id, root);
                         baza.Uzytkownicy.Add(uz);
                     }
                 }
