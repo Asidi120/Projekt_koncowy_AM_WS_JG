@@ -32,6 +32,8 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public event EventHandler<Autor> DodajAutora;
         public event EventHandler<Autor> EdytujAutora;
         public event EventHandler<string> UsunAutora;
+        public event EventHandler<string> UsunUzytkownika;
+        public event EventHandler<string> ZmienRoot;
 
         private InformacjeZBazy _baza;
         public HomePageRoot()
@@ -136,6 +138,30 @@ namespace Projekt_koncowy_AM_WS_JG.View
             else
             {
                 MessageBox.Show("Wybierz autora do usunięcia.");
+            }
+        }
+
+        private void Zmien_root_Click(object sender, RoutedEventArgs e)
+        {
+            if (AutorzyGrid.SelectedItem is Uzytkownik uzytkownik)
+            {
+                ZmienRoot?.Invoke(this, uzytkownik.IDUzytkownika);
+            }
+            else
+            {
+                MessageBox.Show("Wybierz uzytkownika do zmiany pola root.");
+            }
+        }
+
+        private void Usun_uzytkownika_Click(object sender, RoutedEventArgs e)
+        {
+            if (AutorzyGrid.SelectedItem is Uzytkownik uzytkownik)
+            {
+                UsunUzytkownika?.Invoke(this, uzytkownik.IDUzytkownika);
+            }
+            else
+            {
+                MessageBox.Show("Wybierz uzytkownika do usunięcia.");
             }
         }
     }

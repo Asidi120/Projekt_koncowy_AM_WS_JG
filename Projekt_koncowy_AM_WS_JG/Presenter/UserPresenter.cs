@@ -172,6 +172,39 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 homePageRoot.DodajAutora += GdyDodajAutoraNacisniete;
                 homePageRoot.EdytujAutora += GdyEdytujAutoraNacisniete;
                 homePageRoot.UsunAutora += GdyUsunAutoraNacisniete;
+                homePageRoot.UsunUzytkownika += GdyUsunUzytkownikaNacisniete;
+                homePageRoot.ZmienRoot += GdyZmienRootNacisniete;
+            }
+        }
+        public void GdyZmienRootNacisniete(object sender, string id_root)
+        {
+            if (homePageRoot != null)
+            {
+                //_model.ZmienRoot(id_root);
+                //trzeba jeszcze zmienic karte 
+                _model.ZaladujBaze();
+                homePageRoot = new HomePageRoot();
+                homePageRoot.Wyloguj += GdyWyloguj;
+                _view.LoadView(homePageRoot);
+                homePageRoot.Edytuj += GdyEdytujNacisniete;
+                homePageRoot.Dodaj += GdyDodajNacisniete;
+                homePageRoot.Usun += GdyUsunNacisniete;
+                homePageRoot.UstawKsiazkiwroot(_model.baza);
+                homePageRoot.DodajWydawnictwo += GdyDodajWydawnictwoNacisniete;
+                homePageRoot.EdytujWydawnictwo += GdyEdytujWydawnictwoNacisniete;
+                homePageRoot.UsunWydawnictwo += GdyUsunWydawnictwoNacisniete;
+                homePageRoot.DodajAutora += GdyDodajAutoraNacisniete;
+                homePageRoot.EdytujAutora += GdyEdytujAutoraNacisniete;
+                homePageRoot.UsunAutora += GdyUsunAutoraNacisniete;
+                homePageRoot.UsunUzytkownika += GdyUsunUzytkownikaNacisniete;
+                homePageRoot.ZmienRoot += GdyZmienRootNacisniete;
+            }
+        }
+        public void GdyUsunUzytkownikaNacisniete(object sender, String usun)
+        {
+            if (homePageRoot != null)
+            {
+                //tutaj bedzie usuwanie po id_uzytkownika
             }
         }
         public void GdyUsunNacisniete(object sender, String usun)
