@@ -690,8 +690,6 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                 }
             }
         }
-
-
     }
 }
 

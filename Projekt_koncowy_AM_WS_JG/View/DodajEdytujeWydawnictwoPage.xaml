@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Projekt_koncowy_AM_WS_JG.View.DodajEdytujWydawnictwoPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="700" Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Pasek górny z przyciskiem Wróć -->
+        <DockPanel Margin="10">
+            <Button Content="Wróć"
+                    Width="130" Height="30"
+                    Background="#4CAF50" Foreground="White"
+                    FontWeight="Bold"
+                    Click="Wroc_Click"
+                    Cursor="Hand"/>
+        </DockPanel>
+
+        <!-- Formularz wydawnictwa -->
+        <StackPanel Margin="20" Grid.Row="1">
+            <TextBlock Text="Nazwa" />
+            <TextBox x:Name="NazwaWydawnictwaBox" Margin="0,5,0,10"/>
+
+            <TextBlock Text="Kraj założenia" />
+            <TextBox x:Name="KrajWydawnictwaBox" Margin="0,5,0,10"/>
+
+            <TextBlock Text="Rok założenia" />
+            <TextBox x:Name="RokZalozeniaBox" Margin="0,5,0,10"/>
+
+            <Button Content="Dodaj wydawnictwo"
+                    Background="#4CAF50"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Width="150"
+                    Click="DodajWydawnictwo_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
