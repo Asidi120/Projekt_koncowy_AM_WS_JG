@@ -44,14 +44,15 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             {
                 if (_model.CzyJestRoot(menu.EmailLogowanie))
                 {
+
+                    _model.ZaladujBaze();
                     homePageRoot = new HomePageRoot();
                     homePageRoot.Wyloguj += GdyWyloguj;
                     _view.LoadView(homePageRoot);
-                    //ZaladujKsiazki();
-                    _model.ZaladujBaze();
                     homePageRoot.Edytuj += GdyEdytujNacisniete;
                     homePageRoot.Dodaj += GdyDodajNacisniete;
                     homePageRoot.Usun += GdyUsunNacisniete;
+                    homePageRoot.UstawKsiazkiwroot(_model.baza);
                 }
                 else
                 {

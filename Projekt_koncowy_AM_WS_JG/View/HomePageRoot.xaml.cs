@@ -31,9 +31,14 @@ namespace Projekt_koncowy_AM_WS_JG.View
             InitializeComponent();
 
         }
-        public void UstawKsiazkiwroot(List<Ksiazka> ksiazki)
+        public void UstawKsiazkiwroot(InformacjeZBazy baza)
         {
-            KsiazkiGrid.ItemsSource = ksiazki;
+            KsiazkiGrid.ItemsSource = baza.Ksiazki;
+            AutorzyGrid.ItemsSource = baza.Autorzy;
+            WydawnictwaGrid.ItemsSource = baza.Wydawnictwa;
+            StatusGrid.ItemsSource = baza.Statusy;
+            OpinieGrid.ItemsSource = baza.Opinie;
+            UzytkownicyGrid.ItemsSource = baza.Uzytkownicy;
         }
         private void Wyloguj_Click(object sender, RoutedEventArgs e)
         {
