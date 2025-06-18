@@ -565,7 +565,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             using (var conn1 = GetConnection())
             {
                 conn1.Open();
-                using (var cmd1 = new MySqlCommand("SELECT * FROM ksiazka;", conn1))
+                using (var cmd1 = new MySqlCommand("SELECT k.id_ksiazka, k.tytul, k.gatunek, k.opis, k.jezyk_oryginalu, k.rok_wydania, k.liczba_stron, k.id_autor, k.id_wydaw, w.nazwa AS wydawnictwo, a.imie AS imie_autora, a.nazwisko AS nazwisko_autora FROM ksiazka k, wydawnictwo w, autor a WHERE k.id_wydaw = w.id_wydaw AND k.id_autor = a.id_autor;\r\n", conn1))
                 using (var reader = cmd1.ExecuteReader())
                 {
                     while (reader.Read())
@@ -579,8 +579,9 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                         string liczba_stron = $"{reader["liczba_stron"]}";
                         string id_autor = $"{reader["id_autor"]}";
                         string id_wydaw = $"{reader["id_wydaw"]}";
-
-                        Ksiazka ksiazka = new Ksiazka(id_ksiazka, tytul, gatunek, opis, jezyk_oryginalu, rok_wydania, liczba_stron, id_autor, id_wydaw);
+                        string autor = $"{reader["imie_autora"]}"+" "+$"{reader["nazwisko_autora"]}";
+                        string wydawnictwo = $"{reader["wydawnictwo"]}";
+                        Ksiazka ksiazka = new Ksiazka(id_ksiazka, tytul, gatunek, opis, jezyk_oryginalu, rok_wydania, liczba_stron, id_autor, id_wydaw,autor,wydawnictwo);
                         baza.Ksiazki.Add(ksiazka);
                     }
                 }
