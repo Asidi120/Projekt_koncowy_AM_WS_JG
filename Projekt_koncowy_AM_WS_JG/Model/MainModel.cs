@@ -632,13 +632,15 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                 using (var reader = cmd5.ExecuteReader())
                 {
                     while (reader.Read())
-                    {
+                    {   
+                        string id_opinia = $"{reader["id_opinia"]}";
+                        string id_ksiazka = $"{reader["id_ksiazka"]}";
                         string ocena = $"{reader["ocena"]}";
                         string recenzja = $"{reader["recenzja"]}";
                         string uzytkownik = $"{reader["id_uzytkownik"]}";
                         string data = $"{reader["data_wystawienia"]}";
 
-                        Opinia op = new Opinia(ocena, recenzja, uzytkownik, data);
+                        Opinia op = new Opinia(id_opinia,id_ksiazka,ocena, recenzja, uzytkownik, data);
                         baza.Opinie.Add(op);
                     }
                 }

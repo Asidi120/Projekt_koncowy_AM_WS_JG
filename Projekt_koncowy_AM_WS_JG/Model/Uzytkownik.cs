@@ -33,10 +33,14 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             Email = email;
             Plec = plec;
             Data_zalozenia = data_zalozenia;
-            this.id_uzytkowika = id_uzytkowika;
-            this.root = root;
+            IDUzytkownika = id_uzytkowika;
+            Root = root;
         }
-
+        public string Root
+        {
+            get { return root; }
+            set { root = value; }
+        }
         public string IDUzytkownika
         {
             get { return id_uzytkowika; }

@@ -104,6 +104,7 @@
         <!-- OPINIE -->
         <TabItem Header="Opinie">
             <DockPanel>
+
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
                     <Button Content="Dodaj" Margin="5" Width="80"/>
                     <Button Content="Edytuj" Margin="5" Width="80"/>
@@ -112,12 +113,12 @@
 
                 <DataGrid x:Name="OpinieGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding id_opinia}" Width="40"/>
-                        <DataGridTextColumn Header="ID użytkownika" Binding="{Binding id_uzytkownik}" Width="100"/>
-                        <DataGridTextColumn Header="ID książki" Binding="{Binding id_ksiazka}" Width="100"/>
-                        <DataGridTextColumn Header="Ocena" Binding="{Binding ocena}" Width="60"/>
-                        <DataGridTextColumn Header="Data" Binding="{Binding data_wystawienia}" Width="100"/>
-                        <DataGridTextColumn Header="Recenzja" Binding="{Binding recenzja}" Width="200"/>
+                        <DataGridTextColumn Header="ID" Binding="{Binding IdOpinii}" Width="40"/>
+                        <DataGridTextColumn Header="ID użytkownika" Binding="{Binding Użytkownik}" Width="100"/>
+                        <DataGridTextColumn Header="ID książki" Binding="{Binding IdKsiazki}" Width="100"/>
+                        <DataGridTextColumn Header="Ocena" Binding="{Binding Ocena}" Width="60"/>
+                        <DataGridTextColumn Header="Data" Binding="{Binding Data_Wystawienia}" Width="100"/>
+                        <DataGridTextColumn Header="Recenzja" Binding="{Binding Recenzja}" Width="200"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
@@ -134,9 +135,9 @@
 
                 <DataGrid x:Name="StatusGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID użytkownika" Binding="{Binding id_uzytkownik}" Width="100"/>
-                        <DataGridTextColumn Header="ID książki" Binding="{Binding id_ksiazka}" Width="100"/>
-                        <DataGridTextColumn Header="Status" Binding="{Binding status}" Width="150"/>
+                        <DataGridTextColumn Header="ID użytkownika" Binding="{Binding IDUzytkownika}" Width="100"/>
+                        <DataGridTextColumn Header="ID książki" Binding="{Binding IDKsiazki}" Width="100"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding StatusKsiazki}" Width="150"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
