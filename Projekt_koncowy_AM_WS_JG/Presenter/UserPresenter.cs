@@ -28,6 +28,8 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         private AutorPage autorpage;
         private WydawnictwoPage wydawnictwoPage;
         private DodajEdytujPage dodajEdytujPage;
+        private DodajEdytujAutorPage dodajEdytujAutorPage;
+        private DodajEdytujeWydawnictwoPage dodajEdytujWydawnictwoPage;
         public UserPresenter(MainView view, MainModel model)
         {
             _view = view;
@@ -44,7 +46,6 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             {
                 if (_model.CzyJestRoot(menu.EmailLogowanie))
                 {
-
                     _model.ZaladujBaze();
                     homePageRoot = new HomePageRoot();
                     homePageRoot.Wyloguj += GdyWyloguj;
@@ -53,6 +54,12 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     homePageRoot.Dodaj += GdyDodajNacisniete;
                     homePageRoot.Usun += GdyUsunNacisniete;
                     homePageRoot.UstawKsiazkiwroot(_model.baza);
+                    homePageRoot.DodajWydawnictwo += GdyDodajWydawnictwoNacisniete;
+                    homePageRoot.EdytujWydawnictwo += GdyEdytujWydawnictwoNacisniete;
+                    homePageRoot.UsunWydawnictwo += GdyUsunWydawnictwoNacisniete;
+                    homePageRoot.DodajAutora += GdyDodajAutoraNacisniete;
+                    homePageRoot.EdytujAutora += GdyEdytujAutoraNacisniete;
+                    homePageRoot.UsunAutora += GdyUsunAutoraNacisniete;
                 }
                 else
                 {
@@ -79,6 +86,56 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 MessageBox.Show("Nieprawidłowy email lub hasło", "Błąd");
             }
         }
+        public void GdyDodajWydawnictwoNacisniete(object sender, Wydawnictwo wydawnictwo)
+        {
+            if (homePageRoot != null)
+            {
+                dodajEdytujWydawnictwoPage = new DodajEdytujeWydawnictwoPage(wydawnictwo);
+                _view.LoadView(dodajEdytujPage);
+                dodajEdytujWydawnictwoPage.WrocNacisniete += GdyWrocNacisniete3;
+            }
+        }
+        public void GdyEdytujWydawnictwoNacisniete(object sender, Wydawnictwo wydawnictwo)
+        {
+            if (homePageRoot != null)
+            {
+                dodajEdytujWydawnictwoPage = new DodajEdytujeWydawnictwoPage(wydawnictwo);
+                _view.LoadView(dodajEdytujPage);
+                dodajEdytujWydawnictwoPage.WrocNacisniete += GdyWrocNacisniete3;
+            }
+        }
+        public void GdyUsunWydawnictwoNacisniete(object sender, String usun)
+        {
+            if (homePageRoot != null)
+            {
+                //tutaj bedzie usuwanie po id_wydawnictwa
+            }
+        }
+        public void GdyDodajAutoraNacisniete(object sender, Autor autor)
+        {
+            if (homePageRoot != null)
+            {
+                dodajEdytujAutorPage = new DodajEdytujAutorPage(autor);
+                _view.LoadView(dodajEdytujAutorPage);
+                dodajEdytujAutorPage.WrocNacisniete += GdyWrocNacisniete3;
+            }
+        }
+        public void GdyEdytujAutoraNacisniete(object sender, Autor autor)
+        {
+            if (homePageRoot != null)
+            {
+                dodajEdytujAutorPage = new DodajEdytujAutorPage(autor);
+                _view.LoadView(dodajEdytujAutorPage);
+                dodajEdytujAutorPage.WrocNacisniete += GdyWrocNacisniete3;
+            }
+        }
+        public void GdyUsunAutoraNacisniete(object sender, String usun)
+        {
+            if (homePageRoot != null)
+            {
+                //tutaj bedzie usuwanie po id_autora
+            }
+        }
         public void GdyEdytujNacisniete(object sender, Ksiazka ksiazka)
         {
             if (homePageRoot != null)
@@ -101,8 +158,20 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         {
             if (homePageRoot != null)
             {
+                _model.ZaladujBaze();
                 homePageRoot = new HomePageRoot();
+                homePageRoot.Wyloguj += GdyWyloguj;
                 _view.LoadView(homePageRoot);
+                homePageRoot.Edytuj += GdyEdytujNacisniete;
+                homePageRoot.Dodaj += GdyDodajNacisniete;
+                homePageRoot.Usun += GdyUsunNacisniete;
+                homePageRoot.UstawKsiazkiwroot(_model.baza);
+                homePageRoot.DodajWydawnictwo += GdyDodajWydawnictwoNacisniete;
+                homePageRoot.EdytujWydawnictwo += GdyEdytujWydawnictwoNacisniete;
+                homePageRoot.UsunWydawnictwo += GdyUsunWydawnictwoNacisniete;
+                homePageRoot.DodajAutora += GdyDodajAutoraNacisniete;
+                homePageRoot.EdytujAutora += GdyEdytujAutoraNacisniete;
+                homePageRoot.UsunAutora += GdyUsunAutoraNacisniete;
             }
         }
         public void GdyUsunNacisniete(object sender, String usun)

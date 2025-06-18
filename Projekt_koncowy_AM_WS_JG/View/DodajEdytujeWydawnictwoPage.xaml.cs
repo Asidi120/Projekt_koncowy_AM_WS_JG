@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projekt_koncowy_AM_WS_JG.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,47 @@ namespace Projekt_koncowy_AM_WS_JG.View
     /// </summary>
     public partial class DodajEdytujeWydawnictwoPage : UserControl
     {
-        public DodajEdytujeWydawnictwoPage()
+
+        public event EventHandler WrocNacisniete;
+        public event EventHandler<Wydawnictwo> DodajWydawnictwo;
+        private Wydawnictwo _wydawnictwo;
+        public string NazwaWydawnictwa
+        {
+            get => NazwaBox.Text;
+            set => NazwaBox.Text = value;
+        }
+        public string KrajZalozeniaWydawnictwa
+        {
+            get => KrajBox.Text;
+            set => KrajBox.Text = value;
+        }
+        public string RokZalozeniaWydawnictwa
+        {
+            get => RokBox.Text;
+            set => RokBox.Text = value;
+        }
+        public DodajEdytujeWydawnictwoPage(Wydawnictwo wydawnictwo)
         {
             InitializeComponent();
+            NazwaWydawnictwa= wydawnictwo.Nazwa;
+            KrajZalozeniaWydawnictwa = wydawnictwo.Kraj_zalozenia;
+            RokZalozeniaWydawnictwa = wydawnictwo.Rok_zalozenia;
+        }
+
+        private void DodajWydawnictwo_Click(object sender, RoutedEventArgs e)
+        {
+            _wydawnictwo = new Wydawnictwo
+            {
+                Nazwa = NazwaWydawnictwa,
+                Kraj_zalozenia = KrajZalozeniaWydawnictwa,
+                Rok_zalozenia = RokZalozeniaWydawnictwa
+            };
+            DodajWydawnictwo?.Invoke(this, _wydawnictwo);
+        }
+
+        private void Wroc_Click(object sender, RoutedEventArgs e)
+        {
+            WrocNacisniete?.Invoke(this, EventArgs.Empty);
         }
     }
 }

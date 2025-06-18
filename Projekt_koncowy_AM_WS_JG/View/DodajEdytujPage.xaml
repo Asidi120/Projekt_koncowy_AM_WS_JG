@@ -84,53 +84,5 @@
                 <TextBox x:Name="OpisBox" TextWrapping="Wrap" AcceptsReturn="True" Height="150" VerticalScrollBarVisibility="Auto" />
             </StackPanel>
         </ScrollViewer>
-
-        <!-- Zakładki: Dodaj autora / Dodaj wydawnictwo -->
-        <TabControl Grid.Row="2" Margin="10,20,10,10">
-            <!-- Zakładka: Dodaj autora -->
-            <TabItem Header="Dodaj autora">
-                <StackPanel Margin="10">
-                    <TextBlock Text="Imię" />
-                    <TextBox x:Name="ImieAutoraBox" Margin="0,5,0,10"/>
-
-                    <TextBlock Text="Nazwisko" />
-                    <TextBox x:Name="NazwiskoAutoraBox" Margin="0,5,0,10"/>
-
-                    <TextBlock Text="Rok urodzenia" />
-                    <TextBox x:Name="RokUrodzeniaBox" Margin="0,5,0,10"/>
-
-                    <TextBlock Text="Kraj pochodzenia" />
-                    <TextBox x:Name="KrajAutoraBox" Margin="0,5,0,10"/>
-
-                    <Button Content="Dodaj autora"
-                            Background="#4CAF50"
-                            Foreground="White"
-                            FontWeight="Bold"
-                            Width="120"
-                            Click="DodajAutora_Click"/>
-                </StackPanel>
-            </TabItem>
-
-            <!-- Zakładka: Dodaj wydawnictwo -->
-            <TabItem Header="Dodaj wydawnictwo">
-                <StackPanel Margin="10">
-                    <TextBlock Text="Nazwa" />
-                    <TextBox x:Name="NazwaWydawnictwaBox" Margin="0,5,0,10"/>
-
-                    <TextBlock Text="Kraj założenia" />
-                    <TextBox x:Name="KrajWydawnictwaBox" Margin="0,5,0,10"/>
-
-                    <TextBlock Text="Rok założenia" />
-                    <TextBox x:Name="RokZalozeniaBox" Margin="0,5,0,10"/>
-
-                    <Button Content="Dodaj wydawnictwo"
-                            Background="#4CAF50"
-                            Foreground="White"
-                            FontWeight="Bold"
-                            Width="150"
-                            Click="DodajWydawnictwo_Click"/>
-                </StackPanel>
-            </TabItem>
-        </TabControl>
     </Grid>
 </UserControl>

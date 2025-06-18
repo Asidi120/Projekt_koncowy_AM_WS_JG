@@ -24,9 +24,22 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public event EventHandler Wyloguj;
         public event EventHandler WrocNacisniete;
         public event EventHandler Dodaj;
+        public event EventHandler DodajOkladke;
+        private Ksiazka _ksiazka;
+        public event EventHandler<Ksiazka> Edytuj;
         public DodajEdytujPage(Ksiazka ksiazka)
         {
             InitializeComponent();
+            TytulDoDodaj = ksiazka.Tytul;
+            AutorDoDodaj = ksiazka.Autor;
+            WydawnictwoDoDodaj = ksiazka.Wydawnictwo;
+            GatunekDoDodaj = ksiazka.Gatunek;
+            RokWydaniaDoDodaj = ksiazka.RokWydania;
+            LiczbaStronDoDodaj = ksiazka.LiczbaStron;
+            JezykDoDodaj = ksiazka.Jezyk;
+            OpisDoDodaj = ksiazka.Opis;
+            IDAutoraDoDodaj = ksiazka.IDAutora;
+            IDWydawnictwaDoDodaj = ksiazka.IDWydawnictwa;
         }
         public string TytulDoDodaj
         {
@@ -82,29 +95,31 @@ namespace Projekt_koncowy_AM_WS_JG.View
 
         private void Dodaj_Click(object sender, RoutedEventArgs e)
         {
-
+            _ksiazka = new Ksiazka()
+            {
+                Tytul = TytulDoDodaj,
+                Autor = AutorDoDodaj,
+                Wydawnictwo = WydawnictwoDoDodaj,
+                Gatunek = GatunekDoDodaj,
+                RokWydania = RokWydaniaDoDodaj,
+                LiczbaStron = LiczbaStronDoDodaj,
+                Jezyk = JezykDoDodaj,
+                Opis = OpisDoDodaj,
+                IDAutora = IDAutoraDoDodaj,
+                IDWydawnictwa = IDWydawnictwaDoDodaj
+            };
+            Edytuj?.Invoke(this, _ksiazka);
         }
 
         private void Wyloguj_Click(object sender, RoutedEventArgs e)
         {
-
+            Wyloguj?.Invoke(this, EventArgs.Empty);
         }
 
         private void DodajOkladke_Click(object sender, RoutedEventArgs e)
         {
-
+            DodajOkladke?.Invoke(this, EventArgs.Empty);
         }
-
-        private void DodajAutora_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DodajWydawnictwo_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Wroc_Click(object sender, RoutedEventArgs e)
         {
             WrocNacisniete?.Invoke(this, EventArgs.Empty);

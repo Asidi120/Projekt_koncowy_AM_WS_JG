@@ -26,6 +26,14 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public event EventHandler<Ksiazka> Edytuj;
         public event EventHandler<Ksiazka> Dodaj;
         public event EventHandler<string> Usun;
+        public event EventHandler<Wydawnictwo> DodajWydawnictwo;
+        public event EventHandler<Wydawnictwo> EdytujWydawnictwo;
+        public event EventHandler<string> UsunWydawnictwo;
+        public event EventHandler<Autor> DodajAutora;
+        public event EventHandler<Autor> EdytujAutora;
+        public event EventHandler<string> UsunAutora;
+
+        private InformacjeZBazy _baza;
         public HomePageRoot()
         {
             InitializeComponent();
@@ -39,6 +47,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
             StatusGrid.ItemsSource = baza.Statusy;
             OpinieGrid.ItemsSource = baza.Opinie;
             UzytkownicyGrid.ItemsSource = baza.Uzytkownicy;
+            _baza = baza;
         }
         private void Wyloguj_Click(object sender, RoutedEventArgs e)
         {
@@ -69,6 +78,64 @@ namespace Projekt_koncowy_AM_WS_JG.View
             else
             {
                 MessageBox.Show("Wybierz książkę do usunięcia.");
+            }
+        }
+
+        private void Dodaj_Wydawnictwo_Click(object sender, RoutedEventArgs e)
+        {
+            DodajWydawnictwo?.Invoke(this, null);
+        }
+
+        private void Edytuj_Wydawnictwo_Click(object sender, RoutedEventArgs e)
+        {
+            if (WydawnictwaGrid.SelectedItem is Wydawnictwo wydawnictwo)
+            {
+                EdytujWydawnictwo?.Invoke(this, wydawnictwo);
+            }
+            else
+            {
+                MessageBox.Show("Wybierz wydawnictwo do edycji.");
+            }
+        }
+
+        private void Usun_Wydawnictwo_Click(object sender, RoutedEventArgs e)
+        {
+            if (WydawnictwaGrid.SelectedItem is Wydawnictwo wydawnictwo)
+            {
+                UsunWydawnictwo?.Invoke(this, wydawnictwo.IDWydawnictwa);
+            }
+            else
+            {
+                MessageBox.Show("Wybierz wydawnictwo do usunięcia.");
+            }
+        }
+
+        private void Dodaj_Autora_Click(object sender, RoutedEventArgs e)
+        {
+            DodajAutora?.Invoke(this, null);
+        }
+
+        private void Edytuj_Autora_Click(object sender, RoutedEventArgs e)
+        {
+            if (AutorzyGrid.SelectedItem is Autor autor)
+            {
+                EdytujAutora?.Invoke(this, autor);
+            }
+            else
+            {
+                MessageBox.Show("Wybierz autora do edycji.");
+            }
+        }
+
+        private void Usun_Autora_Click(object sender, RoutedEventArgs e)
+        {
+            if (AutorzyGrid.SelectedItem is Autor autor)
+            {
+                UsunAutora?.Invoke(this, autor.IDAutora);
+            }
+            else
+            {
+                MessageBox.Show("Wybierz autora do usunięcia.");
             }
         }
     }

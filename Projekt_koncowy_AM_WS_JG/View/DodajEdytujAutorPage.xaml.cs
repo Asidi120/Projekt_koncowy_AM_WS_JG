@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Projekt_koncowy_AM_WS_JG.Model;
 
 namespace Projekt_koncowy_AM_WS_JG.View
 {
@@ -20,9 +21,54 @@ namespace Projekt_koncowy_AM_WS_JG.View
     /// </summary>
     public partial class DodajEdytujAutorPage : UserControl
     {
-        public DodajEdytujAutorPage()
+
+        public event EventHandler WrocNacisniete;
+        public event EventHandler<Autor> DodajAutora;
+        private Autor _autor;
+        public string ImieDoDodaj
+        {
+            get => ImieBox.Text;
+            set => ImieBox.Text = value;
+        }
+        public string NazwiskoDoDodaj
+        {
+            get => NazwiskoBox.Text;
+            set => NazwiskoBox.Text = value;
+        }
+        public string DataUrodzeniaDoDodaj
+        {
+            get => RokBox.Text;
+            set => RokBox.Text = value;
+        }
+        public string NarodowoscDoDodaj
+        {
+            get => KrajBox.Text;
+            set => KrajBox.Text = value;
+        }
+        public DodajEdytujAutorPage(Autor autor)
         {
             InitializeComponent();
+            ImieBox.Text = autor.Imie;
+            NazwiskoBox.Text = autor.Nazwisko;
+            RokBox.Text = autor.DataUrodzenia;
+            KrajBox.Text = autor.Narodowosc;
+        }
+
+        private void DodajAutora_Click(object sender, RoutedEventArgs e)
+        {
+            _autor = new Autor
+            {
+                Imie = ImieDoDodaj,
+                Nazwisko = NazwiskoDoDodaj,
+                DataUrodzenia = DataUrodzeniaDoDodaj,
+                Narodowosc = NarodowoscDoDodaj
+            };
+            DodajAutora?.Invoke(this, _autor);
+        }
+
+        private void Wroc_Click(object sender, RoutedEventArgs e)
+        {
+            WrocNacisniete?.Invoke(this, EventArgs.Empty);
         }
     }
 }

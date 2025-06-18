@@ -24,16 +24,16 @@
         <!-- Formularz autora -->
         <StackPanel Margin="20" Grid.Row="1">
             <TextBlock Text="Imię" />
-            <TextBox x:Name="ImieAutoraBox" Margin="0,5,0,10"/>
+            <TextBox x:Name="ImieBox" Margin="0,5,0,10"/>
 
             <TextBlock Text="Nazwisko" />
-            <TextBox x:Name="NazwiskoAutoraBox" Margin="0,5,0,10"/>
+            <TextBox x:Name="NazwiskoBox" Margin="0,5,0,10"/>
 
             <TextBlock Text="Rok urodzenia" />
-            <TextBox x:Name="RokUrodzeniaBox" Margin="0,5,0,10"/>
+            <TextBox x:Name="RokBox" Margin="0,5,0,10"/>
 
             <TextBlock Text="Kraj pochodzenia" />
-            <TextBox x:Name="KrajAutoraBox" Margin="0,5,0,10"/>
+            <TextBox x:Name="KrajBox" Margin="0,5,0,10"/>
 
             <Button Content="Dodaj autora"
                     Background="#4CAF50"

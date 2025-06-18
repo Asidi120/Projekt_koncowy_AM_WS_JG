@@ -19,20 +19,22 @@
                         <Button Content="Wyloguj" Click="Wyloguj_Click" Margin="5" Width="80"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
-                        <Button Content="Dodaj" Click="Dodaj_Click" Margin="5" Width="80"/>
-                        <Button Content="Edytuj" Click="Edytuj_Click" Margin="5" Width="80"/>
-                        <Button Content="Usuń" Click="Usun_Click" Margin="5" Width="80"/>
+                        <Button Content="Dodaj" Click="Dodaj_Click" Margin="5" Width="80" />
+                        <Button Content="Edytuj" Click="Edytuj_Click" Margin="5" Width="80" />
+                        <Button Content="Usuń" Click="Usun_Click" Margin="5" Width="80" />
                     </StackPanel>
                 </Grid>
 
                 <DataGrid x:Name="KsiazkiGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding IDKsiazki}" Width="40"/>
+                        <DataGridTextColumn Header="ID" Binding="{Binding IDKsiazki}" Width="35"/>
                         <DataGridTextColumn Header="Tytuł" Binding="{Binding Tytul}" Width="*"/>
-                        <DataGridTextColumn Header="Gatunek" Binding="{Binding Gatunek}" Width="150"/>
-                        <DataGridTextColumn Header="Język" Binding="{Binding Jezyk}" Width="100"/>
+                        <DataGridTextColumn Header="Gatunek" Binding="{Binding Gatunek}" Width="100"/>
+                        <DataGridTextColumn Header="Język" Binding="{Binding Jezyk}" Width="80"/>
                         <DataGridTextColumn Header="Rok" Binding="{Binding RokWydania}" Width="60"/>
                         <DataGridTextColumn Header="Strony" Binding="{Binding LiczbaStron}" Width="60"/>
+                        <DataGridTextColumn Header="Autor" Binding="{Binding Autor}" Width="*"/>
+                        <DataGridTextColumn Header="Wydawnictwo" Binding="{Binding Wydawnictwo}" Width="110"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
@@ -42,9 +44,9 @@
         <TabItem Header="Autorzy">
             <DockPanel>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
-                    <Button Content="Dodaj" Margin="5" Width="80"/>
-                    <Button Content="Edytuj" Margin="5" Width="80"/>
-                    <Button Content="Usuń" Margin="5" Width="80"/>
+                    <Button Content="Dodaj" Margin="5" Width="80" Click="Dodaj_Autora_Click"/>
+                    <Button Content="Edytuj" Margin="5" Width="80" Click="Edytuj_Autora_Click"/>
+                    <Button Content="Usuń" Margin="5" Width="80" Click="Usun_Autora_Click"/>
                 </StackPanel>
 
                 <DataGrid x:Name="AutorzyGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
@@ -63,9 +65,9 @@
         <TabItem Header="Wydawnictwa">
             <DockPanel>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
-                    <Button Content="Dodaj" Margin="5" Width="80"/>
-                    <Button Content="Edytuj" Margin="5" Width="80"/>
-                    <Button Content="Usuń" Margin="5" Width="80"/>
+                    <Button Content="Dodaj" Margin="5" Width="80" Click="Dodaj_Wydawnictwo_Click"/>
+                    <Button Content="Edytuj" Margin="5" Width="80" Click="Edytuj_Wydawnictwo_Click"/>
+                    <Button Content="Usuń" Margin="5" Width="80" Click="Usun_Wydawnictwo_Click"/>
                 </StackPanel>
 
                 <DataGrid x:Name="WydawnictwaGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">

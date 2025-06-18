@@ -8,6 +8,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
 {
     public class Wydawnictwo
     {
+        public Wydawnictwo() { }
         public string IDWydawnictwa { get; set; }
         public string Nazwa { get; set; }
         public string Kraj_zalozenia { get; set; }
