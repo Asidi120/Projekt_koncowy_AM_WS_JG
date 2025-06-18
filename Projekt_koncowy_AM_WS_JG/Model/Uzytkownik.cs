@@ -26,6 +26,15 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             KsiazkiWTrakcie = new List<Ksiazka>();
             KsiazkiPorzucone = new List<Ksiazka>();
         }
+        public Uzytkownik(string nick, string email, string plec, string data_zalozenia, string id_uzytkowika)
+        {
+            Nick = nick;
+            Email = email;
+            Plec = plec;
+            Data_zalozenia = data_zalozenia;
+            this.id_uzytkowika = id_uzytkowika;
+        }
+
         public string IDUzytkownika
         {
             get { return id_uzytkowika; }

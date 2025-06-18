@@ -20,5 +20,13 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             Rok_zalozenia= rok_zalozenia;
             Ksiazki = new List<Ksiazka>();
         }
+
+        public Wydawnictwo(string id_wydaw,string nazwa, string kraj_zalozenia, string rok_zalozenia)
+        {
+            IDWydawnictwa = id_wydaw;
+            Nazwa = nazwa;
+            Kraj_zalozenia = kraj_zalozenia;
+            Rok_zalozenia = rok_zalozenia;
+        }
     }
 }

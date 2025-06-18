@@ -47,7 +47,8 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                     homePageRoot = new HomePageRoot();
                     homePageRoot.Wyloguj += GdyWyloguj;
                     _view.LoadView(homePageRoot);
-                    ZaladujKsiazki();
+                    //ZaladujKsiazki();
+                    _model.ZaladujBaze();
                     homePageRoot.Edytuj += GdyEdytujNacisniete;
                     homePageRoot.Dodaj += GdyDodajNacisniete;
                     homePageRoot.Usun += GdyUsunNacisniete;

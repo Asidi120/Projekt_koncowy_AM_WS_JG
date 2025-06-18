@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projekt_koncowy_AM_WS_JG.Model
 {
-    internal class InformacjeZBazy
+    public class InformacjeZBazy
     {
         public List<Ksiazka> Ksiazki { get; set; }
         public List<Autor> Autorzy { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projekt_koncowy_AM_WS_JG.Model
 {
-    internal class Status
+    public class Status
     {
         public string IDUzytkownika{ get; set; }
         public string IDKsiazki { get; set; }
