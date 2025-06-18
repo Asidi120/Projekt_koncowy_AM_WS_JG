@@ -124,6 +124,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                         {
                             string nick = $"{reader["nick"]}";
                             string data = $"{reader["data_zalozenia"]}";
+                            string[] data_zalozenia = data.Split();
                             string emaill = $"{reader["email"]}";
                             string plec = $"{reader["plec"]}";
                             string id_uzytkownk = $"{reader["id_uzytkownik"]}";
@@ -132,7 +133,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                                 Nick = nick,
                                 Email = emaill,
                                 Plec = plec,
-                                Data_zalozenia = data,
+                                Data_zalozenia = data_zalozenia[0],
                                 IDUzytkownika = id_uzytkownk
                             };
                         }
@@ -230,7 +231,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
             {
                 conn1.Open();
 
-                using (var cmd = new MySqlCommand("select k.id_ksiazka, a.id_autor, w.id_wydaw, tytul, gatunek, opis, jezyk_oryginalu, rok_wydania, liczba_stron, concat(imie, ' ', nazwisko) jakiautor, nazwa, avg(ocena) srednia_ocena, count(ocena) liczba_ocen from ksiazka k left join autor a on k.id_autor = a.id_autor left join wydawnictwo w on k.id_wydaw = w.id_wydaw left join opinia o on o.id_ksiazka = k.id_ksiazka group by k.id_ksiazka;", conn1))
+                using (var cmd = new MySqlCommand("select k.id_ksiazka, a.id_autor, w.id_wydaw, tytul, gatunek, opis, jezyk_oryginalu, rok_wydania, liczba_stron, concat(imie, ' ', nazwisko) jakiautor, nazwa, round(avg(ocena),2) srednia_ocena, count(ocena) liczba_ocen from ksiazka k left join autor a on k.id_autor = a.id_autor left join wydawnictwo w on k.id_wydaw = w.id_wydaw left join opinia o on o.id_ksiazka = k.id_ksiazka group by k.id_ksiazka;", conn1))
                 using (var reader = cmd.ExecuteReader())
                 {
 
@@ -272,8 +273,9 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                                         string ocena = $"{reader2["ocena"]}";
                                         string recenzja = $"{reader2["recenzja"]}";
                                         string data_wystawienia = $"{reader2["data_wystawienia"]}";
+                                        string[] data = data_wystawienia.Split(" ");
                                         string użytkownik = $"{reader2["nick"]}";
-                                        Opinia opinia = new Opinia(ocena, recenzja, użytkownik, data_wystawienia);
+                                        Opinia opinia = new Opinia(ocena, recenzja, użytkownik, data[0]);
                                         opinie.Lista_Opinii.Add(opinia);
 
                                     }

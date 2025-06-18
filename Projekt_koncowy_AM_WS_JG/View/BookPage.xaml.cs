@@ -103,7 +103,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
             RokWydaniaText.Text = $"Rok wydania: {ksiazka.RokWydania}";
             LiczbaStronText.Text = $"Liczba stron: {ksiazka.LiczbaStron}";
             JezykText.Text = $"Język: {ksiazka.Jezyk}";
-            SredniaOcenaText.Text = $"Średnia ocena: {ksiazka.JakieOpinie?.Średnia_Ocena ?? "Brak ocen"} ({ksiazka.JakieOpinie?.Liczba_Ocen ?? "0"} ocen)";
+            SredniaOcenaText.Text = $"Średnia ocena: {ksiazka.JakieOpinie?.Średnia_Ocena ?? "Brak ocen"} ({ksiazka.JakieOpinie?.Liczba_Ocen ?? "0"})";
             id_ksiazki_wybranej = ksiazka.IDKsiazki;
             wybraneWydawnictwo= ksiazka.IDWydawnictwa;
             wybranyAutorIndex= ksiazka.IDAutora;
