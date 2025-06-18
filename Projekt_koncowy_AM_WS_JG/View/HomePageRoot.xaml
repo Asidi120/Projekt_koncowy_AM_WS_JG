@@ -27,12 +27,12 @@
 
                 <DataGrid x:Name="KsiazkiGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding id_ksiazka}" Width="40"/>
-                        <DataGridTextColumn Header="Tytuł" Binding="{Binding tytul}" Width="*"/>
-                        <DataGridTextColumn Header="Gatunek" Binding="{Binding gatunek}" Width="150"/>
-                        <DataGridTextColumn Header="Język" Binding="{Binding jezyk_oryginalu}" Width="100"/>
-                        <DataGridTextColumn Header="Rok" Binding="{Binding rok_wydania}" Width="60"/>
-                        <DataGridTextColumn Header="Strony" Binding="{Binding liczba_stron}" Width="60"/>
+                        <DataGridTextColumn Header="ID" Binding="{Binding IDKsiazki}" Width="40"/>
+                        <DataGridTextColumn Header="Tytuł" Binding="{Binding Tytul}" Width="*"/>
+                        <DataGridTextColumn Header="Gatunek" Binding="{Binding Gatunek}" Width="150"/>
+                        <DataGridTextColumn Header="Język" Binding="{Binding Jezyk}" Width="100"/>
+                        <DataGridTextColumn Header="Rok" Binding="{Binding RokWydania}" Width="60"/>
+                        <DataGridTextColumn Header="Strony" Binding="{Binding LiczbaStron}" Width="60"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
@@ -49,11 +49,11 @@
 
                 <DataGrid x:Name="AutorzyGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding id_autor}" Width="40"/>
-                        <DataGridTextColumn Header="Imię" Binding="{Binding imie}" Width="100"/>
-                        <DataGridTextColumn Header="Nazwisko" Binding="{Binding nazwisko}" Width="120"/>
-                        <DataGridTextColumn Header="Rok urodzenia" Binding="{Binding rok_urodzenia}" Width="100"/>
-                        <DataGridTextColumn Header="Kraj" Binding="{Binding kraj_pochodzenia}" Width="120"/>
+                        <DataGridTextColumn Header="ID" Binding="{Binding IDAutora}" Width="40"/>
+                        <DataGridTextColumn Header="Imię" Binding="{Binding Imie}" Width="100"/>
+                        <DataGridTextColumn Header="Nazwisko" Binding="{Binding Nazwisko}" Width="120"/>
+                        <DataGridTextColumn Header="Rok urodzenia" Binding="{Binding DataUrodzenia}" Width="100"/>
+                        <DataGridTextColumn Header="Kraj" Binding="{Binding Narodowosc}" Width="120"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
@@ -70,10 +70,10 @@
 
                 <DataGrid x:Name="WydawnictwaGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding id_wydaw}" Width="40"/>
-                        <DataGridTextColumn Header="Nazwa" Binding="{Binding nazwa}" Width="200"/>
-                        <DataGridTextColumn Header="Kraj" Binding="{Binding kraj_zalozenia}" Width="120"/>
-                        <DataGridTextColumn Header="Rok" Binding="{Binding rok_zalozenia}" Width="60"/>
+                        <DataGridTextColumn Header="ID" Binding="{Binding IDWydawnictwa}" Width="40"/>
+                        <DataGridTextColumn Header="Nazwa" Binding="{Binding Nazwa}" Width="200"/>
+                        <DataGridTextColumn Header="Kraj" Binding="{Binding Kraj_zalozenia}" Width="120"/>
+                        <DataGridTextColumn Header="Rok" Binding="{Binding Rok_zalozenia}" Width="60"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
