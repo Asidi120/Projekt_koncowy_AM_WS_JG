@@ -916,8 +916,59 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                 return true;
             }
         }
+        public void UstawRootDlaUzytkownika(int idUzytkownika)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                string updateQuery = @"UPDATE uzytkownicy SET root = NOT root WHERE id_uzytkownik = @id_uzytkownik";
+                using (var cmd = new MySqlCommand(updateQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_uzytkownik", idUzytkownika);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void UsunUzytkownikaZBazy(int idUzytkownika)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
 
-
+                string deleteOpinieQuery = @"DELETE FROM opinia WHERE id_uzytkownik = @id_uzytkownik";
+                using (var cmdOpinie = new MySqlCommand(deleteOpinieQuery, conn))
+                {
+                    cmdOpinie.Parameters.AddWithValue("@id_uzytkownik", idUzytkownika);
+                    cmdOpinie.ExecuteNonQuery();
+                }
+                string deleteStatusQuery = @"DELETE FROM status WHERE id_uzytkownik = @id_uzytkownik";
+                using (var cmdStatus = new MySqlCommand(deleteStatusQuery, conn))
+                {
+                    cmdStatus.Parameters.AddWithValue("@id_uzytkownik", idUzytkownika);
+                    cmdStatus.ExecuteNonQuery();
+                }
+                string deleteUserQuery = @"DELETE FROM uzytkownicy WHERE id_uzytkownik = @id_uzytkownik";
+                using (var cmdUser = new MySqlCommand(deleteUserQuery, conn))
+                {
+                    cmdUser.Parameters.AddWithValue("@id_uzytkownik", idUzytkownika);
+                    cmdUser.ExecuteNonQuery();
+                }
+            }
+        }
+        public void UsunStatusZBazy(int idUzytkownika, int idKsiazki)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                string deleteQuery = @"DELETE FROM status WHERE id_uzytkownik = @id_uzytkownik AND id_ksiazka = @id_ksiazka";
+                using (var cmd = new MySqlCommand(deleteQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_uzytkownik", idUzytkownika);
+                    cmd.Parameters.AddWithValue("@id_ksiazka", idKsiazki);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
     }
 }

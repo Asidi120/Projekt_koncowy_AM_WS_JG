@@ -34,8 +34,13 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public event EventHandler<string> UsunAutora;
         public event EventHandler<string> UsunUzytkownika;
         public event EventHandler<string> ZmienRoot;
+        public delegate void UsunStatusHandler(int idUzytkownika, int idKsiazki);
+        public event UsunStatusHandler UsunStatus;
+
+
 
         private InformacjeZBazy _baza;
+
         public HomePageRoot()
         {
             InitializeComponent();
@@ -168,26 +173,50 @@ namespace Projekt_koncowy_AM_WS_JG.View
 
         private void Zmien_root_Click(object sender, RoutedEventArgs e)
         {
-            if (AutorzyGrid.SelectedItem is Uzytkownik uzytkownik)
+            if (UzytkownicyGrid.SelectedItem is Uzytkownik uzytkownik)
             {
                 ZmienRoot?.Invoke(this, uzytkownik.IDUzytkownika);
             }
             else
             {
-                MessageBox.Show("Wybierz uzytkownika do zmiany pola root.");
+                MessageBox.Show("Wybierz użytkownika do zmiany pola root.");
             }
         }
 
+
         private void Usun_uzytkownika_Click(object sender, RoutedEventArgs e)
         {
-            if (AutorzyGrid.SelectedItem is Uzytkownik uzytkownik)
+            if (UzytkownicyGrid.SelectedItem is Uzytkownik uzytkownik)
             {
-                UsunUzytkownika?.Invoke(this, uzytkownik.IDUzytkownika);
+                UsunUzytkownika?.Invoke(this, uzytkownik.IDUzytkownika.ToString());
             }
             else
             {
-                MessageBox.Show("Wybierz uzytkownika do usunięcia.");
+                MessageBox.Show("Wybierz użytkownika do usunięcia.");
             }
         }
+
+        private void Usun_Status_Click(object sender, RoutedEventArgs e)
+        {
+            if (StatusGrid.SelectedItem is Status status)
+            {
+                if (int.TryParse(status.IDUzytkownika, out int idUzytkownika) &&
+                    int.TryParse(status.IDKsiazki, out int idKsiazki))
+                {
+                    UsunStatus?.Invoke(idUzytkownika, idKsiazki);
+                }
+                else
+                {
+                    MessageBox.Show("Niepoprawne ID użytkownika lub książki.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Wybierz status do usunięcia.");
+            }
+        }
+
+
+
     }
 }

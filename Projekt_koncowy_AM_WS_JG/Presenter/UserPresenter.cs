@@ -47,19 +47,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 if (_model.CzyJestRoot(menu.EmailLogowanie))
                 {
                     _model.ZaladujBaze();
-                    homePageRoot = new HomePageRoot();
-                    homePageRoot.Wyloguj += GdyWyloguj;
-                    _view.LoadView(homePageRoot);
-                    homePageRoot.Edytuj += GdyEdytujNacisniete;
-                    homePageRoot.Dodaj += GdyDodajNacisniete;
-                    homePageRoot.Usun += GdyUsunNacisniete;
-                    homePageRoot.UstawKsiazkiwroot(_model.baza);
-                    homePageRoot.DodajWydawnictwo += GdyDodajWydawnictwoNacisniete;
-                    homePageRoot.EdytujWydawnictwo += GdyEdytujWydawnictwoNacisniete;
-                    homePageRoot.UsunWydawnictwo += GdyUsunWydawnictwoNacisniete;
-                    homePageRoot.DodajAutora += GdyDodajAutoraNacisniete;
-                    homePageRoot.EdytujAutora += GdyEdytujAutoraNacisniete;
-                    homePageRoot.UsunAutora += GdyUsunAutoraNacisniete;
+                    ZaladujWidokHome();
                 }
                 else
                 {
@@ -109,6 +97,10 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             homePageRoot.DodajAutora += GdyDodajAutoraNacisniete;
             homePageRoot.EdytujAutora += GdyEdytujAutoraNacisniete;
             homePageRoot.UsunAutora += GdyUsunAutoraNacisniete;
+            homePageRoot.ZmienRoot += GdyZmienRootNacisniete;
+            homePageRoot.UsunUzytkownika += GdyUsunUzytkownikaNacisniete;
+            homePageRoot.UsunStatus += GdyUsunStatusNacisniete;
+
 
             homePageRoot.UstawKsiazkiwroot(_model.baza);
             switch (zakladka)
@@ -134,6 +126,53 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             }
 
             _view.LoadView(homePageRoot);
+        }
+
+        private void GdyUsunStatusNacisniete(object sender, (int idUzytkownika, int idKsiazki) args)
+        {
+            int idUzytkownika = args.idUzytkownika;
+            int idKsiazki = args.idKsiazki;
+
+            _model.UsunStatusZBazy(idUzytkownika, idKsiazki);
+            _model.ZaladujBaze();
+            ZaladujWidokHome(ZakladkaStartowa.Status);
+        }
+
+
+
+        public void GdyZmienRootNacisniete(object sender, string idUzytkownika)
+        {
+            if (homePageRoot != null)
+            {
+                if (int.TryParse(idUzytkownika, out int id))
+                {
+                    _model.UstawRootDlaUzytkownika(id);
+                    _model.ZaladujBaze();
+                    ZaladujWidokHome(ZakladkaStartowa.Uzytkownicy);
+                }
+                else
+                {
+                    MessageBox.Show("Niepoprawny format ID użytkownika.");
+                }
+            }
+        }
+
+        public void GdyUsunUzytkownikaNacisniete(object sender, string idUzytkownika)
+        {
+            if (homePageRoot != null)
+            {
+                if (int.TryParse(idUzytkownika, out int id))
+                {
+                    _model.UsunUzytkownikaZBazy(id);
+                    _model.ZaladujBaze();
+                    ZaladujWidokHome(ZakladkaStartowa.Uzytkownicy);
+                }
+                else
+                {
+                    MessageBox.Show("Niepoprawny format ID użytkownika.");
+
+                }
+            }
         }
 
         public void GdyDodajWydawnictwoNacisniete(object sender, Wydawnictwo wydawnictwo)
@@ -289,13 +328,14 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 dodajEdytujPage.Edytuj += GdyDodajKsiazkeNacisniete;
                 _view.LoadView(dodajEdytujPage);
                 dodajEdytujPage.WrocNacisniete += GdyWrocNacisniete3;
+
             }
         }
         private void GdyDodajKsiazkeNacisniete(object sender, Ksiazka ksiazka)
         {
             _model.DodajKsiazkeDoBazy(ksiazka);
-            _model.ZaladujBaze(); 
-            GdyWrocNacisniete3(sender, EventArgs.Empty);
+            _model.ZaladujBaze();
+            ZaladujWidokHome(ZakladkaStartowa.Ksiazki);
         }
         public void GdyWrocNacisniete3(object? sender, EventArgs e)
         {
@@ -319,37 +359,31 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 homePageRoot.ZmienRoot += GdyZmienRootNacisniete;
             }
         }
-        public void GdyZmienRootNacisniete(object sender, string id_root)
-        {
-            if (homePageRoot != null)
-            {
-                //_model.ZmienRoot(id_root);
-                //trzeba jeszcze zmienic karte 
-                _model.ZaladujBaze();
-                homePageRoot = new HomePageRoot();
-                homePageRoot.Wyloguj += GdyWyloguj;
-                _view.LoadView(homePageRoot);
-                homePageRoot.Edytuj += GdyEdytujNacisniete;
-                homePageRoot.Dodaj += GdyDodajNacisniete;
-                homePageRoot.Usun += GdyUsunNacisniete;
-                homePageRoot.UstawKsiazkiwroot(_model.baza);
-                homePageRoot.DodajWydawnictwo += GdyDodajWydawnictwoNacisniete;
-                homePageRoot.EdytujWydawnictwo += GdyEdytujWydawnictwoNacisniete;
-                homePageRoot.UsunWydawnictwo += GdyUsunWydawnictwoNacisniete;
-                homePageRoot.DodajAutora += GdyDodajAutoraNacisniete;
-                homePageRoot.EdytujAutora += GdyEdytujAutoraNacisniete;
-                homePageRoot.UsunAutora += GdyUsunAutoraNacisniete;
-                homePageRoot.UsunUzytkownika += GdyUsunUzytkownikaNacisniete;
-                homePageRoot.ZmienRoot += GdyZmienRootNacisniete;
-            }
-        }
-        public void GdyUsunUzytkownikaNacisniete(object sender, String usun)
-        {
-            if (homePageRoot != null)
-            {
-                //tutaj bedzie usuwanie po id_uzytkownika
-            }
-        }
+        //public void GdyZmienRootNacisniete(object sender, string id_root)
+        //{
+        //    if (homePageRoot != null)
+        //    {
+        //        //_model.ZmienRoot(id_root);
+        //        //trzeba jeszcze zmienic karte 
+        //        _model.ZaladujBaze();
+        //        homePageRoot = new HomePageRoot();
+        //        homePageRoot.Wyloguj += GdyWyloguj;
+        //        _view.LoadView(homePageRoot);
+        //        homePageRoot.Edytuj += GdyEdytujNacisniete;
+        //        homePageRoot.Dodaj += GdyDodajNacisniete;
+        //        homePageRoot.Usun += GdyUsunNacisniete;
+        //        homePageRoot.UstawKsiazkiwroot(_model.baza);
+        //        homePageRoot.DodajWydawnictwo += GdyDodajWydawnictwoNacisniete;
+        //        homePageRoot.EdytujWydawnictwo += GdyEdytujWydawnictwoNacisniete;
+        //        homePageRoot.UsunWydawnictwo += GdyUsunWydawnictwoNacisniete;
+        //        homePageRoot.DodajAutora += GdyDodajAutoraNacisniete;
+        //        homePageRoot.EdytujAutora += GdyEdytujAutoraNacisniete;
+        //        homePageRoot.UsunAutora += GdyUsunAutoraNacisniete;
+        //        homePageRoot.UsunUzytkownika += GdyUsunUzytkownikaNacisniete;
+        //        homePageRoot.ZmienRoot += GdyZmienRootNacisniete;
+        //    }
+        //}
+        
         public void GdyZmianaPlci(object sender, string plec)
         {
             if (homePage != null)
