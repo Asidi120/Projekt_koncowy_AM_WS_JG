@@ -23,20 +23,43 @@ namespace Projekt_koncowy_AM_WS_JG.View
     {
         public event EventHandler Wroc;
         public event EventHandler WyslijOpinie;
+
+        public int OcenaWystawiona { get; private set; }
+        public string RecenzjaWystawiona => OpiniaTextBox.Text;
         public RatePage()
         {
             InitializeComponent();
         }
+        private void Star_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button starButton && int.TryParse(starButton.Tag.ToString(), out int rating))
+            {
+                OcenaWystawiona = rating;
+                UpdateStars(rating);
+                RatingText.Text = $"{rating}/10";
+            }
+        }
 
+        private void UpdateStars(int selectedRating)
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                if (FindName($"Star{i}") is Button star)
+                {
+                    star.Foreground = i <= selectedRating ? Brushes.Gold : Brushes.LightGray;
+                }
+            }
+        }
         private void WyslijOpinie_Click(object sender, RoutedEventArgs e)
         {
-            if (OcenaComboBox.SelectedIndex != -1)
+            if (OcenaWystawiona== 0)
             {
-                WyslijOpinie?.Invoke(this, EventArgs.Empty);
+                MessageBox.Show("Proszę wybrać ocenę od 1 do 10 gwiazdek", "Brak oceny");
+                return;
             }
             else
             {
-                MessageBox.Show("Uzupełnij ocenę", "Nieprawidłowa opinia");
+                WyslijOpinie?.Invoke(this, e);
             }
         }
    
@@ -44,18 +67,6 @@ namespace Projekt_koncowy_AM_WS_JG.View
         private void WrocNacisniete(object sender, RoutedEventArgs e)
         {
             Wroc?.Invoke(this, EventArgs.Empty);
-        }
-
-        public string RecenzjaWystawiona
-        {
-            get => OpiniaTextBox.Text;
-            set => OpiniaTextBox.Text = value;
-        }
-
-        public string OcenaWystawiona
-        {
-            get => OcenaComboBox.Text;
-            set => OcenaComboBox.Text = value;
         }
     }
 }

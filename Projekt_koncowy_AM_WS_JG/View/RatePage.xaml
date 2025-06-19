@@ -4,68 +4,89 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="700"
+             d:DesignHeight="450" d:DesignWidth="700"
              Background="White">
+    <UserControl.Resources>
+        <Style x:Key="StarButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+    </UserControl.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <!-- 0: Tytuł -->
                 <RowDefinition Height="Auto"/>
+                <!-- 1: Ocena -->
                 <RowDefinition Height="Auto"/>
+                <!-- 2: Opinia -->
+                <RowDefinition Height="Auto"/>
+                <!-- 3: Przycisk Wróć -->
+                <RowDefinition Height="Auto"/>
+                <!-- 4: Przycisk Wyślij -->
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
+                <!-- 5: pozostała przestrzeń -->
             </Grid.RowDefinitions>
 
             <!-- Tytuł strony -->
             <TextBlock Text="Wystaw opinię" 
-                       FontSize="24" 
-                       FontWeight="Bold"
-                       Margin="0 0 0 20"/>
+                       FontSize="36" 
+                       FontFamily="Segoe UI Variable Text Semibold"
+                       Margin="0 0 0 20"
+                       Foreground="#FF1A2C40"
+                       Grid.Row="0"/>
 
             <!-- Ocena -->
             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 20">
-                <TextBlock Text="Ocena (1-10):" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <ComboBox x:Name="OcenaComboBox" Width="60">
-                    <ComboBoxItem Content="1"/>
-                    <ComboBoxItem Content="1.5"/>
-                    <ComboBoxItem Content="2"/>
-                    <ComboBoxItem Content="2.5"/>
-                    <ComboBoxItem Content="3"/>
-                    <ComboBoxItem Content="3.5"/>
-                    <ComboBoxItem Content="4"/>
-                    <ComboBoxItem Content="4.5"/>
-                    <ComboBoxItem Content="5"/>
-                    <ComboBoxItem Content="5.5"/>
-                    <ComboBoxItem Content="6"/>
-                    <ComboBoxItem Content="6.5"/>
-                    <ComboBoxItem Content="7"/>
-                    <ComboBoxItem Content="7.5"/>
-                    <ComboBoxItem Content="8"/>
-                    <ComboBoxItem Content="8.5"/>
-                    <ComboBoxItem Content="9"/>
-                    <ComboBoxItem Content="9.5"/>
-                    <ComboBoxItem Content="10"/>
-                </ComboBox>
+                <TextBlock Text="Ocena:" VerticalAlignment="Center" Margin="0 0 10 0" FontSize="22" Foreground="#FF1A2C40" FontFamily="Segoe UI Variable Text Semibold"/>
+                <StackPanel x:Name="StarPanel" Orientation="Horizontal">
+                    <!-- Gwiazdki 1-10 -->
+                    <Button x:Name="Star1" Content="★" FontSize="28" Foreground="LightGray" Tag="1" Click="Star_Click" Style="{StaticResource StarButtonStyle}"/>
+                    <Button x:Name="Star2" Content="★" FontSize="28" Foreground="LightGray" Tag="2" Click="Star_Click" Style="{StaticResource StarButtonStyle}"/>
+                    <Button x:Name="Star3" Content="★" FontSize="28" Foreground="LightGray" Tag="3" Click="Star_Click" Style="{StaticResource StarButtonStyle}"/>
+                    <Button x:Name="Star4" Content="★" FontSize="28" Foreground="LightGray" Tag="4" Click="Star_Click" Style="{StaticResource StarButtonStyle}"/>
+                    <Button x:Name="Star5" Content="★" FontSize="28" Foreground="LightGray" Tag="5" Click="Star_Click" Style="{StaticResource StarButtonStyle}"/>
+                    <Button x:Name="Star6" Content="★" FontSize="28" Foreground="LightGray" Tag="6" Click="Star_Click" Style="{StaticResource StarButtonStyle}"/>
+                    <Button x:Name="Star7" Content="★" FontSize="28" Foreground="LightGray" Tag="7" Click="Star_Click" Style="{StaticResource StarButtonStyle}"/>
+                    <Button x:Name="Star8" Content="★" FontSize="28" Foreground="LightGray" Tag="8" Click="Star_Click" Style="{StaticResource StarButtonStyle}"/>
+                    <Button x:Name="Star9" Content="★" FontSize="28" Foreground="LightGray" Tag="9" Click="Star_Click" Style="{StaticResource StarButtonStyle}"/>
+                    <Button x:Name="Star10" Content="★" FontSize="28" Foreground="LightGray" Tag="10" Click="Star_Click" Style="{StaticResource StarButtonStyle}"/>
+                </StackPanel>
+                <TextBlock x:Name="RatingText" VerticalAlignment="Center" Margin="10,0,0,0"/>
             </StackPanel>
 
             <!-- Pole na opinię -->
             <StackPanel Grid.Row="2" Margin="0 0 0 20">
-                <TextBlock Text="Twoja opinia:" Margin="0 0 0 5"/>
+                <TextBlock Text="Twoja opinia:" Margin="0 0 0 5" FontSize="16" Foreground="#FF1A2C40" FontFamily="Segoe UI Variable Text Semibold"/>
                 <TextBox x:Name="OpiniaTextBox"
                          AcceptsReturn="True"
                          TextWrapping="Wrap"
-                         Height="150"
-                         VerticalScrollBarVisibility="Auto"/>
+                         Height="209"
+                         VerticalScrollBarVisibility="Auto" FontSize="16"/>
             </StackPanel>
 
-            <!-- Przycisk wysyłania -->
+            <!-- Przycisk Wróć -->
+            <Button Grid.Row="4" 
+                    Content="Wróć" 
+                    Width="150" 
+                    Height="25"
+                    HorizontalAlignment="Left" 
+                    Margin="208,8,0,7"
+                    Click="WrocNacisniete" FontFamily="Segoe UI Variable Text Semibold" Background="#FFF9C763" BorderBrush="#FFF9C763" Foreground="White" FontSize="14"/>
+
+            <!-- Przycisk Wyślij opinię -->
             <Button Grid.Row="4" 
                     Content="Wyślij opinię" 
-                    Width="150" 
+                    Width="184" 
+                    Height="25"
                     HorizontalAlignment="Left"
-                    Click="WyslijOpinie_Click"/>
-            <Button Content="Wróć" HorizontalAlignment="Left" Margin="85,95,0,0" Grid.Row="3" VerticalAlignment="Top" Click="WrocNacisniete"/>
+                    Click="WyslijOpinie_Click" Margin="0,8,0,7" FontFamily="Segoe UI Variable Text Semibold" Background="#FF49BB46" BorderBrush="#FF49BB46" Foreground="White" FontSize="14"/>
         </Grid>
     </ScrollViewer>
 </UserControl>

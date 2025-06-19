@@ -566,33 +566,27 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             if (!_model.CzyUzytkownikWyslalOpinie(_model.uzytkownik.IDUzytkownika, bookPage.IDKsiazkiWybranej))
             {
                 ratePage = new RatePage();
-                _view.LoadView(ratePage);
-                ratePage.Wroc += GdyWrocNacisniete1;
                 ratePage.WyslijOpinie += GdyWyslijOpinieNacisniete;
+                ratePage.Wroc += GdyWrocNacisniete1;
+                _view.LoadView(ratePage);
             }
             else
             {
-                MessageBox.Show("Nie możesz ponownie wystawić opinii");
+                MessageBox.Show("Nie możesz ponownie wystawić opinii", "Uwaga");
             }
         }
+
         private void GdyWyslijOpinieNacisniete(object? sender, EventArgs e)
         {
-            _model.DodajDoBazyOpinie(_model.uzytkownik.IDUzytkownika, bookPage.IDKsiazkiWybranej, ratePage.RecenzjaWystawiona, ratePage.OcenaWystawiona);
-            _model.ZaladujKsiazkiZBazy();
-            var ksiazka = _model.ksiazki.FirstOrDefault(k => k.IDKsiazki == bookPage.IDKsiazkiWybranej);
+            _model.DodajDoBazyOpinie(
+                _model.uzytkownik.IDUzytkownika,
+                bookPage.IDKsiazkiWybranej,
+                ratePage.RecenzjaWystawiona,
+                ratePage.OcenaWystawiona.ToString()
+            );
 
-            if (ksiazka != null)
-            {
-                bookPage = new BookPage(ksiazka);
-                bookPage.OpiniaNacisnieta += GdyOpiniaNacisnieta;
-                _view.LoadView(bookPage);
-                bookPage.WrocNacisniete += GdyWrocNacisniete2;
-                bookPage.PrzeniesNaWydawnictwo += PrzeniesNaWydawnictwo;
-                bookPage.PrzeniesNaAutora += PrzeniesNaAutorazbook;
-                bookPage.DodajDoListy += DodajDoListyNacisniete;
-                bookPage.UsunZListy += UsunZListyNacisniete;
-                bookPage.UstawStatus(_model.ZwrocStatusWybranejKsiazki(bookPage.IDKsiazkiWybranej, _model.uzytkownik.IDUzytkownika));
-            }
+            MessageBox.Show("Dziękujemy za opinię!", "Opinia dodana");
+            GdyWrocNacisniete1(sender, e);
         }
         public void GdyWrocNacisniete1(object? sender, EventArgs e)
         {

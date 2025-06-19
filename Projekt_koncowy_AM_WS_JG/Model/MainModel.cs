@@ -162,24 +162,6 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                 }
             }
         }
-
-        public void DodajDoBazyOpinie(string id_uzytkownik, string id_ksiazka, string recenzja, string ocena)
-        {
-            using (var conn = GetConnection())
-            {
-                conn.Open();
-                using (var cmd = new MySqlCommand($"INSERT INTO opinia (id_uzytkownik, id_ksiazka, recenzja, ocena, data_wystawienia) VALUES (@id_uzytkownik, @id_ksiazka, @recenzja, @ocena, now())", conn))
-                {
-                    cmd.Parameters.AddWithValue("@id_uzytkownik", id_uzytkownik);
-                    cmd.Parameters.AddWithValue("@id_ksiazka", id_ksiazka);
-                    cmd.Parameters.AddWithValue("@recenzja", recenzja);
-                    cmd.Parameters.AddWithValue("@ocena", ocena);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
         public string HasloUzytkownika(string email)
         {
             string haslouzytkownika = "";
@@ -982,7 +964,30 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                 }
             }
         }
+        public void DodajDoBazyOpinie(string id_uzytkownik, string id_ksiazka,
+                             string recenzja, string ocena)
+        {
+            // Sprawdź czy ocena jest w zakresie 1-10
+            if (int.TryParse(ocena, out int rating) && (rating < 1 || rating > 10))
+            {
+                throw new ArgumentException("Ocena musi być w zakresie 1-10");
+            }
 
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand(
+                    "INSERT INTO opinia (id_uzytkownik, id_ksiazka, recenzja, ocena, data_wystawienia) " +
+                    "VALUES (@id_uzytkownik, @id_ksiazka, @recenzja, @ocena, now())", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_uzytkownik", id_uzytkownik);
+                    cmd.Parameters.AddWithValue("@id_ksiazka", id_ksiazka);
+                    cmd.Parameters.AddWithValue("@recenzja", recenzja);
+                    cmd.Parameters.AddWithValue("@ocena", ocena);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
     }
 }
