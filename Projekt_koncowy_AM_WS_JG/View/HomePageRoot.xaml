@@ -4,10 +4,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="700">
-    <TabControl Margin="10" TabStripPlacement="Bottom">
+    <TabControl Margin="10" x:Name="MainTabControl" TabStripPlacement="Bottom">
 
         <!-- KSIĄŻKI -->
-        <TabItem Header="Książki">
+        <TabItem Header="Książki" x:Name="KsiazkiTab">
             <DockPanel>
                 <Grid DockPanel.Dock="Top" Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
@@ -33,15 +33,15 @@
                         <DataGridTextColumn Header="Język" Binding="{Binding Jezyk}" Width="80"/>
                         <DataGridTextColumn Header="Rok" Binding="{Binding RokWydania}" Width="60"/>
                         <DataGridTextColumn Header="Strony" Binding="{Binding LiczbaStron}" Width="60"/>
-                        <DataGridTextColumn Header="Autor" Binding="{Binding Autor}" Width="*"/>
-                        <DataGridTextColumn Header="Wydawnictwo" Binding="{Binding Wydawnictwo}" Width="110"/>
+                        <DataGridTextColumn Header="Wydawnictwo" Binding="{Binding Autor}" Width="*"/>
+                        <DataGridTextColumn Header="Autor" Binding="{Binding Wydawnictwo}" Width="110"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
         </TabItem>
 
         <!-- AUTORZY -->
-        <TabItem Header="Autorzy">
+        <TabItem Header="Autorzy" x:Name="AutorzyTab">
             <DockPanel>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
                     <Button Content="Dodaj" Margin="5" Width="80" Click="Dodaj_Autora_Click"/>
@@ -62,7 +62,7 @@
         </TabItem>
 
         <!-- WYDAWNICTWA -->
-        <TabItem Header="Wydawnictwa">
+        <TabItem Header="Wydawnictwa" x:Name="WydawnictwaTab">
             <DockPanel>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
                     <Button Content="Dodaj" Margin="5" Width="80" Click="Dodaj_Wydawnictwo_Click"/>
@@ -82,7 +82,7 @@
         </TabItem>
 
         <!-- UŻYTKOWNICY -->
-        <TabItem Header="Użytkownicy">
+        <TabItem Header="Użytkownicy" x:Name="UzytkownicyTab">
             <DockPanel>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
                     <Button Content="Zmin_root" Margin="5" Width="80" Click="Zmien_root_Click"/>
@@ -103,7 +103,7 @@
         </TabItem>
 
         <!-- OPINIE -->
-        <TabItem Header="Opinie">
+        <TabItem Header="Opinie" x:Name="OpinieTab">
             <DockPanel>
 
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
@@ -124,7 +124,7 @@
         </TabItem>
 
         <!-- STATUS -->
-        <TabItem Header="Status">
+        <TabItem Header="Status" x:Name="StatusTab">
             <DockPanel>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
                     <Button Content="Usuń" Margin="5" Width="80"/>

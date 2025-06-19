@@ -51,6 +51,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
             UzytkownicyGrid.ItemsSource = baza.Uzytkownicy;
             _baza = baza;
         }
+
         private void Wyloguj_Click(object sender, RoutedEventArgs e)
         {
             Wyloguj?.Invoke(this, EventArgs.Empty);
@@ -69,6 +70,30 @@ namespace Projekt_koncowy_AM_WS_JG.View
             {
                 MessageBox.Show("Wybierz książkę do edycji.");
             }
+        }
+        public void PrzelaczNaZakladkeWydawnictwa()
+        {
+            MainTabControl.SelectedItem = WydawnictwaTab;
+        }
+        public void PrzelaczNaZakladkeAutorzy()
+        {
+            MainTabControl.SelectedItem = AutorzyTab;
+        }
+        public void PrzelaczNaZakladkeKsiazki()
+        {
+            MainTabControl.SelectedItem = KsiazkiTab;
+        }
+        public void PrzelaczNaZakladkeUzytkownicy()
+        {
+            MainTabControl.SelectedItem = UzytkownicyTab;
+        }
+        public void PrzelaczNaZakladkeOpinie()
+        {
+            MainTabControl.SelectedItem = OpinieTab;
+        }
+        public void PrzelaczNaZakladkeStatus()
+        {
+            MainTabControl.SelectedItem = StatusTab;
         }
 
         private void Usun_Click(object sender, RoutedEventArgs e)

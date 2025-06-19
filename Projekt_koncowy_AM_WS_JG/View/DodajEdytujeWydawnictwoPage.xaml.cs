@@ -1,6 +1,7 @@
 ﻿using Projekt_koncowy_AM_WS_JG.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,20 +46,35 @@ namespace Projekt_koncowy_AM_WS_JG.View
             InitializeComponent();
             if (wydawnictwo != null)
             {
+                _wydawnictwo = wydawnictwo;
                 NazwaWydawnictwa= wydawnictwo.Nazwa;
                 KrajZalozeniaWydawnictwa = wydawnictwo.Kraj_zalozenia;
                 RokZalozeniaWydawnictwa = wydawnictwo.Rok_zalozenia;
+            }
+            else
+            {
+                _wydawnictwo= new Wydawnictwo();
             }
         }
 
         private void DodajWydawnictwo_Click(object sender, RoutedEventArgs e)
         {
-            _wydawnictwo = new Wydawnictwo
+            if(_wydawnictwo == null) 
             {
-                Nazwa = NazwaWydawnictwa,
-                Kraj_zalozenia = KrajZalozeniaWydawnictwa,
-                Rok_zalozenia = RokZalozeniaWydawnictwa
-            };
+                _wydawnictwo = new Wydawnictwo
+                {
+                    Nazwa = NazwaWydawnictwa,
+                    Kraj_zalozenia = KrajZalozeniaWydawnictwa,
+                    Rok_zalozenia = RokZalozeniaWydawnictwa
+                };
+            }
+            else
+            {
+                _wydawnictwo.Nazwa = NazwaWydawnictwa;
+                _wydawnictwo.Kraj_zalozenia = KrajZalozeniaWydawnictwa;
+                _wydawnictwo.Rok_zalozenia = RokZalozeniaWydawnictwa;
+
+            }
             DodajWydawnictwo?.Invoke(this, _wydawnictwo);
         }
 

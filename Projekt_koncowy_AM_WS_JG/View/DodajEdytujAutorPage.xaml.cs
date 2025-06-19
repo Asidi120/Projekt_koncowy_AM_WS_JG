@@ -50,22 +50,38 @@ namespace Projekt_koncowy_AM_WS_JG.View
             InitializeComponent();
             if (autor != null)
             {
+                _autor = autor;
                 ImieDoDodaj = autor.Imie;
                 NazwiskoDoDodaj = autor.Nazwisko;
                 DataUrodzeniaDoDodaj = autor.DataUrodzenia;
                 NarodowoscDoDodaj = autor.Narodowosc;
             }
+            else
+            {
+                _autor=new Autor();
+            }
         }
 
         private void DodajAutora_Click(object sender, RoutedEventArgs e)
         {
-            _autor = new Autor
+            if(_autor == null) 
             {
-                Imie = ImieDoDodaj,
-                Nazwisko = NazwiskoDoDodaj,
-                DataUrodzenia = DataUrodzeniaDoDodaj,
-                Narodowosc = NarodowoscDoDodaj
-            };
+                _autor = new Autor
+                {
+                    Imie = ImieDoDodaj,
+                    Nazwisko = NazwiskoDoDodaj,
+                    DataUrodzenia = DataUrodzeniaDoDodaj,
+                    Narodowosc = NarodowoscDoDodaj
+                };
+            }
+            else
+            {
+                _autor.Imie = ImieDoDodaj;
+                _autor.Nazwisko = NazwiskoDoDodaj;
+                _autor.DataUrodzenia = DataUrodzeniaDoDodaj;
+                _autor.Narodowosc = NarodowoscDoDodaj;
+
+            }
             DodajAutora?.Invoke(this, _autor);
         }
 

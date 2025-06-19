@@ -86,73 +86,216 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 MessageBox.Show("Nieprawidłowy email lub hasło", "Błąd");
             }
         }
+        public enum ZakladkaStartowa
+        {
+            Ksiazki,
+            Wydawnictwa,
+            Autorzy,
+            Opinie,
+            Status,
+            Uzytkownicy
+        }
+        private void ZaladujWidokHome(ZakladkaStartowa zakladka = ZakladkaStartowa.Ksiazki)
+        {
+            homePageRoot = new HomePageRoot();
+
+            homePageRoot.Wyloguj += GdyWyloguj;
+            homePageRoot.Edytuj += GdyEdytujNacisniete;
+            homePageRoot.Dodaj += GdyDodajNacisniete;
+            homePageRoot.Usun += GdyUsunNacisniete;
+            homePageRoot.DodajWydawnictwo += GdyDodajWydawnictwoNacisniete;
+            homePageRoot.EdytujWydawnictwo += GdyEdytujWydawnictwoNacisniete;
+            homePageRoot.UsunWydawnictwo += GdyUsunWydawnictwoNacisniete;
+            homePageRoot.DodajAutora += GdyDodajAutoraNacisniete;
+            homePageRoot.EdytujAutora += GdyEdytujAutoraNacisniete;
+            homePageRoot.UsunAutora += GdyUsunAutoraNacisniete;
+
+            homePageRoot.UstawKsiazkiwroot(_model.baza);
+            switch (zakladka)
+            {
+                case ZakladkaStartowa.Wydawnictwa:
+                    homePageRoot.PrzelaczNaZakladkeWydawnictwa();
+                    break;
+                case ZakladkaStartowa.Autorzy:
+                    homePageRoot.PrzelaczNaZakladkeAutorzy();
+                    break;
+                case ZakladkaStartowa.Opinie:
+                    homePageRoot.PrzelaczNaZakladkeOpinie();
+                    break;
+                case ZakladkaStartowa.Uzytkownicy:
+                    homePageRoot.PrzelaczNaZakladkeUzytkownicy();
+                    break;
+                case ZakladkaStartowa.Status:
+                    homePageRoot.PrzelaczNaZakladkeStatus();
+                    break;
+                default:
+                    homePageRoot.PrzelaczNaZakladkeKsiazki();
+                    break;
+            }
+
+            _view.LoadView(homePageRoot);
+        }
+
         public void GdyDodajWydawnictwoNacisniete(object sender, Wydawnictwo wydawnictwo)
         {
             if (homePageRoot != null)
             {
-                dodajEdytujWydawnictwoPage = new DodajEdytujeWydawnictwoPage(wydawnictwo);
-                _view.LoadView(dodajEdytujPage);
+                dodajEdytujWydawnictwoPage = new DodajEdytujeWydawnictwoPage(null);  
+                dodajEdytujWydawnictwoPage.DodajWydawnictwo += GdyDodajWydawnictwoZatwierdzone; 
                 dodajEdytujWydawnictwoPage.WrocNacisniete += GdyWrocNacisniete3;
+
+                _view.LoadView(dodajEdytujWydawnictwoPage);
             }
+        }
+
+        private void GdyDodajWydawnictwoZatwierdzone(object sender, Wydawnictwo wydawnictwo)
+        {
+            _model.DodajWydawnictwoDoBazy(wydawnictwo);
+            _model.ZaladujBaze();
+            ZaladujWidokHome(ZakladkaStartowa.Wydawnictwa);
         }
         public void GdyEdytujWydawnictwoNacisniete(object sender, Wydawnictwo wydawnictwo)
         {
             if (homePageRoot != null)
             {
                 dodajEdytujWydawnictwoPage = new DodajEdytujeWydawnictwoPage(wydawnictwo);
-                _view.LoadView(dodajEdytujPage);
-                dodajEdytujWydawnictwoPage.WrocNacisniete += GdyWrocNacisniete3;
+                dodajEdytujWydawnictwoPage.DodajWydawnictwo += GdyEdytujWydawnictwoZatwierdzone; 
+                dodajEdytujWydawnictwoPage.WrocNacisniete += GdyWrocNacisniete3;                 
+                _view.LoadView(dodajEdytujWydawnictwoPage);
             }
         }
-        public void GdyUsunWydawnictwoNacisniete(object sender, String usun)
+
+        private void GdyEdytujWydawnictwoZatwierdzone(object sender, Wydawnictwo wydawnictwo)
         {
-            if (homePageRoot != null)
-            {
-                //tutaj bedzie usuwanie po id_wydawnictwa
-            }
+            _model.AktualizujWydawnictwo(wydawnictwo);
+            _model.ZaladujBaze();
+            ZaladujWidokHome(ZakladkaStartowa.Wydawnictwa);
         }
+
+        public void GdyUsunWydawnictwoNacisniete(object sender, string idWydawnictwa)
+        {
+            if (!int.TryParse(idWydawnictwa, out int id))
+            {
+                MessageBox.Show("Nieprawidłowy identyfikator wydawnictwa.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            bool usunieto = _model.UsunWydawnictwoZBazy(id);
+            if (!usunieto)
+            {
+                MessageBox.Show("Nie można usunąć wydawnictwa, ponieważ ma przypisane książki.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            _model.ZaladujBaze();
+            ZaladujWidokHome(ZakladkaStartowa.Wydawnictwa);
+        }
+
+
         public void GdyDodajAutoraNacisniete(object sender, Autor autor)
         {
             if (homePageRoot != null)
             {
-                dodajEdytujAutorPage = new DodajEdytujAutorPage(autor);
-                _view.LoadView(dodajEdytujAutorPage);
+                dodajEdytujAutorPage = new DodajEdytujAutorPage(null); 
+                dodajEdytujAutorPage.DodajAutora += GdyDodajAutoraZatwierdzony; 
                 dodajEdytujAutorPage.WrocNacisniete += GdyWrocNacisniete3;
+
+                _view.LoadView(dodajEdytujAutorPage);
             }
         }
+        private void GdyDodajAutoraZatwierdzony(object sender, Autor autor)
+        {
+            _model.DodajAutoraDoBazy(autor); 
+            _model.ZaladujBaze();
+            ZaladujWidokHome(ZakladkaStartowa.Autorzy);
+        }
+
+
+
         public void GdyEdytujAutoraNacisniete(object sender, Autor autor)
         {
             if (homePageRoot != null)
             {
                 dodajEdytujAutorPage = new DodajEdytujAutorPage(autor);
-                _view.LoadView(dodajEdytujAutorPage);
+                dodajEdytujAutorPage.DodajAutora += GdyEdytujAutoraZatwierdzony;
                 dodajEdytujAutorPage.WrocNacisniete += GdyWrocNacisniete3;
+                _view.LoadView(dodajEdytujAutorPage);
             }
         }
-        public void GdyUsunAutoraNacisniete(object sender, String usun)
+        private void GdyEdytujAutoraZatwierdzony(object sender, Autor autor)
         {
-            if (homePageRoot != null)
-            {
-                //tutaj bedzie usuwanie po id_autora
-            }
+            _model.AktualizujAutora(autor);
+            _model.ZaladujBaze();
+            ZaladujWidokHome(ZakladkaStartowa.Autorzy);
         }
+
+
+        public void GdyUsunAutoraNacisniete(object sender, string idAutora)
+        {
+            bool usunieto = _model.UsunAutoraZBazy(idAutora);
+
+            if (!usunieto)
+            {
+                MessageBox.Show("Nie można usunąć autora, ponieważ ma przypisane książki.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            _model.ZaladujBaze();
+            ZaladujWidokHome(ZakladkaStartowa.Autorzy);
+        }
+
+
+        public void GdyUsunNacisniete(object sender, string idKsiazki)
+        {
+            _model.UsunKsiazkeZBazy(idKsiazki);
+            _model.ZaladujBaze();
+
+            homePageRoot = new HomePageRoot();
+            homePageRoot.Wyloguj += GdyWyloguj;
+            homePageRoot.Edytuj += GdyEdytujNacisniete;
+            homePageRoot.Dodaj += GdyDodajNacisniete;
+            homePageRoot.Usun += GdyUsunNacisniete;
+            homePageRoot.DodajWydawnictwo += GdyDodajWydawnictwoNacisniete;
+            homePageRoot.EdytujWydawnictwo += GdyEdytujWydawnictwoNacisniete;
+            homePageRoot.UsunWydawnictwo += GdyUsunWydawnictwoNacisniete;
+            homePageRoot.DodajAutora += GdyDodajAutoraNacisniete;
+            homePageRoot.EdytujAutora += GdyEdytujAutoraNacisniete;
+            homePageRoot.UsunAutora += GdyUsunAutoraNacisniete;
+
+            homePageRoot.UstawKsiazkiwroot(_model.baza);
+            _view.LoadView(homePageRoot); 
+        }
+
+
         public void GdyEdytujNacisniete(object sender, Ksiazka ksiazka)
         {
             if (homePageRoot != null)
             {
                 dodajEdytujPage = new DodajEdytujPage(ksiazka);
+                dodajEdytujPage.Edytuj += GdyEdytujKsiazkeNacisniete;
                 _view.LoadView(dodajEdytujPage);
                 dodajEdytujPage.WrocNacisniete += GdyWrocNacisniete3;
             }
+        }
+        private void GdyEdytujKsiazkeNacisniete(object sender, Ksiazka ksiazka)
+        {
+            _model.AktualizujKsiazke(ksiazka);
+            _model.ZaladujBaze();
+            ZaladujWidokHome(ZakladkaStartowa.Ksiazki);
         }
         public void GdyDodajNacisniete(object sender, Ksiazka ksiazka)
         {
             if (homePageRoot != null)
             {
                 dodajEdytujPage = new DodajEdytujPage(null);
+                dodajEdytujPage.Edytuj += GdyDodajKsiazkeNacisniete;
                 _view.LoadView(dodajEdytujPage);
                 dodajEdytujPage.WrocNacisniete += GdyWrocNacisniete3;
             }
+        }
+        private void GdyDodajKsiazkeNacisniete(object sender, Ksiazka ksiazka)
+        {
+            _model.DodajKsiazkeDoBazy(ksiazka);
+            _model.ZaladujBaze(); 
+            GdyWrocNacisniete3(sender, EventArgs.Empty);
         }
         public void GdyWrocNacisniete3(object? sender, EventArgs e)
         {
@@ -205,13 +348,6 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             if (homePageRoot != null)
             {
                 //tutaj bedzie usuwanie po id_uzytkownika
-            }
-        }
-        public void GdyUsunNacisniete(object sender, String usun)
-        {
-            if (homePageRoot != null)
-            {
-                //tutaj bedzie usuwanie po id_ksiazki
             }
         }
         public void GdyZmianaPlci(object sender, string plec)

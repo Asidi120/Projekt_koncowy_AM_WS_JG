@@ -19,6 +19,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
     /// <summary>
     /// Logika interakcji dla klasy DodajEdytujPage.xaml
     /// </summary>
+    
     public partial class DodajEdytujPage : UserControl
     {
         public event EventHandler Wyloguj;
@@ -32,9 +33,8 @@ namespace Projekt_koncowy_AM_WS_JG.View
             InitializeComponent();
             if(ksiazka !=null)
             {
+                _ksiazka = ksiazka;
                 TytulDoDodaj = ksiazka.Tytul;
-                AutorDoDodaj = ksiazka.Autor;
-                WydawnictwoDoDodaj = ksiazka.Wydawnictwo;
                 GatunekDoDodaj = ksiazka.Gatunek;
                 RokWydaniaDoDodaj = ksiazka.RokWydania;
                 LiczbaStronDoDodaj = ksiazka.LiczbaStron;
@@ -43,22 +43,17 @@ namespace Projekt_koncowy_AM_WS_JG.View
                 IDAutoraDoDodaj = ksiazka.IDAutora;
                 IDWydawnictwaDoDodaj = ksiazka.IDWydawnictwa;
             }
+            else
+            {
+                _ksiazka=new Ksiazka();
+            }
         }
         public string TytulDoDodaj
         {
             get => TytulBox.Text;
             set => TytulBox.Text = value;
         }
-        public string AutorDoDodaj
-        {
-            get => AutorBox.Text;
-            set => AutorBox.Text = value;
-        }
-        public string WydawnictwoDoDodaj
-        {
-            get => WydawnictwoBox.Text;
-            set => WydawnictwoBox.Text = value;
-        }
+        
         public string GatunekDoDodaj
         {
             get => GatunekBox.Text;
@@ -98,19 +93,32 @@ namespace Projekt_koncowy_AM_WS_JG.View
 
         private void Dodaj_Click(object sender, RoutedEventArgs e)
         {
-            _ksiazka = new Ksiazka()
+            if (_ksiazka == null)
             {
-                Tytul = TytulDoDodaj,
-                Autor = AutorDoDodaj,
-                Wydawnictwo = WydawnictwoDoDodaj,
-                Gatunek = GatunekDoDodaj,
-                RokWydania = RokWydaniaDoDodaj,
-                LiczbaStron = LiczbaStronDoDodaj,
-                Jezyk = JezykDoDodaj,
-                Opis = OpisDoDodaj,
-                IDAutora = IDAutoraDoDodaj,
-                IDWydawnictwa = IDWydawnictwaDoDodaj
-            };
+                _ksiazka = new Ksiazka
+                {
+                    Tytul = TytulDoDodaj,
+                    Gatunek = (GatunekBox.SelectedItem as ComboBoxItem)?.Content.ToString(),
+                    LiczbaStron = LiczbaStronDoDodaj,
+                    RokWydania = RokWydaniaDoDodaj,
+                    Jezyk = JezykDoDodaj,
+                    IDAutora = IDAutoraDoDodaj,
+                    IDWydawnictwa = IDWydawnictwaDoDodaj,
+                    Opis = OpisDoDodaj
+                };
+            }
+            else
+            {
+                _ksiazka.Tytul = TytulDoDodaj;
+                _ksiazka.Gatunek = (GatunekBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+                _ksiazka.LiczbaStron = LiczbaStronDoDodaj;
+                _ksiazka.RokWydania = RokWydaniaDoDodaj;
+                _ksiazka.Jezyk = JezykDoDodaj;
+                _ksiazka.IDAutora = IDAutoraDoDodaj;
+                _ksiazka.IDWydawnictwa = IDWydawnictwaDoDodaj;
+                _ksiazka.Opis = OpisDoDodaj;
+            }
+
             Edytuj?.Invoke(this, _ksiazka);
         }
 

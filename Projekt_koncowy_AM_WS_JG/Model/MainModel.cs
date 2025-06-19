@@ -12,7 +12,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         public List<Ksiazka> najnowsze_ksiazki;
         public List<Autor> autorzy;
         public List<Wydawnictwo> wydawnictwa;
-        private string connStr = "server=localhost;user=root;password=123;database=ksiazki;";
+        private string connStr = "server=localhost;user=root;password=!Kuba!12;database=ksiazki;";
         public Uzytkownik uzytkownik;
         public InformacjeZBazy baza;
         public MainModel()
@@ -694,6 +694,231 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                 }
             }
         }
+        public void DodajKsiazkeDoBazy(Ksiazka ksiazka)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+
+                string query = @"INSERT INTO ksiazka 
+                        (tytul, gatunek, opis, liczba_stron, rok_wydania, jezyk_oryginalu, id_autor, id_wydaw)
+                        VALUES (@tytul, @gatunek, @opis, @liczba_stron, @rok_wydania, @jezyk_oryginalu, @id_autor, @id_wydaw)";
+
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@tytul", ksiazka.Tytul);
+                    cmd.Parameters.AddWithValue("@gatunek", ksiazka.Gatunek);
+                    cmd.Parameters.AddWithValue("@opis", ksiazka.Opis);
+                    cmd.Parameters.AddWithValue("@liczba_stron", ksiazka.LiczbaStron);
+                    cmd.Parameters.AddWithValue("@rok_wydania", ksiazka.RokWydania);
+                    cmd.Parameters.AddWithValue("@jezyk_oryginalu", ksiazka.Jezyk);
+                    cmd.Parameters.AddWithValue("@id_autor", ksiazka.IDAutora);
+                    cmd.Parameters.AddWithValue("@id_wydaw", ksiazka.IDWydawnictwa);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void AktualizujKsiazke(Ksiazka ksiazka)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+
+                string query = @"UPDATE ksiazka 
+                        SET tytul = @tytul,gatunek = @gatunek,opis = @opis,liczba_stron = @liczba_stron,rok_wydania = @rok_wydania,jezyk_oryginalu = @jezyk_oryginalu, id_autor = @id_autor,id_wydaw = @id_wydaw WHERE id_ksiazka = @id_ksiazka";
+
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@tytul", ksiazka.Tytul);
+                    cmd.Parameters.AddWithValue("@gatunek", ksiazka.Gatunek);
+                    cmd.Parameters.AddWithValue("@opis", ksiazka.Opis);
+                    cmd.Parameters.AddWithValue("@liczba_stron", ksiazka.LiczbaStron);
+                    cmd.Parameters.AddWithValue("@rok_wydania", ksiazka.RokWydania);
+                    cmd.Parameters.AddWithValue("@jezyk_oryginalu", ksiazka.Jezyk);
+                    cmd.Parameters.AddWithValue("@id_autor", ksiazka.IDAutora);
+                    cmd.Parameters.AddWithValue("@id_wydaw", ksiazka.IDWydawnictwa);
+                    cmd.Parameters.AddWithValue("@id_ksiazka", ksiazka.IDKsiazki);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void UsunKsiazkeZBazy(string idKsiazki)
+        {
+            if (string.IsNullOrEmpty(idKsiazki))
+                return;
+
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+
+                string usunPowiazaniaQuery = @"
+            DELETE FROM opinia WHERE id_ksiazka = @id_ksiazka;
+            DELETE FROM status WHERE id_ksiazka = @id_ksiazka;
+        ";
+
+                using (var cmd = new MySqlCommand(usunPowiazaniaQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_ksiazka", idKsiazki);
+                    cmd.ExecuteNonQuery();
+                }
+
+                string usunKsiazkeQuery = "DELETE FROM ksiazka WHERE id_ksiazka = @id_ksiazka";
+
+                using (var cmd = new MySqlCommand(usunKsiazkeQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_ksiazka", idKsiazki);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void DodajAutoraDoBazy(Autor autor)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+
+                string insertQuery = @"INSERT INTO autor (imie, nazwisko, rok_urodzenia, kraj_pochodzenia) 
+                               VALUES (@imie, @nazwisko, @rok_urodzenia, @kraj_pochodzenia)";
+
+                using (var cmd = new MySqlCommand(insertQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@imie", autor.Imie);
+                    cmd.Parameters.AddWithValue("@nazwisko", autor.Nazwisko);
+                    cmd.Parameters.AddWithValue("@rok_urodzenia", autor.DataUrodzenia);
+                    cmd.Parameters.AddWithValue("@kraj_pochodzenia", autor.Narodowosc);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void AktualizujAutora(Autor autor)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+
+                string updateQuery = @"UPDATE autor 
+                               SET imie = @imie,
+                                   nazwisko = @nazwisko,
+                                   rok_urodzenia = @rok_urodzenia,
+                                   kraj_pochodzenia = @kraj_pochodzenia
+                               WHERE id_autor = @id_autor";
+
+                using (var cmd = new MySqlCommand(updateQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@imie", autor.Imie);
+                    cmd.Parameters.AddWithValue("@nazwisko", autor.Nazwisko);
+                    cmd.Parameters.AddWithValue("@rok_urodzenia", autor.DataUrodzenia);
+                    cmd.Parameters.AddWithValue("@kraj_pochodzenia", autor.Narodowosc);
+                    cmd.Parameters.AddWithValue("@id_autor", autor.IDAutora);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public bool UsunAutoraZBazy(string idAutora)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                string checkQuery = "SELECT COUNT(*) FROM ksiazka WHERE id_autor = @id_autor";
+                using (var checkCmd = new MySqlCommand(checkQuery, conn))
+                {
+                    checkCmd.Parameters.AddWithValue("@id_autor", idAutora);
+                    int liczbaKsiazek = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                    if (liczbaKsiazek > 0)
+                    {
+                        return false;
+                    }
+                }
+                string deleteQuery = "DELETE FROM autor WHERE id_autor = @id_autor";
+                using (var deleteCmd = new MySqlCommand(deleteQuery, conn))
+                {
+                    deleteCmd.Parameters.AddWithValue("@id_autor", idAutora);
+                    deleteCmd.ExecuteNonQuery();
+                }
+
+                return true;
+            }
+        }
+        public void DodajWydawnictwoDoBazy(Wydawnictwo wydawnictwo)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                string insertQuery = @"INSERT INTO wydawnictwo (nazwa, kraj_zalozenia, rok_zalozenia) 
+                               VALUES (@nazwa, @kraj_zalozenia, @rok_zalozenia)";
+
+                using (var cmd = new MySqlCommand(insertQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@nazwa", wydawnictwo.Nazwa);
+                    cmd.Parameters.AddWithValue("@kraj_zalozenia", wydawnictwo.Kraj_zalozenia ?? "Nieznane");
+                    int rok = 0;
+                    if (!int.TryParse(wydawnictwo.Rok_zalozenia?.ToString(), out rok))
+                    {
+                        rok = 0;
+                    }
+                    cmd.Parameters.AddWithValue("@rok_zalozenia", rok);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void AktualizujWydawnictwo(Wydawnictwo wydawnictwo)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+
+                string updateQuery = @"UPDATE wydawnictwo
+                               SET nazwa = @nazwa,
+                                   kraj_zalozenia = @kraj_zalozenia,
+                                   rok_zalozenia = @rok_zalozenia
+                               WHERE id_wydaw = @id_wydaw";
+
+                using (var cmd = new MySqlCommand(updateQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@nazwa", wydawnictwo.Nazwa);
+                    cmd.Parameters.AddWithValue("@kraj_zalozenia", wydawnictwo.Kraj_zalozenia ?? "Nieznane");
+                    cmd.Parameters.AddWithValue("@rok_zalozenia", wydawnictwo.Rok_zalozenia);
+                    cmd.Parameters.AddWithValue("@id_wydaw", wydawnictwo.IDWydawnictwa);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public bool UsunWydawnictwoZBazy(int idWydawnictwa)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+
+                string checkQuery = @"SELECT COUNT(*) FROM ksiazka WHERE id_wydaw = @id_wydaw";
+                using (var checkCmd = new MySqlCommand(checkQuery, conn))
+                {
+                    checkCmd.Parameters.AddWithValue("@id_wydaw", idWydawnictwa);
+                    int liczbaKsiazek = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                    if (liczbaKsiazek > 0)
+                    {
+                        return false;
+                    }
+                }
+                string deleteQuery = @"DELETE FROM wydawnictwo WHERE id_wydaw = @id_wydaw";
+                using (var deleteCmd = new MySqlCommand(deleteQuery, conn))
+                {
+                    deleteCmd.Parameters.AddWithValue("@id_wydaw", idWydawnictwa);
+                    deleteCmd.ExecuteNonQuery();
+                }
+                return true;
+            }
+        }
+
+
+
     }
 }
 
