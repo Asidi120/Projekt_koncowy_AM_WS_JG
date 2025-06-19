@@ -34,10 +34,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public event EventHandler<string> UsunAutora;
         public event EventHandler<string> UsunUzytkownika;
         public event EventHandler<string> ZmienRoot;
-        public delegate void UsunStatusHandler(int idUzytkownika, int idKsiazki);
-        public event UsunStatusHandler UsunStatus;
-
-
+        public event Action<int, int> UsunStatus;
 
         private InformacjeZBazy _baza;
 

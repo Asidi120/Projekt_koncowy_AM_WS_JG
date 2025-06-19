@@ -128,11 +128,8 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             _view.LoadView(homePageRoot);
         }
 
-        private void GdyUsunStatusNacisniete(object sender, (int idUzytkownika, int idKsiazki) args)
+        private void GdyUsunStatusNacisniete(int idUzytkownika, int idKsiazki)
         {
-            int idUzytkownika = args.idUzytkownika;
-            int idKsiazki = args.idKsiazki;
-
             _model.UsunStatusZBazy(idUzytkownika, idKsiazki);
             _model.ZaladujBaze();
             ZaladujWidokHome(ZakladkaStartowa.Status);
