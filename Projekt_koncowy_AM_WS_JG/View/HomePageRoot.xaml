@@ -107,7 +107,7 @@
             <DockPanel>
 
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
-                    <Button Content="Usuń" Margin="5" Width="80"/>
+                    <Button  x:Name="OpinieBtn" Content="Usuń" Margin="5" Width="80" Click="Usun_Opinie_Click"/>
                 </StackPanel>
 
                 <DataGrid x:Name="OpinieGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
@@ -124,10 +124,10 @@
         </TabItem>
 
         <!-- STATUS -->
-        <TabItem Header="Status" x:Name="StatusTab">
+        <TabItem  Header="Status" x:Name="StatusTab">
             <DockPanel>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
-                    <Button Content="Usuń" Margin="5" Width="80"/>
+                    <Button x:Name="UsunStatusBtn" Content="Usuń" Margin="5" Width="80" Click="Usun_Status_Click"/>
                 </StackPanel>
 
                 <DataGrid x:Name="StatusGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">

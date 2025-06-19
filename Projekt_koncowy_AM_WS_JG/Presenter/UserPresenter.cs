@@ -100,6 +100,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             homePageRoot.ZmienRoot += GdyZmienRootNacisniete;
             homePageRoot.UsunUzytkownika += GdyUsunUzytkownikaNacisniete;
             homePageRoot.UsunStatus += GdyUsunStatusNacisniete;
+            homePageRoot.UsunOpinie += GdyUsunOpinieNacisniete;
 
 
             homePageRoot.UstawKsiazkiwroot(_model.baza);
@@ -126,6 +127,13 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             }
 
             _view.LoadView(homePageRoot);
+        }
+
+        private void GdyUsunOpinieNacisniete(object? sender, string idOpini)
+        {
+            _model.UsunOpinieZBazy(idOpini);
+            _model.ZaladujBaze();
+            ZaladujWidokHome(ZakladkaStartowa.Opinie);
         }
 
         private void GdyUsunStatusNacisniete(int idUzytkownika, int idKsiazki)

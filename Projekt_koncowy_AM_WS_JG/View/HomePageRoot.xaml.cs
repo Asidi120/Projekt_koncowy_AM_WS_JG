@@ -35,6 +35,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public event EventHandler<string> UsunUzytkownika;
         public event EventHandler<string> ZmienRoot;
         public event Action<int, int> UsunStatus;
+        public event EventHandler<string> UsunOpinie;
 
         private InformacjeZBazy _baza;
 
@@ -212,8 +213,17 @@ namespace Projekt_koncowy_AM_WS_JG.View
                 MessageBox.Show("Wybierz status do usunięcia.");
             }
         }
-
-
+        private void Usun_Opinie_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpinieGrid.SelectedItem is Opinia opinia)
+            {
+                UsunOpinie?.Invoke(this, opinia.IdOpinii);
+            }
+            else
+            {
+                MessageBox.Show("Wybierz opinię do usunięcia.");
+            }
+        }
 
     }
 }

@@ -12,7 +12,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         public List<Ksiazka> najnowsze_ksiazki;
         public List<Autor> autorzy;
         public List<Wydawnictwo> wydawnictwa;
-        private string connStr = "server=localhost;user=root;password=123;database=ksiazki;";
+        private string connStr = "server=localhost;user=root;password=!Kuba!12;database=ksiazki;";
         public Uzytkownik uzytkownik;
         public InformacjeZBazy baza;
         public MainModel()
@@ -969,6 +969,20 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                 }
             }
         }
+        public void UsunOpinieZBazy(string idOpinii)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                string deleteQuery = "DELETE FROM opinia WHERE id_opinia = @id_opinia";
+                using (var cmd = new MySqlCommand(deleteQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_opinia", idOpinii);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
 
     }
 }
