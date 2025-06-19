@@ -357,6 +357,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 homePageRoot.UsunAutora += GdyUsunAutoraNacisniete;
                 homePageRoot.UsunUzytkownika += GdyUsunUzytkownikaNacisniete;
                 homePageRoot.ZmienRoot += GdyZmienRootNacisniete;
+                homePageRoot.UsunStatus += GdyUsunStatusNacisniete;
             }
         }
         //public void GdyZmienRootNacisniete(object sender, string id_root)
@@ -383,7 +384,14 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         //        homePageRoot.ZmienRoot += GdyZmienRootNacisniete;
         //    }
         //}
-        
+        public void GdyUsunStatus(object sender, (int idUzytkownika, int idKsiazki) args)
+        {
+            int idUzytkownika = args.idUzytkownika;
+            int idKsiazki = args.idKsiazki;
+            _model.UsunStatusZBazy(idUzytkownika, idKsiazki);
+            _model.ZaladujBaze();
+            ZaladujWidokHome(ZakladkaStartowa.Status);
+        }
         public void GdyZmianaPlci(object sender, string plec)
         {
             if (homePage != null)
