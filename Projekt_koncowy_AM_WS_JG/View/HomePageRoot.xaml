@@ -106,8 +106,8 @@
         <TabItem Header="Opinie" x:Name="OpinieTab">
             <DockPanel>
 
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
-                    <Button Content="Usuń" Margin="5" Width="80"/>
+                <StackPanel  Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
+                    <Button  x:Name="opiniebutton" Content="Usuń" Margin="5" Width="80" Click="Usun_Opinie_Click"/>
                 </StackPanel>
 
                 <DataGrid x:Name="OpinieGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
