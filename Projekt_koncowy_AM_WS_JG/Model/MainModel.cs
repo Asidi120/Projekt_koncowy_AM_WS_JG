@@ -12,7 +12,7 @@ namespace Projekt_koncowy_AM_WS_JG.Model
         public List<Ksiazka> najnowsze_ksiazki;
         public List<Autor> autorzy;
         public List<Wydawnictwo> wydawnictwa;
-        private string connStr = "server=localhost;user=root;password=123;database=ksiazki;";
+        private string connStr = "server=localhost;user=root;password=!Kuba!12;database=ksiazki;";
         public Uzytkownik uzytkownik;
         public InformacjeZBazy baza;
         public MainModel()
@@ -985,6 +985,36 @@ namespace Projekt_koncowy_AM_WS_JG.Model
                     cmd.Parameters.AddWithValue("@recenzja", recenzja);
                     cmd.Parameters.AddWithValue("@ocena", ocena);
                     cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        // W klasie MainModel.cs
+        public bool SprawdzCzyAutorIstnieje(string idAutora)
+        {
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var komenda = new MySqlCommand(
+                    "SELECT EXISTS(SELECT 1 FROM autor WHERE id_autor = @id_autor)", conn))
+                {
+                    komenda.Parameters.AddWithValue("@id_autor", idAutora);
+                    return Convert.ToBoolean(komenda.ExecuteScalar());
+                }
+            }
+        }
+
+        public bool SprawdzCzyWydawnictwoIstnieje(string idWydawnictwa)
+        {
+            if (string.IsNullOrWhiteSpace(idWydawnictwa)) return false;
+
+            using (var conn = GetConnection())
+            {
+                conn.Open();
+                using (var komenda = new MySqlCommand(
+                    "SELECT EXISTS(SELECT 1 FROM wydawnictwo WHERE id_wydaw = @id_wydaw)", conn))
+                {
+                    komenda.Parameters.AddWithValue("@id_wydaw", idWydawnictwa);
+                    return Convert.ToBoolean(komenda.ExecuteScalar());
                 }
             }
         }

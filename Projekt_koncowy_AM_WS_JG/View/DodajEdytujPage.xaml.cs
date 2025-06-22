@@ -91,36 +91,72 @@ namespace Projekt_koncowy_AM_WS_JG.View
             set => IDWydawnictwaBox.Text = value;
         }
 
+        //private void Dodaj_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (_ksiazka == null)
+        //    {
+        //        _ksiazka = new Ksiazka
+        //        {
+        //            Tytul = TytulDoDodaj,
+        //            Gatunek = (GatunekBox.SelectedItem as ComboBoxItem)?.Content.ToString(),
+        //            LiczbaStron = LiczbaStronDoDodaj,
+        //            RokWydania = RokWydaniaDoDodaj,
+        //            Jezyk = JezykDoDodaj,
+        //            IDAutora = IDAutoraDoDodaj,
+        //            IDWydawnictwa = IDWydawnictwaDoDodaj,
+        //            Opis = OpisDoDodaj
+        //        };
+        //    }
+        //    else
+        //    {
+        //        _ksiazka.Tytul = TytulDoDodaj;
+        //        _ksiazka.Gatunek = (GatunekBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+        //        _ksiazka.LiczbaStron = LiczbaStronDoDodaj;
+        //        _ksiazka.RokWydania = RokWydaniaDoDodaj;
+        //        _ksiazka.Jezyk = JezykDoDodaj;
+        //        _ksiazka.IDAutora = IDAutoraDoDodaj;
+        //        _ksiazka.IDWydawnictwa = IDWydawnictwaDoDodaj;
+        //        _ksiazka.Opis = OpisDoDodaj;
+        //    }
+
+        //    Edytuj?.Invoke(this, _ksiazka);
+        //}
         private void Dodaj_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(TytulDoDodaj) ||string.IsNullOrWhiteSpace(JezykDoDodaj) ||string.IsNullOrWhiteSpace(IDAutoraDoDodaj) || string.IsNullOrWhiteSpace(IDWydawnictwaDoDodaj) ||
+                (GatunekBox.SelectedItem == null && string.IsNullOrWhiteSpace(GatunekDoDodaj)) ||
+                !int.TryParse(LiczbaStronDoDodaj, out int strony) || strony <= 0)
+            {
+                MessageBox.Show("Wszystkie pola muszą być wypełnione, gatunek musi być wybrany, a liczba stron musi być większa od zera.",
+                                "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(RokWydaniaDoDodaj))
+            {
+                MessageBox.Show("Rok wydania nie może być pusty.", "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (!int.TryParse(RokWydaniaDoDodaj, out _))
+            {
+                MessageBox.Show("Rok wydania musi być liczbą.", "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             if (_ksiazka == null)
-            {
-                _ksiazka = new Ksiazka
-                {
-                    Tytul = TytulDoDodaj,
-                    Gatunek = (GatunekBox.SelectedItem as ComboBoxItem)?.Content.ToString(),
-                    LiczbaStron = LiczbaStronDoDodaj,
-                    RokWydania = RokWydaniaDoDodaj,
-                    Jezyk = JezykDoDodaj,
-                    IDAutora = IDAutoraDoDodaj,
-                    IDWydawnictwa = IDWydawnictwaDoDodaj,
-                    Opis = OpisDoDodaj
-                };
-            }
-            else
-            {
-                _ksiazka.Tytul = TytulDoDodaj;
-                _ksiazka.Gatunek = (GatunekBox.SelectedItem as ComboBoxItem)?.Content.ToString();
-                _ksiazka.LiczbaStron = LiczbaStronDoDodaj;
-                _ksiazka.RokWydania = RokWydaniaDoDodaj;
-                _ksiazka.Jezyk = JezykDoDodaj;
-                _ksiazka.IDAutora = IDAutoraDoDodaj;
-                _ksiazka.IDWydawnictwa = IDWydawnictwaDoDodaj;
-                _ksiazka.Opis = OpisDoDodaj;
-            }
+                _ksiazka = new Ksiazka();
+
+            _ksiazka.Tytul = TytulDoDodaj;
+            _ksiazka.Gatunek = (GatunekBox.SelectedItem as ComboBoxItem)?.Content.ToString() ?? GatunekDoDodaj;
+            _ksiazka.LiczbaStron = LiczbaStronDoDodaj;
+            _ksiazka.RokWydania = RokWydaniaDoDodaj;
+            _ksiazka.Jezyk = JezykDoDodaj;
+            _ksiazka.IDAutora = IDAutoraDoDodaj;
+            _ksiazka.IDWydawnictwa = IDWydawnictwaDoDodaj;
+            _ksiazka.Opis = OpisDoDodaj;
 
             Edytuj?.Invoke(this, _ksiazka);
         }
+
 
         private void Wyloguj_Click(object sender, RoutedEventArgs e)
         {

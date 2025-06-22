@@ -59,7 +59,19 @@ namespace Projekt_koncowy_AM_WS_JG.View
 
         private void DodajWydawnictwo_Click(object sender, RoutedEventArgs e)
         {
-            if(_wydawnictwo == null) 
+            if (string.IsNullOrWhiteSpace(NazwaWydawnictwa))
+            {
+                MessageBox.Show("Nazwa nie może być pusta.", "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (!int.TryParse(RokZalozeniaWydawnictwa, out int rok) || rok > DateTime.Now.Year)
+            {
+                MessageBox.Show("Podaj poprawny rok założenia",
+                                "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            string poprawnyRok = rok.ToString();
+            if (_wydawnictwo == null) 
             {
                 _wydawnictwo = new Wydawnictwo
                 {

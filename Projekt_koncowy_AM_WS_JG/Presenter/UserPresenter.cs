@@ -322,7 +322,25 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         }
         private void GdyEdytujKsiazkeNacisniete(object sender, Ksiazka ksiazka)
         {
-            _model.AktualizujKsiazke(ksiazka);
+            if (!_model.SprawdzCzyAutorIstnieje(ksiazka.IDAutora))
+            {
+                MessageBox.Show("Autor o podanym ID nie istnieje w bazie danych.");
+                return;
+            }
+            else
+            {
+                if (!_model.SprawdzCzyWydawnictwoIstnieje(ksiazka.IDWydawnictwa))
+                {
+                    MessageBox.Show("Wydawnictwo o podanym ID nie istnieje w bazie danych.");
+                    return;
+                }
+                else
+                {
+                    _model.AktualizujKsiazke(ksiazka);
+
+                }
+
+            }
             _model.ZaladujBaze();
             ZaladujWidokHome(ZakladkaStartowa.Ksiazki);
         }
@@ -339,7 +357,25 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
         }
         private void GdyDodajKsiazkeNacisniete(object sender, Ksiazka ksiazka)
         {
-            _model.DodajKsiazkeDoBazy(ksiazka);
+            if (!_model.SprawdzCzyAutorIstnieje(ksiazka.IDAutora))
+            {
+                MessageBox.Show("Autor o podanym ID nie istnieje w bazie danych.");
+                return;
+            }
+            else
+            {
+                if (!_model.SprawdzCzyWydawnictwoIstnieje(ksiazka.IDWydawnictwa))
+                {
+                    MessageBox.Show("Wydawnictwo o podanym ID nie istnieje w bazie danych.");
+                    return;
+                }
+                else
+                {
+                    _model.DodajKsiazkeDoBazy(ksiazka);
+
+                }
+
+            }
             _model.ZaladujBaze();
             ZaladujWidokHome(ZakladkaStartowa.Ksiazki);
         }

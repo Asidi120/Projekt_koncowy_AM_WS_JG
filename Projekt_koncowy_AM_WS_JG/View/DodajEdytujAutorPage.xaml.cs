@@ -64,7 +64,20 @@ namespace Projekt_koncowy_AM_WS_JG.View
 
         private void DodajAutora_Click(object sender, RoutedEventArgs e)
         {
-            if(_autor == null) 
+            if (string.IsNullOrWhiteSpace(ImieDoDodaj) || string.IsNullOrWhiteSpace(NazwiskoDoDodaj))
+            {
+                MessageBox.Show("Imię i nazwisko nie mogą być puste.", "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (!int.TryParse(DataUrodzeniaDoDodaj, out int rok)|| rok > DateTime.Now.Year)
+            {
+                MessageBox.Show("Podaj poprawny rok urodzenia",
+                                "Błąd walidacji",MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            string poprawnyRok = rok.ToString();
+
+            if (_autor == null)
             {
                 _autor = new Autor
                 {
@@ -80,8 +93,8 @@ namespace Projekt_koncowy_AM_WS_JG.View
                 _autor.Nazwisko = NazwiskoDoDodaj;
                 _autor.DataUrodzenia = DataUrodzeniaDoDodaj;
                 _autor.Narodowosc = NarodowoscDoDodaj;
-
             }
+
             DodajAutora?.Invoke(this, _autor);
         }
 
