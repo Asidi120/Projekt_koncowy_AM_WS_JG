@@ -26,6 +26,8 @@ namespace Projekt_koncowy_AM_WS_JG.View
     public partial class RejestracjaPage : UserControl
     {
         public event EventHandler RejestracjaGotowa;
+        public event EventHandler WrocNacisniete;
+
         public RejestracjaPage()
         {
             InitializeComponent();
@@ -35,6 +37,12 @@ namespace Projekt_koncowy_AM_WS_JG.View
             string wzorzec = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             return Regex.IsMatch(email, wzorzec);
         }
+        private void WrocDoLogowaniaKliknieta(object sender, RoutedEventArgs e)
+        {
+            WrocNacisniete?.Invoke(this, EventArgs.Empty);
+        }
+
+
         private void RejestrujGotowaKliknieta(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(nazwaużytkownika.Text))

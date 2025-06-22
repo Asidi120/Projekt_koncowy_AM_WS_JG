@@ -22,7 +22,7 @@ StrokeThickness="2"
 HorizontalAlignment="Left" 
 VerticalAlignment="Top" 
 Margin="146,24,0,0" Grid.RowSpan="2"/>
-        <Button Content="Rejestruj" HorizontalAlignment="Center" VerticalAlignment="Center" Height="36" Width="194" Click="RejestrujGotowaKliknieta" Grid.Row="1" BorderBrush="#FF49BB46" Background="#FF49BB46" Foreground="White" FontSize="16"/>
+        <Button Content="Rejestruj" HorizontalAlignment="Left" VerticalAlignment="Center" Height="36" Width="194" Click="RejestrujGotowaKliknieta" Grid.Row="1" BorderBrush="#FF49BB46" Background="#FF49BB46" Foreground="White" FontSize="16" Margin="319,0,0,0"/>
         <TextBlock HorizontalAlignment="Left" Margin="205,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" FontFamily="Segoe UI Variable Text Semibold" Foreground="#FF1A2C40" Width="210"><Run Language="pl-pl" Text="Nazwa użytkownika:"/></TextBlock>
         <TextBox x:Name="nazwaużytkownika" HorizontalAlignment="Left" Margin="205,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="308" Height="26"/>
         <TextBox x:Name="email" HorizontalAlignment="Left" Margin="205,194,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="308" Height="26"/>
@@ -32,6 +32,7 @@ Margin="146,24,0,0" Grid.RowSpan="2"/>
         <PasswordBox x:Name="haslo" HorizontalAlignment="Left" Margin="205,263,0,0" VerticalAlignment="Top" Width="308" Height="26"/>
         <TextBlock  HorizontalAlignment="Left" Margin="205,294,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" FontFamily="Segoe UI Variable Text Semibold" Foreground="#FF1A2C40"><Run Language="pl-pl" Text="Powtórz haslo:"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="239,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36" Text="Utwórz konto" Height="77" Width="302" FontFamily="Segoe UI Variable Text Semibold" Foreground="#FF1A2C40" FontWeight="Bold"/>
+        <Button Content="Wróć" Click="WrocDoLogowaniaKliknieta" HorizontalAlignment="Left" Height="36" Margin="205,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="105" Background="#FFF9C763" BorderBrush="#FFF9C763" Foreground="White" FontSize="16"/>
 
     </Grid>
 </UserControl>

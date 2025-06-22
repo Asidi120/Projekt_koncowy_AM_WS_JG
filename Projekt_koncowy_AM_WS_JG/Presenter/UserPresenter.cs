@@ -39,6 +39,7 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             menu.Rejestracja += GdyRejestracja;
             _view.LoadView(menu);
         }
+
         public void GdyLoguj(object sender, EventArgs e)
         {
             string hasloZBazy = _model.HasloUzytkownika(menu.EmailLogowanie);
@@ -441,7 +442,17 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
             rejestracja = new RejestracjaPage();
             _view.LoadView(rejestracja);
             rejestracja.RejestracjaGotowa += GdyRejestracjaGotowa;
+            rejestracja.WrocNacisniete += WrocNacisniete;
         }
+
+        private void WrocNacisniete(object? sender, EventArgs e)
+        {
+            if (menu != null)
+            {
+                _view.LoadView(menu);
+            }
+        }
+
         public void GdyRejestracjaGotowa(object sender, EventArgs e)
         {
             if (!_model.CzyUzytkownikIstnieje(rejestracja.NazwaUżytkownika))
