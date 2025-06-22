@@ -35,8 +35,8 @@
         <TextBlock HorizontalAlignment="Left" Margin="230,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" Foreground="#FF1A2C40" FontFamily="Segoe UI Variable Text Semibold" Height="29" Width="61"><Run Language="pl-pl" Text="Hasło:"/></TextBlock>
         <Button Content="Rejestruj" Margin="222,354,340,0" VerticalAlignment="Top" Click="RejestracjaKliknieta" Height="27" Foreground="White" Background="#FFF9C763" BorderBrush="#FFF9C763"/>
         <PasswordBox x:Name="haslo" HorizontalAlignment="Left" Margin="245,310,0,0" VerticalAlignment="Top" Width="214" Height="25" BorderBrush="White"/>
-        <Image HorizontalAlignment="Left" Height="29" Margin="220,251,0,0" VerticalAlignment="Top" Width="25" Source="/View/ludek1.jpg"/>
-        <Image HorizontalAlignment="Left" Height="25" Margin="220,310,0,0" VerticalAlignment="Top" Width="25" Source="/View/klodka.jpg"/>
+        <Image HorizontalAlignment="Left" Height="29" Margin="220,251,0,0" VerticalAlignment="Top" Width="25" Source="/Zdjecia/ludek1.jpg"/>
+        <Image HorizontalAlignment="Left" Height="25" Margin="220,310,0,0" VerticalAlignment="Top" Width="25" Source="/Zdjecia/klodka.jpg"/>
 
     </Grid>
 </UserControl>

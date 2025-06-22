@@ -178,7 +178,7 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </ScrollViewer>
-                    <Image HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="28" Source="/View/lupa1.jpg"/>
+                    <Image HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="28" Source="/Zdjecia/lupa1.jpg"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Moje Książki">

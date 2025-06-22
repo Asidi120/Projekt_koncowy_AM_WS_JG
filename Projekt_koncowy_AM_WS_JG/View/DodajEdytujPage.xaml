@@ -45,7 +45,7 @@
                         <Border CornerRadius="8" Background="#f0f0f0">
                             <Image x:Name="OkladkaImage" Stretch="UniformToFill" Margin="5"/>
                         </Border>
-                        <Button Content="Dodaj okładkę" Margin="0,10,0,0" Click="DodajOkladke_Click"/>
+                        <Button Content="Dodaj okładkę" Margin="20,100,20,0" Click="DodajOkladke_Click" Background="#FFEACA4F" Foreground="White" FontSize="16" FontWeight="Bold" BorderThickness="0,0,0,0"/>
                     </StackPanel>
 
                     <!-- Dane książki -->

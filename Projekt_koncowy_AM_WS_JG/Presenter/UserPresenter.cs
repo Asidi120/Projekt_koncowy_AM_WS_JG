@@ -3,6 +3,7 @@ using Projekt_koncowy_AM_WS_JG.Model;
 using Projekt_koncowy_AM_WS_JG.View;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
@@ -318,6 +319,29 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 dodajEdytujPage.Edytuj += GdyEdytujKsiazkeNacisniete;
                 _view.LoadView(dodajEdytujPage);
                 dodajEdytujPage.WrocNacisniete += GdyWrocNacisniete3;
+                dodajEdytujPage.DodajOkladke+= GdyDodajOkladkeNacisniete;
+            }
+        }
+        private void GdyDodajOkladkeNacisniete(object sender, string idksiazki)
+        {
+            string sciezka = dodajEdytujPage.PobierzSciezkeDoPliku();
+            if (string.IsNullOrEmpty(sciezka))
+            {
+                MessageBox.Show("Nie wybrano pliku.","Błąd");
+                return;
+            }
+            string rootFolder = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)!.Parent!.Parent!.Parent!.FullName;
+            string folderOkladki = System.IO.Path.Combine(rootFolder, "Okładki");
+            string nazwaPliku = System.IO.Path.Combine(folderOkladki, $"{idksiazki}.jpg");
+            Directory.CreateDirectory(folderOkladki);
+            try
+            {
+                File.Copy(sciezka, nazwaPliku, true);
+                MessageBox.Show($"Okładka została zapisana: {nazwaPliku}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Błąd podczas kopiowania pliku: {ex.Message}");
             }
         }
         private void GdyEdytujKsiazkeNacisniete(object sender, Ksiazka ksiazka)

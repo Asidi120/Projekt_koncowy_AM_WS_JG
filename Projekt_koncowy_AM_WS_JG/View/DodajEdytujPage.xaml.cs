@@ -1,4 +1,5 @@
-﻿using Projekt_koncowy_AM_WS_JG.Model;
+﻿using Microsoft.Win32;
+using Projekt_koncowy_AM_WS_JG.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace Projekt_koncowy_AM_WS_JG.View
         public event EventHandler Wyloguj;
         public event EventHandler WrocNacisniete;
         public event EventHandler Dodaj;
-        public event EventHandler DodajOkladke;
+        public event EventHandler<string> DodajOkladke;
         private Ksiazka _ksiazka;
         public event EventHandler<Ksiazka> Edytuj;
         public DodajEdytujPage(Ksiazka ksiazka)
@@ -165,11 +166,35 @@ namespace Projekt_koncowy_AM_WS_JG.View
 
         private void DodajOkladke_Click(object sender, RoutedEventArgs e)
         {
-            DodajOkladke?.Invoke(this, EventArgs.Empty);
+            string id_ksiazki = _ksiazka?.IDKsiazki ?? string.Empty;
+            if (string.IsNullOrEmpty(id_ksiazki))
+            {
+                MessageBox.Show("Nie można dodać okładki, ponieważ nie stworzono jeszcze tej książki.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else
+            {
+                DodajOkladke?.Invoke(this, id_ksiazki);
+            }
         }
         private void Wroc_Click(object sender, RoutedEventArgs e)
         {
             WrocNacisniete?.Invoke(this, EventArgs.Empty);
+        }
+        public string PobierzSciezkeDoPliku()
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Obrazy (*.jpg)|*.jpg";
+            if (dialog.ShowDialog() == true)
+            {
+                return dialog.FileName;
+            }
+            return null;
+        }
+
+        public void PokazKomunikat(string wiadomosc)
+        {
+            MessageBox.Show(wiadomosc);
         }
     }
 }
