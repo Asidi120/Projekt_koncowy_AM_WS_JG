@@ -18,10 +18,10 @@
                 Margin="10"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Background="#DDDDDD" Foreground="#333"
+                Background="#FFF9C763" Foreground="White"
                 FontWeight="Bold"
                 Click="Wroc_Click"
-                Panel.ZIndex="10"/>
+                Panel.ZIndex="10" BorderBrush="#FFF9C763" FontSize="16"/>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="30">
                 <StackPanel Orientation="Vertical" MaxWidth="800" HorizontalAlignment="Center">
@@ -34,17 +34,17 @@
 
                     <!-- Dane -->
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                        <TextBlock x:Name="TytulText" FontSize="26" FontWeight="Bold" TextWrapping="Wrap" Foreground="#222"/>
-                        <TextBlock x:Name="AutorText" FontSize="16" FontStyle="Italic" Margin="0,5,0,0" Foreground="#666" Cursor="Hand" MouseLeftButtonDown="Autor_Click"/>
-                        <TextBlock x:Name="WydawnictwoText" FontSize="14" Margin="0,5,0,0" Foreground="#444" Cursor="Hand" MouseLeftButtonDown="Wydawnictwo_Click"/>
-                        <TextBlock x:Name="GatunekText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
-                        <TextBlock x:Name="LiczbaStronText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
-                        <TextBlock x:Name="RokWydaniaText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
-                        <TextBlock x:Name="JezykText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
-                        <TextBlock x:Name="SredniaOcenaText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
+                        <TextBlock x:Name="TytulText" FontSize="26" FontWeight="Bold" TextWrapping="Wrap" Foreground="#FF1A2C40"/>
+                        <TextBlock x:Name="AutorText" FontSize="18" FontStyle="Italic" Margin="0,5,0,0" Foreground="#666" Cursor="Hand" MouseLeftButtonDown="Autor_Click"/>
+                        <TextBlock x:Name="WydawnictwoText" FontSize="16" Margin="0,5,0,0" Foreground="#444" Cursor="Hand" MouseLeftButtonDown="Wydawnictwo_Click"/>
+                        <TextBlock x:Name="GatunekText" FontSize="16" Margin="0,5,0,0" Foreground="#444"/>
+                        <TextBlock x:Name="LiczbaStronText" FontSize="16" Margin="0,5,0,0" Foreground="#444"/>
+                        <TextBlock x:Name="RokWydaniaText" FontSize="16" Margin="0,5,0,0" Foreground="#444"/>
+                        <TextBlock x:Name="JezykText" FontSize="16" Margin="0,5,0,0" Foreground="#444"/>
+                        <TextBlock x:Name="SredniaOcenaText" FontSize="16" Margin="0,5,0,0" Foreground="#444"/>
                         <ComboBox x:Name="StatusComboBox"
-                            Width="150"
-                            Margin="25,45,10,20"
+                            Width="158"
+                            Margin="10,55,10,0"
                             SelectedIndex="0"
                             SelectionChanged="DodajDoListy_Click">
                             <ComboBoxItem Content="Niedodane" />
@@ -65,19 +65,19 @@
                 </Border>
                 <!-- Przycisk -->
                 <Button Content="Napisz opinię" Width="160" Height="40" Margin="0,20,0,0" HorizontalAlignment="Left"
-                    Background="#4682B4" Foreground="White" FontWeight="Bold" Click="NapiszOpinie_Click"/>
+                    Background="#FF1A2C40" Foreground="White" FontWeight="Bold" Click="NapiszOpinie_Click"/>
                 <!-- Opinie -->
                 <ItemsControl x:Name="OpinieControl">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Background="LightPink" BorderBrush="#ddd" BorderThickness="1" CornerRadius="6"
-                    Padding="12" Margin="0,0,0,15" Effect="{StaticResource DropShadow}">
+                            <Border Background="#FFF9C763" BorderBrush="#ddd" BorderThickness="1" CornerRadius="6"
+                    Padding="12" Margin="0,10,0,15" Effect="{StaticResource DropShadow}">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Użytkownik}" FontWeight="SemiBold" FontSize="14" Foreground="#444"/>
                                     <TextBlock Text="{Binding Data_Wystawienia}" FontSize="12" Foreground="#888" Margin="0,0,0,4"/>
-                                    <TextBlock Text="Ocena: " FontSize="13" FontWeight="Bold" Foreground="#007ACC" />
-                                    <TextBlock Text="{Binding Ocena}" FontSize="13" Foreground="#007ACC" Margin="0,0,0,4"/>
-                                    <TextBlock Text="{Binding Recenzja}" TextWrapping="Wrap" FontSize="13" Foreground="#222" Margin="0,5,0,0"/>
+                                    <TextBlock Text="Ocena: " FontSize="13" FontWeight="Bold" Foreground="#FF1A2C40" />
+                                    <TextBlock Text="{Binding Ocena}" FontSize="13" Foreground="#FF1A2C40" Margin="0,0,0,4"/>
+                                    <TextBlock Text="{Binding Recenzja}" TextWrapping="Wrap" FontSize="13" Foreground="#FF1A2C40" Margin="0,5,0,0"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

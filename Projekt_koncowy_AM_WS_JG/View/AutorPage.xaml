@@ -20,10 +20,10 @@
                 Margin="10"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Background="#DDDDDD" Foreground="#333"
+                Background="#FFF9C763" Foreground="White"
                 FontWeight="Bold"
                 Click="Wroc_Click"
-                Panel.ZIndex="10"/>
+                Panel.ZIndex="10" BorderBrush="#FFF9C763" FontSize="16"/>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="30">
             <StackPanel Orientation="Vertical" MaxWidth="800" HorizontalAlignment="Center">
@@ -37,22 +37,22 @@
 
                     <!-- Dane autora -->
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                        <TextBlock x:Name="ImieNazwiskoText" FontSize="26" FontWeight="Bold" TextWrapping="Wrap" Foreground="#222"/>
-                        <TextBlock x:Name="DataUrodzeniaText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
-                        <TextBlock x:Name="NarodowoscText" FontSize="14" Margin="0,5,0,0" Foreground="#444"/>
+                        <TextBlock x:Name="ImieNazwiskoText" FontSize="28" FontWeight="Bold" TextWrapping="Wrap" Foreground="#FF1A2C40"/>
+                        <TextBlock x:Name="DataUrodzeniaText" FontSize="18" Margin="0,5,0,0" Foreground="#444"/>
+                        <TextBlock x:Name="NarodowoscText" FontSize="18" Margin="0,5,0,0" Foreground="#444"/>
                     </StackPanel>
                 </DockPanel>
 
                 <!-- Lista książek -->
-                <TextBlock Text="Książki autora" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                <TextBlock Text="Książki autora" Foreground="#FF1A2C40" FontWeight="Bold" FontSize="20" Margin="0,0,0,10"/>
                 <ItemsControl x:Name="KsiazkiAutoraControl">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Background="LightYellow" BorderBrush="#ccc" BorderThickness="1" CornerRadius="6"
+                            <Border Background="#FFF9C763" BorderBrush="#ccc" BorderThickness="1" CornerRadius="6"
                                     Padding="10" Margin="0,0,0,10" Effect="{StaticResource DropShadow}">
                                 <StackPanel>
-                                    <TextBlock Text="{Binding Tytul}" FontWeight="Bold" FontSize="14" Foreground="#222"/>
-                                    <TextBlock Text="{Binding RokWydania}" FontSize="12" Foreground="#666"/>
+                                    <TextBlock Text="{Binding Tytul}" FontWeight="Bold" FontSize="14" Foreground="#FF1A2C40"/>
+                                    <TextBlock Text="{Binding RokWydania}" FontSize="12" Foreground="#FF1A2C40"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
