@@ -594,10 +594,26 @@ namespace Projekt_koncowy_AM_WS_JG.Presenter
                 bookPage.IDKsiazkiWybranej,
                 ratePage.RecenzjaWystawiona,
                 ratePage.OcenaWystawiona.ToString()
+
             );
 
             MessageBox.Show("Dziękujemy za opinię!", "Opinia dodana");
             GdyWrocNacisniete1(sender, e);
+            _model.ZaladujKsiazkiZBazy();
+            var ksiazka = _model.ksiazki.FirstOrDefault(k => k.IDKsiazki == bookPage.IDKsiazkiWybranej);
+
+            if (ksiazka != null)
+            {
+                bookPage = new BookPage(ksiazka);
+                bookPage.OpiniaNacisnieta += GdyOpiniaNacisnieta;
+                _view.LoadView(bookPage);
+                bookPage.WrocNacisniete += GdyWrocNacisniete2;
+                bookPage.PrzeniesNaWydawnictwo += PrzeniesNaWydawnictwo;
+                bookPage.PrzeniesNaAutora += PrzeniesNaAutorazbook;
+                bookPage.DodajDoListy += DodajDoListyNacisniete;
+                bookPage.UsunZListy += UsunZListyNacisniete;
+                bookPage.UstawStatus(_model.ZwrocStatusWybranejKsiazki(bookPage.IDKsiazkiWybranej, _model.uzytkownik.IDUzytkownika));
+            }
         }
         public void GdyWrocNacisniete1(object? sender, EventArgs e)
         {
