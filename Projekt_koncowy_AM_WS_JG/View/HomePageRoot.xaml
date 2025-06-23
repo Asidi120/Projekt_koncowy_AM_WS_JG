@@ -85,7 +85,7 @@
         <TabItem Header="Użytkownicy" x:Name="UzytkownicyTab">
             <DockPanel>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,10">
-                    <Button Content="Zmin_root" Margin="5" Width="80" Click="Zmien_root_Click"/>
+                    <Button Content="Zmień root" Margin="5" Width="80" Click="Zmien_root_Click"/>
                     <Button Content="Usuń" Margin="5" Width="80" Click="Usun_uzytkownika_Click"/>
                 </StackPanel>
 
